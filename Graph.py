@@ -1,7 +1,9 @@
 from geojson import LineString, Feature, FeatureCollection
 import geojson
 
+#creates a graph object
 class Graph:
+	#constructor
 	def __init__(self, filename=None):
 		self.nodeHash = {} # [local_id] ->  id
 		self.nodeHashReverse = {}
@@ -17,6 +19,9 @@ class Graph:
 		self.deletedNodes = {}
 		self.breadcrumbs = {} # id -> [[lon,lat],[lon,lat], ...]
 
+	#adds a node given then id position, longitude, latitude, and weight
+	#checks to make sure duplicate nodes aren't added
+	#returns node id - 1
 	def addNode(self, nid, lon, lat, nodeweight = 0):
 		if nid not in self.nodeHash.keys():
 			self.nodeHash[nid] = self.nodeID
@@ -31,8 +36,10 @@ class Graph:
 
 		return self.nodeID - 1
 
+	#adds an edge given two nodes to connect
 	def addEdge(self, nid1, lon1, lat1, nid2, lon2, lat2,  nodeweight1 = 0, nodeweight2 = 0, edgeweight = 0):
 
+		#instantiates node 1 if not already in graph
 		if nid1 not in self.nodeHash.keys():
 			self.nodeHash[nid1] = self.nodeID
 			self.nodeHashReverse[self.nodeID] = nid1
@@ -40,7 +47,7 @@ class Graph:
 			self.nodeLink[self.nodeID] = []
 			self.nodeWeight[self.nodeID] = nodeweight1
 			self.nodeID += 1
-
+		#instantiates node 2 if not already in graph
 		if nid2 not in self.nodeHash.keys():
 			self.nodeHash[nid2] = self.nodeID
 			self.nodeHashReverse[self.nodeID] = nid2
@@ -48,10 +55,12 @@ class Graph:
 			self.nodeLink[self.nodeID] = []
 			self.nodeWeight[self.nodeID] = nodeweight2
 			self.nodeID += 1
-
+		#assigns each node id
 		localid1 = self.nodeHash[nid1]
 		localid2 = self.nodeHash[nid2]
 
+		#edges are tracked by node 1 id * 10000000 + node 2 id
+		#checks for duplicate edge id
 		if localid1 * 10000000 + localid2 in self.edgeHash.keys():
 			print("Duplicated Edge !!!", nid1, nid2)
 
@@ -62,11 +71,13 @@ class Graph:
 		self.edgeWeight[self.edgeID] = edgeweight
 		self.edgeID += 1
 
+		#if node 2 isn't listed in node 1 links, add node 2
 		if localid2 not in self.nodeLink[localid1]:
 			self.nodeLink[localid1].append(localid2)
 
 		return self.edgeID - 1
 
+	#
 	def connectTwoNodes(self, n1, n2, edgeweight=0):
 		lon1 = self.nodes[n1][0]
 		lat1 = self.nodes[n1][1]
