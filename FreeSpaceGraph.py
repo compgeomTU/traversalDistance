@@ -1,18 +1,23 @@
 from calfreespace import calfreespace 
 
-class FreeSpaceGraph: # get this dynamically, for each --> given one fsbound print the adgacent
+class FreeSpaceGraph:
   def __init__(self, g1, g2): # g1, g2 are Graph objects
     self.g1 = g1
     self.g2 = g2
     self.cell_boundaries = {}
 
+    ## get this dynamically, for each --> given one fsbound print the adgacent
     # Horizontal boundaries
     for e, v in self.g1.edges, self.g2.nodes:
       self.cell_boundaries[(e,v,True)] = CellBoundary(v,e,True)
-    # verticle boundaries
+    # Verticle boundaries
     for e, v in self.g2.edges, self.g1.nodes:
       self.cell_boundaries[(e,v,False)] = CellBoundary(v,e,False)
-
+    print("-- Cell Boundaries --\n", self.cell_boundaries)
+    
+    
+    ## get traversal distance
+    # searching algorithm?
   
   class CellBoundary:
     def _init_(self, vertexID, edgeID, node, isHoriz):
@@ -39,3 +44,6 @@ class FreeSpaceGraph: # get this dynamically, for each --> given one fsbound pri
       ya = g_verts.nodes[vertexID][1]
       # call CFS and return tuple
       self.start, self.end = calFreeSpace(x1, y1, x2, y2, xa, ya) # compute from free space by traversing the free space
+
+      
+      
