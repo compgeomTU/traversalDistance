@@ -1,5 +1,4 @@
 from calfreespace import calfreespace 
-#make file for it
 
 class FreeSpaceGraph: # get this dynamically, for each --> given one fsbound print the adgacent
   def __init__(self, g1, g2): # g1, g2 are Graph objects
@@ -23,13 +22,20 @@ class FreeSpaceGraph: # get this dynamically, for each --> given one fsbound pri
       self.node = node
       self.isHoriz = isHoriz # True if the edge is from G1
       
-      edge = self.g1.edges[self.edgeID]
+      if isHoriz: # edge is from G1
+        g_edge = self.g1
+        g_verts = self.g2
+      else: # edge is from G2
+        g_edge = self.g2
+        g_verts = self.g1
+        
+      edge = g_edge.edges[self.edgeID]
       # inputs for CFS
-      x1 = self.g1.nodes[edge[0]][1] # --> id of vertex, x-coord
-      y1 = self.g1.nodes[edge[0]][0]
-      x2 = self.g1.nodes[edge[1]][1]
-      y2 = self.g1.nodes[edge[1]][0]
-      xa = self.g2.nodes[vertexID][0]
-      ya = self.g2.nodes[vertexID][1]
+      x1 = g_edge.nodes[edge[0]][1] # --> id of vertex, x-coord
+      y1 = g_edge.nodes[edge[0]][0]
+      x2 = g_edge.nodes[edge[1]][1]
+      y2 = g_edge.nodes[edge[1]][0]
+      xa = g_verts.nodes[vertexID][0]
+      ya = g_verts.nodes[vertexID][1]
       # call CFS and return tuple
       self.start, self.end = calFreeSpace(x1, y1, x2, y2, xa, ya) # compute from free space by traversing the free space
