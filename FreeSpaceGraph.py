@@ -18,26 +18,29 @@ class FreeSpaceGraph:
 
         # get traversal distance using dfs search
         # given one free space boundary, compute all adjacent free space boundaries
-        def DFSTraversalDist(self, v):
+    
+    def DFSTraversalDist(self, v):
+        def DFS(cb, visited):
+            # Mark the current node as visited
+            visited.add(cb)
+            # call recursively for all nodes adjacent
+            #take vertex id and look at all neighbors 
+            for neighbour in self.graph[cb]: #syntax issue, more complicated to get where neighbors are
+                if neighbour not in visited: #linear search will be slow
+                #vertex id as a key in a dictionary instead of a list
+                    self.DFS(neighbour, visited)
+                    #calculation of white space should be done and updated here (how much did we cover?)
+                    #print to test functionality
 
-            def DFS(v, visited):
-                # Mark the current node as visited
-                visited.add(v)
-                # call recursively for all nodes adjacent
-                for neighbour in self.graph[v]:
-                    if neighbour not in visited:
-                        self.DFS(neighbour, visited)
-
-            # call recursive dfs function
-            visited = set()
-            self.DFS(v, visited)
+        # call recursive dfs function
+        visited = set()
+        self.DFS(v, visited)
 
     class CellBoundary:
         def _init_(self, vertexID, edgeID, node, isHoriz):
             # use ID's consistant with Erfan's code
             self.vertexID = vertexID
             self.edgeID = edgeID
-            self.node = node
             self.isHoriz = isHoriz  # True if the edge is from G1
 
             if isHoriz:  # edge is from G1
