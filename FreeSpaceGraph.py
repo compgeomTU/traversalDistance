@@ -28,10 +28,10 @@ class FreeSpaceGraph:
             if cb.isHoriz == True: #cleaner way to do that
                 for neighbour in self.graph[cb]: #syntax issue, more complicated to get where neighbors are
                     if neighbour.visited == False: #change to be a flag of the cell boundary not a list
-                #vertex id as a key in a dictionary instead of a list
-                    self.DFS(neighbour)
-                    #calculation of white space should be done and updated here (how much did we cover?)
-                    #print to test functionality
+                        #vertex id as a key in a dictionary instead of a list
+                        self.DFS(neighbour)
+                        #calculation of white space should be done and updated here (how much did we cover?)
+                        #print to test functionality
 
         # call recursive dfs function
         for i in self.cell_boundaries:
