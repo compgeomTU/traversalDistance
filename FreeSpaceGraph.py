@@ -10,31 +10,33 @@ class FreeSpaceGraph:
         # get this dynamically, for each --> given one fsbound print the adgacent
         # Horizontal boundaries
         for e, v in self.g1.edges, self.g2.nodes:
-            self.cell_boundaries[(e, v, True)] = CellBoundary(v, e, True)
+            self.cell_boundaries[(v, e, True)] = CellBoundary(v, e, True)
         # Verticle boundaries
         for e, v in self.g2.edges, self.g1.nodes:
-            self.cell_boundaries[(e, v, False)] = CellBoundary(v, e, False)
+            self.cell_boundaries[(v, e, False)] = CellBoundary(v, e, False)
         print("-- Cell Boundaries --\n", self.cell_boundaries)
 
         # get traversal distance using dfs search
         # given one free space boundary, compute all adjacent free space boundaries
     
-    def DFSTraversalDist(self, v):
-        def DFS(cb, visited):
+    def DFSTraversalDist(self, cb):
+        def DFS(cb):
             # Mark the current node as visited
-            visited.add(cb)
+            cb.visited = True
             # call recursively for all nodes adjacent
             #take vertex id and look at all neighbors 
-            for neighbour in self.graph[cb]: #syntax issue, more complicated to get where neighbors are
-                if neighbour not in visited: #linear search will be slow
+            if cb.isHoriz == True: #cleaner way to do that
+                for neighbour in self.graph[cb]: #syntax issue, more complicated to get where neighbors are
+                    if neighbour.visited == False: #change to be a flag of the cell boundary not a list
                 #vertex id as a key in a dictionary instead of a list
-                    self.DFS(neighbour, visited)
+                    self.DFS(neighbour)
                     #calculation of white space should be done and updated here (how much did we cover?)
                     #print to test functionality
 
         # call recursive dfs function
-        visited = set()
-        self.DFS(v, visited)
+        for i in self.cell_boundaries:
+            i.visited = False
+        self.DFS(cb)
 
     class CellBoundary:
         def _init_(self, vertexID, edgeID, node, isHoriz):
@@ -42,6 +44,7 @@ class FreeSpaceGraph:
             self.vertexID = vertexID
             self.edgeID = edgeID
             self.isHoriz = isHoriz  # True if the edge is from G1
+            self.visited = False
 
             if isHoriz:  # edge is from G1
                 g_edge = self.g1
