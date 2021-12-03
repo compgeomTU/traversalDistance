@@ -25,27 +25,67 @@ import numpy as np
 import matplotlib.pyplot as plt
 from mpl_toolkits.mplot3d import Axes3D
 
-ax = plt.subplot(projection='3d')
+def example_degree():
+    ax = plt.subplot(projection='3d')
 
-cell_boundary = np.linspace(0, 1, 10)
+    cell_boundary = np.linspace(0, 1, 10)
 
-y, z = np.meshgrid(cell_boundary, cell_boundary)
+    y, z = np.meshgrid(cell_boundary, cell_boundary)
 
-x = y * 0
-S1 = (x, y, z)
+    x = y * 0
+    S1 = (x, y, z)
 
-x = y * -0.5
-S2 = (x, y, z)
+    x = y * -0.5
+    S2 = (x, y, z)
 
-x = y * 0.5
-S3 = (x, y, z)
+    x = y * 0.5
+    S3 = (x, y, z)
 
-ax.plot_surface(S1[0], S1[1], S1[2], color="lightgray")
-ax.plot_surface(S2[0], S2[1], S2[2], color="lightgray")
-ax.plot_surface(S3[0], S3[1], S3[2], color="lightgray")
+    ax.plot_surface(S1[0], S1[1], S1[2], color="lightgray")
+    ax.plot_surface(S2[0], S2[1], S2[2], color="lightgray")
+    ax.plot_surface(S3[0], S3[1], S3[2], color="lightgray")
 
-xLabel = ax.set_xlabel('X')
-yLabel = ax.set_ylabel('Y')
-zLabel = ax.set_zlabel('Z')
+    xLabel = ax.set_xlabel('X')
+    yLabel = ax.set_ylabel('Y')
+    zLabel = ax.set_zlabel('Z')
 
-plt.show()
+    plt.show()
+
+def add_degree(n):
+
+    # spine of cells ranging from 0 <= theda <= pi
+    # theda is in radian form
+    theta = np.linspace(0, 1, n) * np.pi
+
+    # costant lenght of cells
+    r = np.full(shape=n, fill_value=1, dtype=np.float)
+
+    # cartesian coordiantes
+    x = np.ndarray(shape=(n,), dtype=np.float)
+    y = np.ndarray(shape=(n,), dtype=np.float)
+
+    # converting polar coordiantes to cartesian coordiantes
+    for i in range(n):
+        x[i] = r[i] * np.cos(theta[i])
+        y[i] = r[i] * np.sin(theta[i])
+
+    # creating cells by adding z axis
+    ax = plt.subplot(projection='3d')
+
+    for i in range(n):
+        Y, Z = np.meshgrid([0, y[i]], [0, 1])
+        X = Y * x[i]
+
+        # cell = (X, Y, Z)
+        # [0] -> x-axis range [1] -> y-axis range y [2] -> z-axis range
+        cell = (X, Y, Z)
+        ax.plot_surface(X, Y, Z, color="lightgray")
+
+    xLabel = ax.set_xlabel('X')
+    yLabel = ax.set_ylabel('Y')
+    zLabel = ax.set_zlabel('Z')
+
+    plt.show()
+
+if __name__ == "__main__":
+    add_degree(8)
