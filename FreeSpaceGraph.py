@@ -25,13 +25,53 @@ class FreeSpaceGraph:
             cb.visited = True
             # call recursively for all nodes adjacent
             #take vertex id and look at all neighbors 
-            if cb.isHoriz == True: #cleaner way to do that
-                for neighbour in self.graph[cb]: #syntax issue, more complicated to get where neighbors are
-                    if neighbour.visited == False: #change to be a flag of the cell boundary not a list
-                        #vertex id as a key in a dictionary instead of a list
-                        self.DFS(neighbour)
-                        #calculation of white space should be done and updated here (how much did we cover?)
-                        #print to test functionality
+            if cb.isHoriz == False:
+                for neighbour in self.g1.nodeLink[cb.vertexID]: 
+                        #for the top
+                        vertexID = g2.edges[cb.edgeID][0] #gets the next vertex
+                        #get next edge id
+                        edgeID = g1.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        #for the right traversal
+                        newCB = cell_boundaries[(vertexID, edgeID, True)]
+                        if newCB.visited == False:
+                            self.DFS(newCB)
+                        
+                        #for the bottom
+                        vertexID = g2.edges[cb.edgeID][1] #gets the next vertex
+                        #get next edge id
+                        edgeID = g1.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        newCB = cell_boundaries[(vertexID, edgeID, True)]
+                        if newCB.visited == False:
+                            self.DFS(newCB)
+
+                        #for the right traversal
+                        newCB = cell_boundaries[(neighbour, cb.edgeID, False)]
+                        if newCB.visited == False:
+                            self.DFS(newCB)
+
+            else: #horizontal need to repeat all the steps ^ but flipped g1 and g2
+                for neighbour in self.g2.nodeLink[cb.vertexID]: 
+                        #for the top
+                        vertexID = g1.edges[cb.edgeID][0] #gets the next vertex
+                        #get next edge id
+                        edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        #for the right traversal
+                        newCB = cell_boundaries[tuple(vertexID, edgeID, True)]
+                        if newCB.visited == False:
+                            self.DFS(newCB)
+                        
+                        #for the bottom
+                        vertexID = g1.edges[cb.edgeID][1] #gets the next vertex
+                        #get next edge id
+                        edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        newCB = cell_boundaries[tuple(vertexID, edgeID, True)]
+                        if newCB.visited == False:
+                            self.DFS(newCB)
+                        
+                        #for the right traversal
+                        newCB = cell_boundaries[tuple(neighbour, cb.edgeID, False)]
+                        if newCB.visited == False:
+                            self.DFS(newCB)
 
         # call recursive dfs function
         for i in self.cell_boundaries:
