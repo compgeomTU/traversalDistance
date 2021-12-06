@@ -26,7 +26,7 @@ class FreeSpaceGraph:
             # call recursively for all nodes adjacent
             #take vertex id and look at all neighbors 
             if cb.isHoriz == False: #vertical interval #cleaner way to do that
-                for neighbour in self.g1[cb]: #syntax issue, more complicated to get where neighbors are
+                for neighbour in self.g1.nodeLink[cb.vertexID]: #syntax issue, more complicated to get where neighbors are
                     if neighbour.visited == False: #change to be a flag of the cell boundary not a list
                         #vertex id as a key in a dictionary instead of a list
                         self.DFS(neighbour)
