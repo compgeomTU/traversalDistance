@@ -64,10 +64,10 @@ class Graph:
 		if localid1 * 10000000 + localid2 in self.edgeHash.keys():
 			print("Duplicated Edge !!!", nid1, nid2)
 
-			return self.edgeHash[tuple([localid1, localid2])]
+			return self.edgeHash[(localid1, localid2)]
 
 		self.edges[self.edgeID] = [localid1, localid2]
-		self.edgeHash[tuple([localid1, localid2])] = self.edgeID
+		self.edgeHash[(localid1, localid2)] = self.edgeID
 		self.edgeWeight[self.edgeID] = edgeweight
 		self.edgeID += 1
 
@@ -90,11 +90,11 @@ class Graph:
 
 	def removeNode(self, nodeid):
 		for next_node in self.nodeLink[nodeid]:
-			edgeid = self.edgeHash[tuple([nodeid,next_node])]
+			edgeid = self.edgeHash[(nodeid,next_node)]
 
 			del self.edges[edgeid]
 			del self.edgeWeight[edgeid]
-			del self.edgeHash[tuple([nodeid,next_node])]
+			del self.edgeHash[(nodeid,next_node)]
 
 		self.deletedNodes[nodeid] = self.nodes[nodeid]
 		del self.nodes[nodeid]
@@ -112,7 +112,7 @@ class Graph:
 				edges[(self.edges[edgeID][0], self.edges[edgeID][1])] = edgeID
 
 		for edgeid, edge in edges.items():
-			self.edgeHash[tuple([edge[0], edge[1]])] = edgeid
+			self.edgeHash[(edge[0], edge[1])] = edgeid
 
 		print("Remove", c, "Duplicated Edges")
 
@@ -124,8 +124,8 @@ class Graph:
 			localid2 = edge[0]
 
 			self.edges[self.edgeID] = [localid1, localid2]
-			self.edgeHash[tuple([localid1, localid2])] = self.edgeID
-			self.edgeWeight[self.edgeID] = self.edgeWeight[self.edgeHash[tuple([localid2, localid1])]]
+			self.edgeHash[(localid1, localid2)] = self.edgeID
+			self.edgeWeight[self.edgeID] = self.edgeWeight[self.edgeHash[(localid2, localid1)]]
 			self.edgeID += 1
 
 			if localid2 not in self.nodeLink[localid1]:
