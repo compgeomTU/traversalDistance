@@ -23,14 +23,18 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.image as image
 from mpl_toolkits.mplot3d import Axes3D
+import io
+from PIL import Image
+import matplotlib.image as image
 
-def example_degree():
+def example_cells():
     ax = plt.subplot(projection='3d')
 
-    cell_boundary = np.linspace(0, 1, 10)
+    cell = np.linspace(0, 1, 10)
 
-    y, z = np.meshgrid(cell_boundary, cell_boundary)
+    y, z = np.meshgrid(cell, cell)
 
     x = y * 0
     S1 = (x, y, z)
@@ -51,7 +55,7 @@ def example_degree():
 
     plt.show()
 
-def add_degree(n):
+def polar_degree(n):
 
     # spine of cells ranging from 0 <= theda <= pi
     # theda is in radian form
@@ -60,32 +64,41 @@ def add_degree(n):
     # costant lenght of cells
     r = np.full(shape=n, fill_value=1, dtype=np.float)
 
-    # cartesian coordiantes
-    x = np.ndarray(shape=(n,), dtype=np.float)
-    y = np.ndarray(shape=(n,), dtype=np.float)
-
     # converting polar coordiantes to cartesian coordiantes
-    for i in range(n):
-        x[i] = r[i] * np.cos(theta[i])
-        y[i] = r[i] * np.sin(theta[i])
+    x = r * np.cos(theta)
+    y = r * np.sin(theta)
 
-    # creating cells by adding z axis
-    ax = plt.subplot(projection='3d')
-
-    for i in range(n):
-        Y, Z = np.meshgrid([0, y[i]], [0, 1])
-        X = Y * x[i]
-
-        # cell = (X, Y, Z)
-        # [0] -> x-axis range [1] -> y-axis range y [2] -> z-axis range
-        cell = (X, Y, Z)
-        ax.plot_surface(X, Y, Z, color="lightgray")
-
-    xLabel = ax.set_xlabel('X')
-    yLabel = ax.set_ylabel('Y')
-    zLabel = ax.set_zlabel('Z')
+    plt.scatter(x, y)
 
     plt.show()
 
+def texture_map():
+
+    # sample figure
+    plt.figure()
+    plt.plot([1, 2], linewidth=10.0)
+    plt.plot([2, 1], linewidth=10.0)
+
+    # write figure to memory buffer
+    buf = io.BytesIO()
+    plt.savefig(buf, format='png')
+    plt.clf()
+    buf.seek(0)
+
+    # read figure from buffer
+    im = image.imread(buf)
+
+    xp, yp = im.shape
+
+    x = np.arange(0, xp, 1)
+    y = np.arange(0, yp, 1)
+    Y, X = np.meshgrid(y, x)
+    Z = X * 0.5
+
+    ax = plt.gca(projection='3d')
+    ax.plot_surface(X, Y, Z, facecolors=im)
+    plt.show()
+
+
 if __name__ == "__main__":
-    add_degree(8)
+    texture_map()
