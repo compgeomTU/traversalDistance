@@ -22,6 +22,7 @@ class FreeSpaceGraph:
     
     def DFSTraversalDist(self, cb):
         def DFS(cb):
+            cb.print_cellboundary()
             # Mark the current node as visited
             cb.visited = True
             # call recursively for all nodes adjacent
@@ -74,10 +75,10 @@ class FreeSpaceGraph:
                         if newCB.visited == False:
                             self.DFS(newCB)
 
-        # call recursive dfs function
-        #for i in self.cell_boundaries:
-        #    i.visited = False
-        #self.DFS(cb)
+        # call recursive dfs function (this is now the DFSTraversalDist function)
+        for i in self.cell_boundaries:
+            i.visited = False
+        self.DFS(cb)
 
     class CellBoundary:
         def _init_(self, vertexID, edgeID, node, isHoriz):
@@ -105,3 +106,8 @@ class FreeSpaceGraph:
             # call CFS and return tuple
             # compute from free space by traversing the free space
             self.start, self.end = calFreeSpace(x1, y1, x2, y2, xa, ya)
+            
+        def print_cellboundary(self):
+            print("Cell Boundary: ", self.vertexID, self.edgeID, self.isHoriz)
+            #print("Start: ", self.start)
+            #print("End: ", self.end)
