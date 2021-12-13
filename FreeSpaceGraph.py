@@ -34,18 +34,18 @@ class FreeSpaceGraph:
             if cb.isHoriz == False:
                 for neighbour in self.g1.nodeLink[cb.vertexID]: 
                         #for the top
-                        vertexID = g2.edges[cb.edgeID][0] #gets the next vertex
+                        vertexID = self.g2.edges[cb.edgeID][0] #gets the next vertex
                         #get next edge id
-                        edgeID = g1.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        edgeID = self.g1.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
                         #for the right traversal
                         newCB = cell_boundaries[(vertexID, edgeID, True)]
                         if newCB.visited == False:
                             self.DFS(newCB)
                         
                         #for the bottom
-                        vertexID = g2.edges[cb.edgeID][1] #gets the next vertex
+                        vertexID = self.g2.edges[cb.edgeID][1] #gets the next vertex
                         #get next edge id
-                        edgeID = g1.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        edgeID = self.g1.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
                         newCB = cell_boundaries[(vertexID, edgeID, True)]
                         if newCB.visited == False:
                             self.DFS(newCB)
@@ -58,18 +58,18 @@ class FreeSpaceGraph:
             else: #horizontal need to repeat all the steps ^ but flipped g1 and g2
                 for neighbour in self.g2.nodeLink[cb.vertexID]: 
                         #for the left
-                        vertexID = g1.edges[cb.edgeID][0] #gets the next vertex
+                        vertexID = self.g1.edges[cb.edgeID][0] #gets the next vertex
                         #get next edge id
-                        edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        edgeID = self.g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
                         #for the right traversal
                         newCB = cell_boundaries[tuple(vertexID, edgeID, False)]
                         if newCB.visited == False:
                             self.DFS(newCB)
                         
                         #for the right
-                        vertexID = g1.edges[cb.edgeID][1] #gets the next vertex
+                        vertexID = self.g1.edges[cb.edgeID][1] #gets the next vertex
                         #get next edge id
-                        edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
+                        edgeID = self.g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
                         newCB = cell_boundaries[tuple(vertexID, edgeID, False)]
                         if newCB.visited == False:
                             self.DFS(newCB)
