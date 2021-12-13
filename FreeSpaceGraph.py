@@ -13,12 +13,12 @@ class FreeSpaceGraph:
         #for e, v in self.g1.edges, self.g2.nodes:
         for v in self.g2.nodes:
             for e in self.g1.edges:
-                self.cell_boundaries[(v, e, True)] = CellBoundary(v, e, True)
+                self.cell_boundaries[(v, e, True)] = self.CellBoundary(v, e, True)
         # Verticle boundaries
         #for e, v in self.g2.edges, self.g1.nodes:
         for v in self.g1.nodes:
             for e in self.g2.edges:
-                self.cell_boundaries[(v, e, False)] = CellBoundary(v, e, False)
+                self.cell_boundaries[(v, e, False)] = self.CellBoundary(v, e, False)
         print("-- Cell Boundaries --\n", self.cell_boundaries)
 
         # get traversal distance using dfs search
