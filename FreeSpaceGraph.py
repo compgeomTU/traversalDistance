@@ -10,11 +10,15 @@ class FreeSpaceGraph:
 
         # get this dynamically, for each --> given one fsbound print the adgacent
         # Horizontal boundaries
-        for e, v in self.g1.edges, self.g2.nodes:
-            self.cell_boundaries[(v, e, True)] = CellBoundary(v, e, True)
+        #for e, v in self.g1.edges, self.g2.nodes:
+        for v in self.g2.nodes:
+            for e in self.g1.edges:
+                self.cell_boundaries[(v, e, True)] = CellBoundary(v, e, True)
         # Verticle boundaries
-        for e, v in self.g2.edges, self.g1.nodes:
-            self.cell_boundaries[(v, e, False)] = CellBoundary(v, e, False)
+        #for e, v in self.g2.edges, self.g1.nodes:
+        for v in self.g1.nodes:
+            for e in self.g2.edges:
+                self.cell_boundaries[(v, e, False)] = CellBoundary(v, e, False)
         print("-- Cell Boundaries --\n", self.cell_boundaries)
 
         # get traversal distance using dfs search
@@ -106,7 +110,7 @@ class FreeSpaceGraph:
             # call CFS and return tuple
             # compute from free space by traversing the free space
             self.start, self.end = calFreeSpace(x1, y1, x2, y2, xa, ya)
-            
+
         def print_cellboundary(self):
             print("Cell Boundary: ", self.vertexID, self.edgeID, self.isHoriz)
             #print("Start: ", self.start)
