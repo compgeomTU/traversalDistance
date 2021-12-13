@@ -57,7 +57,7 @@ class FreeSpaceGraph:
                         #get next edge id
                         edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
                         #for the right traversal
-                        newCB = cell_boundaries[tuple(vertexID, edgeID, True)]
+                        newCB = cell_boundaries[tuple(vertexID, edgeID, False)]
                         if newCB.visited == False:
                             self.DFS(newCB)
                         
@@ -65,19 +65,19 @@ class FreeSpaceGraph:
                         vertexID = g1.edges[cb.edgeID][1] #gets the next vertex
                         #get next edge id
                         edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
-                        newCB = cell_boundaries[tuple(vertexID, edgeID, True)]
+                        newCB = cell_boundaries[tuple(vertexID, edgeID, False)]
                         if newCB.visited == False:
                             self.DFS(newCB)
                         
                         #for the right traversal
-                        newCB = cell_boundaries[tuple(neighbour, cb.edgeID, False)]
+                        newCB = cell_boundaries[tuple(neighbour, cb.edgeID, True)]
                         if newCB.visited == False:
                             self.DFS(newCB)
 
         # call recursive dfs function
-        for i in self.cell_boundaries:
-            i.visited = False
-        self.DFS(cb)
+        #for i in self.cell_boundaries:
+        #    i.visited = False
+        #self.DFS(cb)
 
     class CellBoundary:
         def _init_(self, vertexID, edgeID, node, isHoriz):
