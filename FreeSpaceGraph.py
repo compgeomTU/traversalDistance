@@ -109,7 +109,7 @@ class FreeSpaceGraph:
             ya = g_verts.nodes[vertexID][1]
             # call CFS and return tuple
             # compute from free space by traversing the free space
-            self.start, self.end = calFreeSpace(x1, y1, x2, y2, xa, ya)
+            self.start, self.end = calfreespace(x1, y1, x2, y2, xa, ya)
 
         def print_cellboundary(self):
             print("Cell Boundary: ", self.vertexID, self.edgeID, self.isHoriz)
