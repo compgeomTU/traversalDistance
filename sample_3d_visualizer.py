@@ -88,7 +88,7 @@ def texture_map():
     # read figure from buffer
     im = image.imread(buf)
 
-    xp, yp = im.shape
+    xp, yp, __ = im.shape
 
     x = np.arange(0, xp, 1)
     y = np.arange(0, yp, 1)
@@ -99,6 +99,43 @@ def texture_map():
     ax.plot_surface(X, Y, Z, facecolors=im)
     plt.show()
 
+def graph_2d_plot():
+
+    # edges
+    # e: dict of edge {e_n: (x_n, y_n)}
+    e = {1: (1.5, 1.5),
+        2: (3.5, 4),
+        3: (4.5, 6),
+        4: (4.5, 10),
+        5: (8, 8),
+        6: (10, 13),
+        7: (9, 15),
+        }
+
+    # verticies
+    # v: list of edge pairs (e1 ,e2) that make up verticies
+    v = [(1 ,2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
+
+    for i in v:
+        e1 = e[i[0]]
+        e2 = e[i[1]]
+        plt.plot([e1[0], e2[0]], [e1[1], e2[1]], color ='blue', linewidth=3)
+
+    for k, v_ in e.items():
+        plt.scatter([v_[0]], [v_[1]], s=200, c='red')
+
+        plt.annotate(f"e_{k}", v_, textcoords="offset points", xytext=(25,0), ha='center')
+
+    plt.show()
+
+def graph_3d_plot():
+    # build graph and then add z-axis to the matplotlib engine
+    # paramitization will build verticies as cells
+    # once graph is in 3d, example images can be transformed to the cell meshgrids
+    pass
+
+
+
 
 if __name__ == "__main__":
-    texture_map()
+    2d_graph_plot()
