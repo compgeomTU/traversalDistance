@@ -135,7 +135,5 @@ def graph_3d_plot():
     pass
 
 
-
-
 if __name__ == "__main__":
     2d_graph_plot()
