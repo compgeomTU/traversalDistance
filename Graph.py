@@ -10,7 +10,7 @@ class Graph:
 		self.nodeLink = {}   # id -> list of next node
 		self.nodeID = 0
 		self.edgeID = 0
-		self.edgeHash = {} # [nid1 * 10000000 + nid2] -> edge id   [nid1, nid2] -> edge id
+		self.edgeHash = {} # [nid1, nid2] -> edge id
 		self.edgeWeight = {}
 		self.nodeWeight = {}
 		self.edgeInt = {}
