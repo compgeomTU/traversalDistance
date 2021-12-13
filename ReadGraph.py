@@ -6,8 +6,8 @@ import FreeSpaceGraph
 
 g = Graph("G")
 h = Graph("H")
-
-fsg = FreeSpaceGraph.FreeSpaceGraph(g,h)
+e = 2
+fsg = FreeSpaceGraph.FreeSpaceGraph(g,h,e)
 cb = fsg.cell_boundaries(0,0,False)
 fsg.DFSTraversalDist(cb)
 #prints graph objects with no print override 
