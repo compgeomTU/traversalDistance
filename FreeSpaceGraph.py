@@ -53,7 +53,7 @@ class FreeSpaceGraph:
 
             else: #horizontal need to repeat all the steps ^ but flipped g1 and g2
                 for neighbour in self.g2.nodeLink[cb.vertexID]: 
-                        #for the top
+                        #for the left
                         vertexID = g1.edges[cb.edgeID][0] #gets the next vertex
                         #get next edge id
                         edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
@@ -62,7 +62,7 @@ class FreeSpaceGraph:
                         if newCB.visited == False:
                             self.DFS(newCB)
                         
-                        #for the bottom
+                        #for the right
                         vertexID = g1.edges[cb.edgeID][1] #gets the next vertex
                         #get next edge id
                         edgeID = g2.edgeHash[(vertexID, neighbour)] #NOT DONE YET JUST A PSEUDOCODE OUTLINE
@@ -70,7 +70,7 @@ class FreeSpaceGraph:
                         if newCB.visited == False:
                             self.DFS(newCB)
                         
-                        #for the right traversal
+                        #for the top traversal
                         newCB = cell_boundaries[tuple(neighbour, cb.edgeID, True)]
                         if newCB.visited == False:
                             self.DFS(newCB)
