@@ -132,8 +132,62 @@ def graph_3d_plot():
     # build graph and then add z-axis to the matplotlib engine
     # paramitization will build verticies as cells
     # once graph is in 3d, example images can be transformed to the cell meshgrids
+
+    # edges
+    # e: dict of edge {e_n: (x_n, y_n)}
+    e = {1: (1.5, 1.5, 0.5),
+        2: (3.5, 4, 0.5),
+        3: (4.5, 6, 1),
+        4: (4.5, 10, 1.5),
+        5: (8, 8, 2),
+        6: (10, 13, 2),
+        7: (9, 15, 3),
+        }
+
+    # verticies
+    # v: list of edge pairs (e1 ,e2) that make up verticies
+    v = [(1 ,2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
+
+    ax = plt.gca(projection='3d')
+
+    for i in v:
+        x0 = e[i[0]][0]
+        y0 = e[i[0]][1]
+        z0 = e[i[0]][2]
+
+        x1 = e[i[1]][0]
+        y1 = e[i[1]][1]
+        z1 = e[i[1]][2]
+        print(x0)
+        print(y0)
+        print(z0)
+        print()
+
+        ax.plot([x0, x1], [y0, y1], [z0, z1], color ='blue', linewidth=3)
+
+    mp = [[], 0, [], 0, [], 0]
+
+    for value, item in e.items():
+        mp[0].append(item[0])
+        mp[2].append(item[1])
+        mp[4].append(item[2])
+
+        mp[1] = value
+        mp[3] = value
+        mp[5] = value
+
+        ax.scatter(item[0], item[1], item[2], s=100, c='green')
+
+    ax.scatter((sum(mp[0]) / mp[1]),
+                (sum(mp[2]) / mp[3]),
+                (sum(mp[4]) / mp[5]),
+                s=200, c='red')
+
+    plt.show()
+
+def graph_2d_parameterization():
     pass
 
 
 if __name__ == "__main__":
-    2d_graph_plot()
+    graph_3d_plot()
