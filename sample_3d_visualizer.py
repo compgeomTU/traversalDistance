@@ -28,6 +28,7 @@ from mpl_toolkits.mplot3d import Axes3D
 import io
 from PIL import Image
 import matplotlib.image as image
+import math
 
 def example_cells():
     ax = plt.subplot(projection='3d')
@@ -158,36 +159,26 @@ def graph_3d_plot():
         x1 = e[i[1]][0]
         y1 = e[i[1]][1]
         z1 = e[i[1]][2]
-        print(x0)
-        print(y0)
-        print(z0)
-        print()
 
         ax.plot([x0, x1], [y0, y1], [z0, z1], color ='blue', linewidth=3)
 
-    mp = [[], 0, [], 0, [], 0]
+    mp = [[], [], []]
 
     for value, item in e.items():
         mp[0].append(item[0])
-        mp[2].append(item[1])
-        mp[4].append(item[2])
-
-        mp[1] = value
-        mp[3] = value
-        mp[5] = value
+        mp[1].append(item[1])
+        mp[2].append(item[2])
 
         ax.scatter(item[0], item[1], item[2], s=100, c='green')
 
-    ax.scatter((sum(mp[0]) / mp[1]),
-                (sum(mp[2]) / mp[3]),
-                (sum(mp[4]) / mp[5]),
-                s=200, c='red')
+    mp_x = sum(mp[0]) / len(e)
+    mp_y = sum(mp[1]) / len(e)
+    mp_z = sum(mp[2]) / len(e)
+
+    ax.scatter(mp_x, mp_y, mp_z, s=200, c='red')
 
     plt.show()
 
-def graph_2d_parameterization():
-    pass
-
 
 if __name__ == "__main__":
-    graph_3d_plot()
+    graph_2d_parameterization()
