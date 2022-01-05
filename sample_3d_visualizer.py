@@ -76,10 +76,27 @@ def polar_degree(n):
 def texture_map():
 
     # sample figure
-    plt.figure()
-    plt.plot([1, 2], linewidth=10.0)
-    plt.plot([2, 1], linewidth=10.0)
+    plt.figure(figsize=(10, 10), dpi=20)
+    ax = plt.axes()
+    ax.set_facecolor("grey")
 
+    freespace_struct = np.array([[0, 0], [0, 0.25], [0.25, 0],
+                                 [0, 1], [0.25, 1], [0, 0.75],
+                                 [1, 1], [1, 0.75], [0.75, 1],
+                                 [1, 0], [0.75, 0], [1, 0.25]
+                                ])
+
+    freespace_poly_0 = plt.Polygon(freespace_struct[:3, :], color='white')
+    plt.gca().add_patch(freespace_poly_0)
+
+    freespace_poly_1 = plt.Polygon(freespace_struct[3:6, :], color='white')
+    plt.gca().add_patch(freespace_poly_1)
+
+    freespace_poly_2 = plt.Polygon(freespace_struct[6:9, :], color='white')
+    plt.gca().add_patch(freespace_poly_2)
+
+    freespace_poly_3 = plt.Polygon(freespace_struct[9:, :], color='white')
+    plt.gca().add_patch(freespace_poly_3)
     # write figure to memory buffer
     buf = io.BytesIO()
     plt.savefig(buf, format='png')
@@ -88,6 +105,7 @@ def texture_map():
 
     # read figure from buffer
     im = image.imread(buf)
+
 
     xp, yp, __ = im.shape
 
@@ -176,6 +194,43 @@ def graph_3d_plot():
     mp_z = sum(mp[2]) / len(e)
 
     ax.scatter(mp_x, mp_y, mp_z, s=200, c='red')
+
+    plt.show()
+
+def graph_2d_parameterization():
+
+    # edges
+    # e: dict of edge {e_n: (x_n, y_n)}
+    e = {1: (1.5, 1.5),
+        2: (3.5, 4),
+        3: (4.5, 6),
+        4: (4.5, 10),
+        5: (8, 8),
+        6: (10, 13),
+        7: (9, 15),
+        }
+
+    # verticies
+    # v: list of edge pairs (e1 ,e2) that make up verticies
+    v = [(1 ,2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
+
+    ax = plt.gca(projection='3d')
+
+
+    for i in  v:
+
+        x0 = e[i[0]][0]
+        y0 = e[i[0]][1]
+
+        x1 = e[i[1]][0]
+        y1 = e[i[1]][1]
+
+        xs = np.linspace(x0, x1, 10)
+        zs = np.linspace(0, 1, 10)
+
+        X, Z = np.meshgrid(xs, zs)
+        Y = np.linspace(y0, y1, 10)
+        ax.plot_surface(X, Y, Z, color='grey')
 
     plt.show()
 
