@@ -1,4 +1,5 @@
 from geojson import LineString, Feature, FeatureCollection
+import matplotlib.pyplot as plt
 import geojson
 
 class Graph:
@@ -219,3 +220,21 @@ class Graph:
 		file1.close()
 		file2.close()
 		print("Done.")
+
+	def Plot2MatPlotLib(self):
+	    n = list()
+
+	    for id, edge in self.edges.items():
+	        n1_id, n2_id = edge[0], edge[1]
+	        n1, n2 = self.nodes[n1_id], self.nodes[n2_id]
+
+	        if n1 not in n: n.append(n1)
+	        if n2 not in n: n.append(n2)
+
+	        plt.plot([n1[0], n2[0]], [n1[1], n2[1]],
+	                    color ='dimgray', linewidth=3)
+
+	    lons, lats = map(list, zip(*n))
+
+	    plt.scatter(lons, lats, s=200, c='dimgray')
+	    plt.show()
