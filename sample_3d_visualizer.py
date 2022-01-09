@@ -29,6 +29,7 @@ import io
 from PIL import Image
 import matplotlib.image as image
 import math
+from Graph import Graph
 
 def example_cells():
     ax = plt.subplot(projection='3d')
@@ -233,6 +234,9 @@ def graph_2d_parameterization():
         ax.plot_surface(X, Y, Z, color='grey')
 
     plt.show()
+
+def Graph_Class_Plot():
+
 
 
 if __name__ == "__main__":
