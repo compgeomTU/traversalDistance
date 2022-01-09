@@ -15,11 +15,7 @@ def FreeSpaceGraph():
     #print(g)
     #print(h)
 
-<<<<<<< HEAD
 def PlotGraph():
-=======
-def PlotGraph()
->>>>>>> 8ee4ee966470caee2a0c464fcced4b831c1c1b49
     #plots graph to matplotlib
     r = Graph("sample_graphs/R")
     r.Plot2MatPlotLib()
