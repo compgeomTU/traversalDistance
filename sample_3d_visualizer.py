@@ -236,6 +236,4 @@ def graph_2d_parameterization():
     plt.show()
 
 if __name__ == "__main__":
-    g_path = "sample_graphs/R"
-    g = Graph(g_path)
-    g.Plot2MatPlotLib()
+    pass
