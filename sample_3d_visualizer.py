@@ -77,8 +77,8 @@ def graph_3d_plot():
 
     plt.show()
 
-def Graph_2d_parameterization():
-    g = Graph('sample_graphs/R')
+def graph_2d_parameterization(file):
+    g = Graph(file)
     ax = plt.gca(projection='3d')
 
     for id, edge in g.edges.items():
@@ -90,19 +90,19 @@ def Graph_2d_parameterization():
 
         X, Z = np.meshgrid(xs, zs)
         Y = np.linspace(n1[1], n2[1], 10)
-        ax.plot_surface(X, Y, Z, color='dimgray')
+        ax.plot_surface(X, Y, Z, alpha=0.5, color='lightgray')
 
         cell = FreeSpaceCell.sampleFreeSpace()
         us, vs, ws = cell.build3DFreeSpace([n1, n2])
         verticies = [list(zip(us, vs, ws))]
-        print(verticies)
-        ax.add_collection3d(Poly3DCollection(verticies))
+        poly_cell = Poly3DCollection(verticies, facecolor='dimgray')
+        ax.add_collection3d(poly_cell)
 
-    #xLabel = ax.set_xlabel('X')
-    #yLabel = ax.set_ylabel('Y')
-    #zLabel = ax.set_zlabel('Z')
+    xLabel = ax.set_xlabel('X')
+    yLabel = ax.set_ylabel('Y')
+    zLabel = ax.set_zlabel('Z')
 
     plt.show()
 
 if __name__ == "__main__":
-    Graph_2d_parameterization()
+    #graph_2d_parameterization('sample_graphs/R')

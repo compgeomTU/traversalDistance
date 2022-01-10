@@ -191,9 +191,4 @@ class FreeSpaceCell():
         return format
 
 if __name__ == "__main__":
-    e = [[1.0, 1.0], [25.0, 3.0]]
-    cell = FreeSpaceCell.sampleFreeSpace()
-    cell_xs, cell_ys, cell_zs = cell.build3DFreeSpace(e)
-    print(cell_xs)
-    print(cell_ys)
-    print(cell_zs)
+    pass
