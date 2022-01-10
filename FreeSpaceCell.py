@@ -1,6 +1,5 @@
 # python3 FreeSpaceCell.py
 
-from mpl_toolkits.mplot3d.art3d import Poly3DCollection
 from math import sqrt
 
 class FreeSpaceCell():
@@ -85,7 +84,6 @@ class FreeSpaceCell():
     def buildFreeSpace(self, precision=0.0001):
         xs = list()
         ys = list()
-        zs = list()
 
         def addPoint(x, y):
             for x_, y_ in zip(xs, ys):
@@ -93,7 +91,6 @@ class FreeSpaceCell():
 
             xs.append(x)
             ys.append(y)
-            zs.append(0.0)
 
         if self.__x0_s != -1.0:
             x = self.__x0_s
@@ -138,22 +135,21 @@ class FreeSpaceCell():
         if len(xs) < 3:
             xs = list()
             ys = list()
-            zs = list()
 
-        return xs, ys, zs
+        return xs, ys
 
     def build3DFreeSpace(self, e):
-        xs, ys, zs = buildFreeSpace()
+        xs, ys = self.buildFreeSpace()
 
         # e: 2 3D coord points that define the edge
-        e0_x, e0_y, e0_z = e[0][0], e[0][1], e[0][2]
-        e1_x, e1_y, e1_z = e[[1][0], e[1][1], e[1][2]
+        e0_x, e0_y = e[0][0], e[0][1]
+        e1_x, e1_y = e[1][0], e[1][1]
 
         # l: lenght of horizonal boundry of surface
-        l = sqrt((e1_x-e0_x)**2+e1_y-e0_y)**2+(e1_z-e0_z)**2)
+        l = sqrt((e1_x-e0_x)**2+(e1_y-e0_y)**2)
 
         # t: index of left most point of edge
-        t = 0 if e0_x > e1_x else 1
+        t = 0 if e0_x < e1_x else 1
 
         ## u, v, w = liniar tranfomation (system of equations) from 2D to 3D
         # mapping 2D domain to 3D range
@@ -161,18 +157,18 @@ class FreeSpaceCell():
         # c^2 - b^2 = a^2 => a = sqrt(c^2 - b^2)
         # a = sqrt((l * x)^2 - ((e1_y - e0_y) * x)^2)
         # u = a + et_x
-        us = map(lambda x: sqrt((l*x)**2-((e1_y-e0_y)*x)**2)+e[t][0], xs)
+        u = lambda x: sqrt((l*x)**2-((e1_y-e0_y)*x)**2)+ e[t][0]
+        us = list(map(u, xs))
 
         # v = (et_x - et^_x) * x - et_y
-        vs = map(lambda x: (e[t][1]-e[abs(t-1)][1])*x + e[t][1], xs)
+        v = lambda x: (e[abs(t-1)][1] - e[t][1])*x + e[t][1]
+        vs = list(map(v, xs))
 
         # w = y
-        ws = map(lambda y: y, ys)
+        w = lambda y: y
+        ws = list(map(w, ys))
 
-        print(list(us))
-        print(list(vs))
-        print(list(ws))
-
+        return us, vs, ws
 
     def __str__(self):
         string = """
@@ -195,9 +191,9 @@ class FreeSpaceCell():
         return format
 
 if __name__ == "__main__":
-    fsc = FreeSpaceCell.sampleFreeSpace()
-    print(fsc)
-    x, y, z = fsc.buildFreeSpace()
-    print(x)
-    print(y)
-    print(z)
+    e = [[1.0, 1.0], [25.0, 3.0]]
+    cell = FreeSpaceCell.sampleFreeSpace()
+    cell_xs, cell_ys, cell_zs = cell.build3DFreeSpace(e)
+    print(cell_xs)
+    print(cell_ys)
+    print(cell_zs)

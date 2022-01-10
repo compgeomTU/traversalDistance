@@ -21,60 +21,11 @@
 # liniar transformation functions such that (u, v, w) -> (x, y, z) for an
 # ellipse (will actually be a polygon) planes cordionding cell plane.
 
-import numpy as np
 import matplotlib.pyplot as plt
-import matplotlib.image as image
-from mpl_toolkits.mplot3d import Axes3D
-import io
-from PIL import Image
-import matplotlib.image as image
-import math
+from mpl_toolkits.mplot3d.art3d import Poly3DCollection
+import numpy as np
 from Graph import Graph
-
-def texture_map():
-
-    # sample figure
-    plt.figure(figsize=(10, 10), dpi=20)
-    ax = plt.axes()
-    ax.set_facecolor("grey")
-
-    freespace_struct = np.array([[0, 0], [0, 0.25], [0.25, 0],
-                                 [0, 1], [0.25, 1], [0, 0.75],
-                                 [1, 1], [1, 0.75], [0.75, 1],
-                                 [1, 0], [0.75, 0], [1, 0.25]
-                                ])
-
-    freespace_poly_0 = plt.Polygon(freespace_struct[:3, :], color='white')
-    plt.gca().add_patch(freespace_poly_0)
-
-    freespace_poly_1 = plt.Polygon(freespace_struct[3:6, :], color='white')
-    plt.gca().add_patch(freespace_poly_1)
-
-    freespace_poly_2 = plt.Polygon(freespace_struct[6:9, :], color='white')
-    plt.gca().add_patch(freespace_poly_2)
-
-    freespace_poly_3 = plt.Polygon(freespace_struct[9:, :], color='white')
-    plt.gca().add_patch(freespace_poly_3)
-    # write figure to memory buffer
-    buf = io.BytesIO()
-    plt.savefig(buf, format='png')
-    plt.clf()
-    buf.seek(0)
-
-    # read figure from buffer
-    im = image.imread(buf)
-
-
-    xp, yp, __ = im.shape
-
-    x = np.arange(0, xp, 1)
-    y = np.arange(0, yp, 1)
-    Y, X = np.meshgrid(y, x)
-    Z = X * 0.5
-
-    ax = plt.gca(projection='3d')
-    ax.plot_surface(X, Y, Z, facecolors=im)
-    plt.show()
+from FreeSpaceCell import FreeSpaceCell
 
 def graph_3d_plot():
     # build graph and then add z-axis to the matplotlib engine
@@ -127,7 +78,7 @@ def graph_3d_plot():
     plt.show()
 
 def Graph_2d_parameterization():
-    g = Graph('sample_graphs/H')
+    g = Graph('sample_graphs/R')
     ax = plt.gca(projection='3d')
 
     for id, edge in g.edges.items():
@@ -139,13 +90,18 @@ def Graph_2d_parameterization():
 
         X, Z = np.meshgrid(xs, zs)
         Y = np.linspace(n1[1], n2[1], 10)
-        ax.plot_surface(X, Y, Z, color='lightcoral')
+        ax.plot_surface(X, Y, Z, color='dimgray')
 
-    xLabel = ax.set_xlabel('X')
-    yLabel = ax.set_ylabel('Y')
-    zLabel = ax.set_zlabel('Z')
+        cell = FreeSpaceCell.sampleFreeSpace()
+        us, vs, ws = cell.build3DFreeSpace([n1, n2])
+        verticies = [list(zip(us, vs, ws))]
+        print(verticies)
+        ax.add_collection3d(Poly3DCollection(verticies))
 
-    g.Plot2MatPlotLib()
+    #xLabel = ax.set_xlabel('X')
+    #yLabel = ax.set_ylabel('Y')
+    #zLabel = ax.set_zlabel('Z')
+
     plt.show()
 
 if __name__ == "__main__":
