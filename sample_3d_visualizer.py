@@ -31,49 +31,6 @@ import matplotlib.image as image
 import math
 from Graph import Graph
 
-def example_cells():
-    ax = plt.subplot(projection='3d')
-
-    cell = np.linspace(0, 1, 10)
-
-    y, z = np.meshgrid(cell, cell)
-
-    x = y * 0
-    S1 = (x, y, z)
-
-    x = y * -0.5
-    S2 = (x, y, z)
-
-    x = y * 0.5
-    S3 = (x, y, z)
-
-    ax.plot_surface(S1[0], S1[1], S1[2], color="lightgray")
-    ax.plot_surface(S2[0], S2[1], S2[2], color="lightgray")
-    ax.plot_surface(S3[0], S3[1], S3[2], color="lightgray")
-
-    xLabel = ax.set_xlabel('X')
-    yLabel = ax.set_ylabel('Y')
-    zLabel = ax.set_zlabel('Z')
-
-    plt.show()
-
-def polar_degree(n):
-
-    # spine of cells ranging from 0 <= theda <= pi
-    # theda is in radian form
-    theta = np.linspace(0, 1, n) * np.pi
-
-    # costant lenght of cells
-    r = np.full(shape=n, fill_value=1, dtype=np.float)
-
-    # converting polar coordiantes to cartesian coordiantes
-    x = r * np.cos(theta)
-    y = r * np.sin(theta)
-
-    plt.scatter(x, y)
-
-    plt.show()
-
 def texture_map():
 
     # sample figure
@@ -117,35 +74,6 @@ def texture_map():
 
     ax = plt.gca(projection='3d')
     ax.plot_surface(X, Y, Z, facecolors=im)
-    plt.show()
-
-def graph_2d_plot():
-
-    # edges
-    # e: dict of edge {e_n: (x_n, y_n)}
-    e = {1: (1.5, 1.5),
-        2: (3.5, 4),
-        3: (4.5, 6),
-        4: (4.5, 10),
-        5: (8, 8),
-        6: (10, 13),
-        7: (9, 15),
-        }
-
-    # verticies
-    # v: list of edge pairs (e1 ,e2) that make up verticies
-    v = [(1 ,2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
-
-    for i in v:
-        e1 = e[i[0]]
-        e2 = e[i[1]]
-        plt.plot([e1[0], e2[0]], [e1[1], e2[1]], color ='blue', linewidth=3)
-
-    for k, v_ in e.items():
-        plt.scatter([v_[0]], [v_[1]], s=200, c='red')
-
-        plt.annotate(f"e_{k}", v_, textcoords="offset points", xytext=(25,0), ha='center')
-
     plt.show()
 
 def graph_3d_plot():
@@ -198,42 +126,27 @@ def graph_3d_plot():
 
     plt.show()
 
-def graph_2d_parameterization():
-
-    # edges
-    # e: dict of edge {e_n: (x_n, y_n)}
-    e = {1: (1.5, 1.5),
-        2: (3.5, 4),
-        3: (4.5, 6),
-        4: (4.5, 10),
-        5: (8, 8),
-        6: (10, 13),
-        7: (9, 15),
-        }
-
-    # verticies
-    # v: list of edge pairs (e1 ,e2) that make up verticies
-    v = [(1 ,2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
-
+def Graph_2d_parameterization():
+    g = Graph('sample_graphs/H')
     ax = plt.gca(projection='3d')
 
+    for id, edge in g.edges.items():
+        n1_id, n2_id = edge[0], edge[1]
+        n1, n2 = g.nodes[n1_id], g.nodes[n2_id]
 
-    for i in  v:
-
-        x0 = e[i[0]][0]
-        y0 = e[i[0]][1]
-
-        x1 = e[i[1]][0]
-        y1 = e[i[1]][1]
-
-        xs = np.linspace(x0, x1, 10)
+        xs = np.linspace(n1[0], n2[0], 10)
         zs = np.linspace(0, 1, 10)
 
         X, Z = np.meshgrid(xs, zs)
-        Y = np.linspace(y0, y1, 10)
-        ax.plot_surface(X, Y, Z, color='grey')
+        Y = np.linspace(n1[1], n2[1], 10)
+        ax.plot_surface(X, Y, Z, color='lightcoral')
 
+    xLabel = ax.set_xlabel('X')
+    yLabel = ax.set_ylabel('Y')
+    zLabel = ax.set_zlabel('Z')
+
+    g.Plot2MatPlotLib()
     plt.show()
 
 if __name__ == "__main__":
-    pass
+    Graph_2d_parameterization()
