@@ -27,6 +27,7 @@ import numpy as np
 from Graph import Graph
 from FreeSpaceCell import FreeSpaceCell
 
+
 def graph_3d_plot():
     # build graph and then add z-axis to the matplotlib engine
     # paramitization will build verticies as cells
@@ -35,17 +36,17 @@ def graph_3d_plot():
     # edges
     # e: dict of edge {e_n: (x_n, y_n)}
     e = {1: (1.5, 1.5, 0.5),
-        2: (3.5, 4, 0.5),
-        3: (4.5, 6, 1),
-        4: (4.5, 10, 1.5),
-        5: (8, 8, 2),
-        6: (10, 13, 2),
-        7: (9, 15, 3),
-        }
+         2: (3.5, 4, 0.5),
+         3: (4.5, 6, 1),
+         4: (4.5, 10, 1.5),
+         5: (8, 8, 2),
+         6: (10, 13, 2),
+         7: (9, 15, 3),
+         }
 
     # verticies
     # v: list of edge pairs (e1 ,e2) that make up verticies
-    v = [(1 ,2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
+    v = [(1, 2), (2, 3), (3, 4), (3, 5), (4, 6), (5, 6), (4, 7)]
 
     ax = plt.gca(projection='3d')
 
@@ -58,7 +59,7 @@ def graph_3d_plot():
         y1 = e[i[1]][1]
         z1 = e[i[1]][2]
 
-        ax.plot([x0, x1], [y0, y1], [z0, z1], color ='blue', linewidth=3)
+        ax.plot([x0, x1], [y0, y1], [z0, z1], color='blue', linewidth=3)
 
     mp = [[], [], []]
 
@@ -76,6 +77,7 @@ def graph_3d_plot():
     ax.scatter(mp_x, mp_y, mp_z, s=200, c='red')
 
     plt.show()
+
 
 def graph_2d_parameterization(file):
     g = Graph(file)
@@ -104,5 +106,6 @@ def graph_2d_parameterization(file):
 
     plt.show()
 
+
 if __name__ == "__main__":
-    #graph_2d_parameterization('sample_graphs/R')
+    graph_2d_parameterization('sample_graphs/R')
