@@ -93,10 +93,12 @@ class FreeSpaceGraph:
                         neighbour, cb.edgeID, True)]
                     if newCB.visited == False:
                         self.DFS(newCB)
+        """ end DFS() """
 
         # call recursive dfs function (this is now the DFSTraversalDist function)
         for i in self.cell_boundaries.values():
             i.visited = False
+
         self.DFS(cb)
 
         print("\ndone DFS traversal dist fxn")
