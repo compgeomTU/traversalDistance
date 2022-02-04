@@ -95,8 +95,7 @@ class FreeSpaceGraph:
                         self.DFS(newCB)
 
         # call recursive dfs function (this is now the DFSTraversalDist function)
-        for i in self.cell_boundaries:
-            '''print(i)'''
+        for i in self.cell_boundaries.values():
             i.visited = False
         self.DFS(cb)
 
