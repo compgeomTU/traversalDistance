@@ -14,10 +14,14 @@ def testFreeSpaceGraph():
     print(h)
 
     fsg = FreeSpaceGraph(g, h, e)
-    # get random cell boundary
+    print("made FSG")
+
     cb = fsg.cell_boundaries[(0, 0, g, h)]
+    print("created random cell boundary")
 
     fsg.DFSTraversalDist(cb)
+    print("ran DFS")
+    '''are we just going to traverse the whole thing? or have an end?'''
 
 
 def PlotGraph():

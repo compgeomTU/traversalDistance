@@ -23,33 +23,30 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
+    def DFS(self, cb, path_dists, curr_path_len):
+        cb.print_cellboundary()
+        cb.visited = True
+        if self.g1 == cb.g_edge:        # this would mean the graph is horiz
+            A, B = self.g1, self.g2     # avoid repeating the same code by setting A and B
+        else:
+            A, B = self.g2, self.g1
+        # go thru neighboring edges from given vertexID
+        for neighbour in A.nodeLink[cb.vertexID]:
+            # get neighboring edges' nodes
+            left_vertexID, right_vertexID = B.edges[cb.edgeID]
+            for V in [left_vertexID, right_vertexID]:
+                new_edgeID = A.edgeHash[(V, neighbour)]
+                newCB = self.cell_boundaries[(V, new_edgeID, A, B)]
+                # recursive call on the edge that hasn't been called yet
+                if newCB.visited == False:
+                    self.DFS(newCB, path_dists, curr_path_len + 1)
+                else:
+                    path_dists += [curr_path_len]
+
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
-
-        def DFS(self, cb, path_dists, curr_path_len):
-            cb.print_cellboundary()
-            cb.visited = True
-            if self.g1 == cb.g_edge:        # this would mean the graph is horiz
-                A, B = self.g1, self.g2     # avoid repeating the same code by setting A and B
-            else:
-                A, B = self.g2, self.g1
-
-            # go thru neighboring edges from given vertexID
-            for neighbour in A.nodeLink[cb.vertexID]:
-                # get neighboring edges' nodes
-                left_vertexID, right_vertexID = B.edges[cb.edgeID]
-                for V in [left_vertexID, right_vertexID]:
-                    new_edgeID = A.edgeHash[(V, neighbour)]
-                    newCB = self.cell_boundaries[(V, new_edgeID, A, B)]
-                    # recursive call on the edge that hasn't been called yet
-                    if newCB.visited == False:
-                        self.DFS(newCB, path_dists, curr_path_len + 1)
-                    else:
-                        path_dists += curr_path_len
-
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-
         self.DFS(cb, [], 0)
         #
         # or would we want to just track a minimum path distance? instead of tracking all of them?
@@ -62,6 +59,8 @@ class CellBoundary:
         # use ID's consistant with Erfan's code
         self.vertexID = vertexID
         self.edgeID = edgeID
+        self.g_edge = g_edge
+        self.g_verts = g_verts
         self.visited = False
 
         edge = g_edge.edges[self.edgeID]
