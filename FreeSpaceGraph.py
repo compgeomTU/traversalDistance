@@ -1,5 +1,5 @@
 from CalFreeSpace import calfreespace
-import pdb
+import pdb  # what is this??????????????
 
 
 class FreeSpaceGraph:
@@ -8,13 +8,10 @@ class FreeSpaceGraph:
         self.g2 = g2
         self.e = epsilon
         self.cell_boundaries = {}
-
-        # get this dynamically, for each --> given one fsbound print the adgacent
+        '''get these dynamically, for each --> given one fsbound print the adjacent'''
         # Horizontal boundaries
         for v in self.g2.nodes.keys():
             for e in self.g1.edges.keys():
-                '''myKey = v, e, g1, g2'''
-                #### self.cell_boundaries[(myKey)] = self.CellBoundary(myKey)
                 self.cell_boundaries[(v, e, g1, g2)] = CellBoundary(
                     v, e, g1, g2, self.e)
         # Verticle boundaries
@@ -23,88 +20,44 @@ class FreeSpaceGraph:
                 self.cell_boundaries[(v, e, g2, g1)] = CellBoundary(
                     v, e, g2, g1, self.e)
 
-        '''print("-- Cell Boundaries --\n", print(self.cell_boundaries))'''
-
-        # get traversal distance using dfs search
-        # given one free space boundary, compute all adjacent free space boundaries
-
-    def DFS(self, cb):
-        cb.print_cellboundary()
-        # Mark the current node as visited
-        cb.visited = True
-        # call recursively for all nodes adjacent
-        # take vertex id and look at all neighbors
-        if cb.isHoriz == False:
-            for neighbour in self.g1.nodeLink[cb.vertexID]:
-                # for the top
-                # gets the next vertex
-                vertexID = self.g2.edges[cb.edgeID][0]
-                # get next edge id
-                # NOT DONE YET JUST A PSEUDOCODE OUTLINE
-                edgeID = self.g1.edgeHash[(vertexID, neighbour)]
-                # for the right traversal
-                newCB = self.cell_boundaries[(vertexID, edgeID, True)]
-                if newCB.visited == False:
-                    self.DFS(newCB)
-
-                # for the bottom
-                # gets the next vertex
-                vertexID = self.g2.edges[cb.edgeID][1]
-                # get next edge id
-                # NOT DONE YET JUST A PSEUDOCODE OUTLINE
-                edgeID = self.g1.edgeHash[(vertexID, neighbour)]
-                newCB = self.cell_boundaries[(vertexID, edgeID, True)]
-                if newCB.visited == False:
-                    self.DFS(newCB)
-
-                # for the right traversal
-                newCB = self.cell_boundaries[(neighbour, cb.edgeID, False)]
-                if newCB.visited == False:
-                    self.DFS(newCB)
-
-        else:  # horizontal need to repeat all the steps ^ but flipped g1 and g2
-            for neighbour in self.g2.nodeLink[cb.vertexID]:
-                # for the left
-                # gets the next vertex
-                vertexID = self.g1.edges[cb.edgeID][0]
-                # get next edge id
-                # NOT DONE YET JUST A PSEUDOCODE OUTLINE
-                edgeID = self.g2.edgeHash[(vertexID, neighbour)]
-                # for the right traversal
-                newCB = self.cell_boundaries[tuple(
-                    vertexID, edgeID, False)]
-                if newCB.visited == False:
-                    self.DFS(newCB)
-                # for the right
-                # gets the next vertex
-                vertexID = self.g1.edges[cb.edgeID][1]
-                # get next edge id
-                # NOT DONE YET JUST A PSEUDOCODE OUTLINE
-                edgeID = self.g2.edgeHash[(vertexID, neighbour)]
-                newCB = self.cell_boundaries[tuple(
-                    vertexID, edgeID, False)]
-                if newCB.visited == False:
-                    self.DFS(newCB)
-
-                # for the top traversal
-                newCB = self.cell_boundaries[tuple(
-                    neighbour, cb.edgeID, True)]
-                if newCB.visited == False:
-                    self.DFS(newCB)
-        """ end DFS() """
+    def print_cbs(self):
+        print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
     def DFSTraversalDist(self, cb):
-        # call recursive dfs function (this is now the DFSTraversalDist function)
-        for i in self.cell_boundaries.values():
-            i.visited = False
-        ''''is this supposed to be in the loop? how is this executing recursively'''
-        self.DFS(cb)
+        '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
 
-        print("\ndone DFS traversal dist fxn")
+        def DFS(self, cb, path_dists, curr_path_len):
+            cb.print_cellboundary()
+            cb.visited = True
+            if self.g1 == cb.g_edge:        # this would mean the graph is horiz
+                A, B = self.g1, self.g2     # avoid repeating the same code by setting A and B
+            else:
+                A, B = self.g2, self.g1
+
+            # go thru neighboring edges from given vertexID
+            for neighbour in A.nodeLink[cb.vertexID]:
+                # get neighboring edges' nodes
+                left_vertexID, right_vertexID = B.edges[cb.edgeID]
+                for V in [left_vertexID, right_vertexID]:
+                    new_edgeID = A.edgeHash[(V, neighbour)]
+                    newCB = self.cell_boundaries[(V, new_edgeID, A, B)]
+                    # recursive call on the edge that hasn't been called yet
+                    if newCB.visited == False:
+                        self.DFS(newCB, path_dists, curr_path_len + 1)
+                    else:
+                        path_dists += curr_path_len
+
+        for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
+            i.visited = False
+
+        self.DFS(cb, [], 0)
+        #
+        # or would we want to just track a minimum path distance? instead of tracking all of them?
+        #
+        print("\n done DFS traversal dist fxn")
 
 
 class CellBoundary:
-
     def __init__(self, vertexID, edgeID, g_edge, g_verts, eps):
         # use ID's consistant with Erfan's code
         self.vertexID = vertexID
@@ -125,5 +78,5 @@ class CellBoundary:
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
-        #print("Start: ", self.start)
-        #print("End: ", self.end)
+        # print("Start: ", self.start)
+        # print("End: ", self.end)
