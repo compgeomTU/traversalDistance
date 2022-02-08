@@ -26,22 +26,31 @@ class FreeSpaceGraph:
     def DFS(self, cb, path_dists, curr_path_len):
         cb.print_cellboundary()
         cb.visited = True
-        if self.g1 == cb.g_edge:        # this would mean the graph is horiz
-            A, B = self.g1, self.g2     # avoid repeating the same code by setting A and B
-        else:
-            A, B = self.g2, self.g1
+
         # go thru neighboring edges from given vertexID
-        for neighbour in A.nodeLink[cb.vertexID]:
+        for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
-            left_vertexID, right_vertexID = B.edges[cb.edgeID]
+            left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
             for V in [left_vertexID, right_vertexID]:
-                new_edgeID = A.edgeHash[(V, neighbour)]
-                newCB = self.cell_boundaries[(V, new_edgeID, A, B)]
+                new_edgeID = cb.g_verts.edgeHash[(V, neighbor)]
+                # creating new cell boundary from "flipping" horiz --> vertical
+                newCB = self.cell_boundaries[(
+                    V, new_edgeID, cb.g_verts, cb.g_edges)]
+
                 # recursive call on the edge that hasn't been called yet
                 if newCB.visited == False:
                     self.DFS(newCB, path_dists, curr_path_len + 1)
                 else:
                     path_dists += [curr_path_len]
+
+            # connect v's of same type
+            newCB = self.cell_boundaries[(
+                neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
+            # recursive call on the edge that hasn't been called yet
+            if newCB.visited == False:
+                self.DFS(newCB, path_dists, curr_path_len + 1)
+            else:
+                path_dists += [curr_path_len]
 
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
@@ -55,20 +64,20 @@ class FreeSpaceGraph:
 
 
 class CellBoundary:
-    def __init__(self, vertexID, edgeID, g_edge, g_verts, eps):
+    def __init__(self, vertexID, edgeID, g_edges, g_verts, eps):
         # use ID's consistant with Erfan's code
         self.vertexID = vertexID
         self.edgeID = edgeID
-        self.g_edge = g_edge
+        self.g_edges = g_edges
         self.g_verts = g_verts
         self.visited = False
 
-        edge = g_edge.edges[self.edgeID]
+        edge = g_edges.edges[self.edgeID]
         # inputs for CFS
-        x1 = g_edge.nodes[edge[0]][1]  # --> id of vertex, x-coord
-        y1 = g_edge.nodes[edge[0]][0]
-        x2 = g_edge.nodes[edge[1]][1]
-        y2 = g_edge.nodes[edge[1]][0]
+        x1 = g_edges.nodes[edge[0]][1]  # --> id of vertex, x-coord
+        y1 = g_edges.nodes[edge[0]][0]
+        x2 = g_edges.nodes[edge[1]][1]
+        y2 = g_edges.nodes[edge[1]][0]
         xa = g_verts.nodes[vertexID][0]
         ya = g_verts.nodes[vertexID][1]
         # call CFS and return tuple --> compute from free space by traversing the free space
