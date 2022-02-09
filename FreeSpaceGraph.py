@@ -88,3 +88,6 @@ class CellBoundary:
         print("Cell Boundary: ", self.vertexID, self.edgeID)
         # print("Start: ", self.start)
         # print("End: ", self.end)
+
+
+'''in the beginning when you visit, print each cb for dubugging purposes'''
