@@ -24,6 +24,9 @@ def testFreeSpaceGraph():
 
     '''are we just going to traverse the whole thing? or have an end?'''
 
+    print("G edges: ", g.edges)
+    print("H edges: ", h.edges)
+
 
 def PlotGraph():
     # plots graph to matplotlib
@@ -36,4 +39,4 @@ def PlotGraph():
 
 if __name__ == "__main__":
     testFreeSpaceGraph()
-    # PlotGraph()
+    PlotGraph()

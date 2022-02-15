@@ -107,3 +107,4 @@ class CellBoundary:
 
     def add_cd_str(self):
         return str(self.vertexID) + "," + str(self.edgeID)+" -> "
+        """possibly want to add a flag for which graph is first ..."""
