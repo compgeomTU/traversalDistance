@@ -39,11 +39,11 @@ class FreeSpaceGraph:
 
                     # recursive call on the edge that hasn't been called yet
                     if newCB.visited == False:
-                        print("DFS -- add", end="")
+                        print("DFS -- add ", end="")
                         newCB.print_cellboundary()  # print visited cb
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                     else:
-                        print("DFS -- basecase -> curr_path = ", curr_path)
+                        print("DFS -- basecase -> return path")
                         paths += [curr_path]
                         return paths
 
@@ -56,7 +56,7 @@ class FreeSpaceGraph:
                     newCB.print_cellboundary()  # print visited cb
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
-                    print("DFS -- basecase -> curr_path = ", curr_path)
+                    print("DFS -- basecase -> return path")
                     paths += [curr_path]
                     return paths
 
@@ -65,8 +65,9 @@ class FreeSpaceGraph:
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
         paths = self.DFS(cb, [], "")
-
-        print("\n", paths)
+        print("\n -- PATHS --")
+        for p in paths:
+            print(p)
         #
         # or would we want to just track a minimum path distance? instead of tracking all of them?
         #
@@ -100,6 +101,3 @@ class CellBoundary:
 
     def add_cd_str(self):
         return str(self.vertexID) + "," + str(self.edgeID)+"-"
-
-
-'''in the beginning when you visit, print each cb for dubugging purposes'''
