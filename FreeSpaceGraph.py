@@ -29,10 +29,12 @@ class FreeSpaceGraph:
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
+
             for V in [left_vertexID, right_vertexID]:
 
-                if (V, neighbor) in cb.g_verts.edgeHash:
-                    new_edgeID = cb.g_verts.edgeHash[(V, neighbor)]
+                # or (V, neighbor) in cb.g_verts.edgeHash:
+                if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
+                    new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
                     # creating new cell boundary from "flipping" horiz --> vertical
                     newCB = self.cell_boundaries[(
                         V, new_edgeID, cb.g_verts, cb.g_edges)]
@@ -40,12 +42,16 @@ class FreeSpaceGraph:
                     # recursive call on the edge that hasn't been called yet
                     if newCB.visited == False:
                         print("DFS -- add ", end="")
-                        newCB.print_cellboundary()  # print visited cb
+                        newCB.print_cellboundary()  # print visited cb'''
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                     else:
                         print("DFS -- basecase -> return path")
                         paths += [curr_path]
                         return paths
+                elif (neighbor, cb.vertexID) in cb.g_verts.edgeHash:
+                    print("!! neighbor, cb.vertexID TRUE")
+                else:
+                    print("!! both false")
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -53,7 +59,7 @@ class FreeSpaceGraph:
                 # recursive call on the edge that hasn't been called yet
                 if newCB.visited == False:
                     print("DFS -- add ", end="")
-                    newCB.print_cellboundary()  # print visited cb
+                    newCB.print_cellboundary()  # print visited cb'''
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
                     print("DFS -- basecase -> return path")
@@ -100,4 +106,4 @@ class CellBoundary:
         # print("End: ", self.end)
 
     def add_cd_str(self):
-        return str(self.vertexID) + "," + str(self.edgeID)+"-"
+        return str(self.vertexID) + "," + str(self.edgeID)+" -> "
