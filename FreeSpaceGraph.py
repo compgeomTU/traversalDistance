@@ -23,7 +23,7 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb, path_dists, curr_path_len):
+    def DFS(self, cb, paths, curr_path):
         cb.visited = True
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
@@ -41,11 +41,11 @@ class FreeSpaceGraph:
                     if newCB.visited == False:
                         print("DFS -- add", end="")
                         newCB.print_cellboundary()  # print visited cb
-                        self.DFS(newCB, path_dists, curr_path_len + 1)
+                        self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                     else:
-                        print("DFS -- hit base case --> curr_path_len = ",
-                              curr_path_len)
-                        path_dists += [curr_path_len]
+                        print("DFS -- basecase -> curr_path = ", curr_path)
+                        paths += [curr_path]
+                        return paths
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -54,16 +54,19 @@ class FreeSpaceGraph:
                 if newCB.visited == False:
                     print("DFS -- add ", end="")
                     newCB.print_cellboundary()  # print visited cb
-                    self.DFS(newCB, path_dists, curr_path_len + 1)
+                    self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
-                    print("DFS -- hit base case --> curr_path_len = ", curr_path_len)
-                    path_dists += [curr_path_len]
+                    print("DFS -- basecase -> curr_path = ", curr_path)
+                    paths += [curr_path]
+                    return paths
 
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-        self.DFS(cb, [], 0)
+        paths = self.DFS(cb, [], "")
+
+        print("\n", paths)
         #
         # or would we want to just track a minimum path distance? instead of tracking all of them?
         #
@@ -94,6 +97,9 @@ class CellBoundary:
         print("Cell Boundary: ", self.vertexID, self.edgeID)
         # print("Start: ", self.start)
         # print("End: ", self.end)
+
+    def add_cd_str(self):
+        return str(self.vertexID) + "," + str(self.edgeID)+"-"
 
 
 '''in the beginning when you visit, print each cb for dubugging purposes'''
