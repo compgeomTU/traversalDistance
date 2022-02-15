@@ -10,17 +10,17 @@ def testFreeSpaceGraph():
     h = Graph("sample_graphs/H")
     e = 2
     # prints graph objects with no print override
-    print(g)
-    print(h)
+    print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     fsg = FreeSpaceGraph(g, h, e)
-    print("made FSG")
+    print("-- created FSG")
 
-    cb = fsg.cell_boundaries[(0, 0, g, h)]
-    print("created random cell boundary")
+    # from g_edges: 0,0,1
+    cb = fsg.cell_boundaries[(0, 1, g, h)]
+    print("-- created test cell boundary: ", cb.print_cellboundary())
 
     fsg.DFSTraversalDist(cb)
-    print("ran DFS")
+    print("-- ran DFS")
     '''are we just going to traverse the whole thing? or have an end?'''
 
 

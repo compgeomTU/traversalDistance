@@ -24,33 +24,39 @@ class FreeSpaceGraph:
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
     def DFS(self, cb, path_dists, curr_path_len):
-        cb.print_cellboundary()
         cb.visited = True
-
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
             for V in [left_vertexID, right_vertexID]:
-                new_edgeID = cb.g_verts.edgeHash[(V, neighbor)]
-                # creating new cell boundary from "flipping" horiz --> vertical
-                newCB = self.cell_boundaries[(
-                    V, new_edgeID, cb.g_verts, cb.g_edges)]
 
+                if (V, neighbor) in cb.g_verts.edgeHash:
+                    new_edgeID = cb.g_verts.edgeHash[(V, neighbor)]
+                    # creating new cell boundary from "flipping" horiz --> vertical
+                    newCB = self.cell_boundaries[(
+                        V, new_edgeID, cb.g_verts, cb.g_edges)]
+
+                    # recursive call on the edge that hasn't been called yet
+                    if newCB.visited == False:
+                        print("DFS -- ", end="")
+                        newCB.print_cellboundary()  # print visited cb
+                        self.DFS(newCB, path_dists, curr_path_len + 1)
+                    else:
+                        print("DFS -- hit base case")
+                        path_dists += [curr_path_len]
+
+                # connect v's of same type
+                newCB = self.cell_boundaries[(
+                    neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
                 # recursive call on the edge that hasn't been called yet
                 if newCB.visited == False:
+                    print("DFS -- ", end="")
+                    newCB.print_cellboundary()  # print visited cb
                     self.DFS(newCB, path_dists, curr_path_len + 1)
                 else:
+                    print("DFS -- hit base case")
                     path_dists += [curr_path_len]
-
-            # connect v's of same type
-            newCB = self.cell_boundaries[(
-                neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
-            # recursive call on the edge that hasn't been called yet
-            if newCB.visited == False:
-                self.DFS(newCB, path_dists, curr_path_len + 1)
-            else:
-                path_dists += [curr_path_len]
 
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
