@@ -39,11 +39,12 @@ class FreeSpaceGraph:
 
                     # recursive call on the edge that hasn't been called yet
                     if newCB.visited == False:
-                        print("DFS -- ", end="")
+                        print("DFS -- add", end="")
                         newCB.print_cellboundary()  # print visited cb
                         self.DFS(newCB, path_dists, curr_path_len + 1)
                     else:
-                        print("DFS -- hit base case")
+                        print("DFS -- hit base case --> curr_path_len = ",
+                              curr_path_len)
                         path_dists += [curr_path_len]
 
                 # connect v's of same type
@@ -51,11 +52,11 @@ class FreeSpaceGraph:
                     neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
                 # recursive call on the edge that hasn't been called yet
                 if newCB.visited == False:
-                    print("DFS -- ", end="")
+                    print("DFS -- add ", end="")
                     newCB.print_cellboundary()  # print visited cb
                     self.DFS(newCB, path_dists, curr_path_len + 1)
                 else:
-                    print("DFS -- hit base case")
+                    print("DFS -- hit base case --> curr_path_len = ", curr_path_len)
                     path_dists += [curr_path_len]
 
     def DFSTraversalDist(self, cb):
@@ -66,7 +67,6 @@ class FreeSpaceGraph:
         #
         # or would we want to just track a minimum path distance? instead of tracking all of them?
         #
-        print("\n done DFS traversal dist fxn")
 
 
 class CellBoundary:

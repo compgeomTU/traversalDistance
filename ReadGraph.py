@@ -9,15 +9,16 @@ def testFreeSpaceGraph():
     g = Graph("sample_graphs/G")
     h = Graph("sample_graphs/H")
     e = 2
-    # prints graph objects with no print override
-    print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
+    # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     fsg = FreeSpaceGraph(g, h, e)
     print("-- created FSG")
 
-    # from g_edges: 0,0,1
-    cb = fsg.cell_boundaries[(0, 1, g, h)]
-    print("-- created test cell boundary: ", cb.print_cellboundary())
+    #cbs = fsg.cell_boundaries.keys()
+
+    cb = fsg.cell_boundaries[(0, 0, g, h)]
+    print("-- take test cell bound:   ", end="")
+    cb.print_cellboundary()
 
     fsg.DFSTraversalDist(cb)
     print("-- ran DFS")
