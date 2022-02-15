@@ -48,10 +48,6 @@ class FreeSpaceGraph:
                         print("DFS -- basecase -> return path")
                         paths += [curr_path]
                         return paths
-                '''elif (neighbor, cb.vertexID) in cb.g_verts.edgeHash:
-                    print("!! neighbor, cb.vertexID TRUE")
-                else:
-                    print("!! both false")'''
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -71,7 +67,7 @@ class FreeSpaceGraph:
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
         paths = self.DFS(cb, [], "")
-        print("\n -- PATHS --")
+        print("\n -- PATHS --  R=rectangle graph X=other")
         for p in paths:
             print(p)
         #
