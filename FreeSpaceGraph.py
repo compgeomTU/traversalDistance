@@ -25,6 +25,7 @@ class FreeSpaceGraph:
 
     def DFS(self, cb, paths, curr_path):
         cb.visited = True
+
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
@@ -47,7 +48,7 @@ class FreeSpaceGraph:
                     else:
                         print("DFS -- basecase -> return path")
                         paths += [curr_path]
-                        return paths
+                        # return paths
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -60,7 +61,9 @@ class FreeSpaceGraph:
                 else:
                     print("DFS -- basecase -> return path")
                     paths += [curr_path]
-                    return paths
+                    # return paths'''
+
+        return paths
 
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
