@@ -48,10 +48,10 @@ class FreeSpaceGraph:
                         print("DFS -- basecase -> return path")
                         paths += [curr_path]
                         return paths
-                elif (neighbor, cb.vertexID) in cb.g_verts.edgeHash:
+                '''elif (neighbor, cb.vertexID) in cb.g_verts.edgeHash:
                     print("!! neighbor, cb.vertexID TRUE")
                 else:
-                    print("!! both false")
+                    print("!! both false")'''
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -106,5 +106,9 @@ class CellBoundary:
         # print("End: ", self.end)
 
     def add_cd_str(self):
-        return str(self.vertexID) + "," + str(self.edgeID)+" -> "
+        if self.g_verts.nodes[0][0] == 0 and self.g_verts.nodes[0][1] == -3:
+            isRectangleGraph = "v"
+        else:
+            isRectangleGraph = "u"
+        return isRectangleGraph+str(self.vertexID) + "," + str(self.edgeID)+" -> "
         """possibly want to add a flag for which graph is first ..."""

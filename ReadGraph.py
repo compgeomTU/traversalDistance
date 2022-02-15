@@ -39,4 +39,4 @@ def PlotGraph():
 
 if __name__ == "__main__":
     testFreeSpaceGraph()
-    PlotGraph()
+    # PlotGraph()
