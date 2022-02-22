@@ -23,44 +23,59 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb, path_dists, curr_path_len):
-        cb.print_cellboundary()
+    def DFS(self, cb, paths, curr_path):
         cb.visited = True
 
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
-            for V in [left_vertexID, right_vertexID]:
-                new_edgeID = cb.g_verts.edgeHash[(V, neighbor)]
-                # creating new cell boundary from "flipping" horiz --> vertical
-                newCB = self.cell_boundaries[(
-                    V, new_edgeID, cb.g_verts, cb.g_edges)]
 
+            for V in [left_vertexID, right_vertexID]:
+
+                # or (V, neighbor) in cb.g_verts.edgeHash:
+                if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
+                    new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
+                    # creating new cell boundary from "flipping" horiz --> vertical
+                    newCB = self.cell_boundaries[(
+                        V, new_edgeID, cb.g_verts, cb.g_edges)]
+
+                    # recursive call on the edge that hasn't been called yet
+                    if newCB.visited == False:
+                        print("DFS -- add ", end="")
+                        newCB.print_cellboundary()  # print visited cb'''
+                        self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
+                    else:
+                        print("DFS -- basecase -> return path")
+                        paths += [curr_path]
+                        # return paths
+
+                # connect v's of same type
+                newCB = self.cell_boundaries[(
+                    neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
                 # recursive call on the edge that hasn't been called yet
                 if newCB.visited == False:
-                    self.DFS(newCB, path_dists, curr_path_len + 1)
+                    print("DFS -- add ", end="")
+                    newCB.print_cellboundary()  # print visited cb'''
+                    self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
-                    path_dists += [curr_path_len]
+                    print("DFS -- basecase -> return path")
+                    paths += [curr_path]
+                    # return paths'''
 
-            # connect v's of same type
-            newCB = self.cell_boundaries[(
-                neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
-            # recursive call on the edge that hasn't been called yet
-            if newCB.visited == False:
-                self.DFS(newCB, path_dists, curr_path_len + 1)
-            else:
-                path_dists += [curr_path_len]
+        return paths
 
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-        self.DFS(cb, [], 0)
+        paths = self.DFS(cb, [], "")
+        print("\n -- PATHS --  R=rectangle graph X=other")
+        for p in paths:
+            print(p)
         #
         # or would we want to just track a minimum path distance? instead of tracking all of them?
         #
-        print("\n done DFS traversal dist fxn")
 
 
 class CellBoundary:
@@ -88,3 +103,11 @@ class CellBoundary:
         print("Cell Boundary: ", self.vertexID, self.edgeID)
         # print("Start: ", self.start)
         # print("End: ", self.end)
+
+    def add_cd_str(self):
+        if self.g_verts.nodes[0][0] == 0 and self.g_verts.nodes[0][1] == -3:
+            isRectangleGraph = "v"
+        else:
+            isRectangleGraph = "u"
+        return isRectangleGraph+str(self.vertexID) + "," + str(self.edgeID)+" -> "
+        """possibly want to add a flag for which graph is first ..."""

@@ -6,29 +6,37 @@ from FreeSpaceGraph import FreeSpaceGraph
 
 
 def testFreeSpaceGraph():
+    print("n\ -- TESTING FreeSpaceGraph.py -- ")
     g = Graph("sample_graphs/G")
     h = Graph("sample_graphs/H")
     e = 2
-    # prints graph objects with no print override
-    print(g)
-    print(h)
+    # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     fsg = FreeSpaceGraph(g, h, e)
-    print("made FSG")
+    print("-- created FSG")
 
     cb = fsg.cell_boundaries[(0, 0, g, h)]
-    print("created random cell boundary")
+    print("-- take test cell bound:   ", end="")
+    cb.print_cellboundary()
 
     fsg.DFSTraversalDist(cb)
-    print("ran DFS")
+    print("-- END -- \n")
+
     '''are we just going to traverse the whole thing? or have an end?'''
+
+    print("G edges: ", g.edges)
+    print("H edges: ", h.edges)
 
 
 def PlotGraph():
     # plots graph to matplotlib
-    r = Graph("sample_graphs/R")
-    r.Plot2MatPlotLib()
+    g = Graph("sample_graphs/G")
+    g.Plot2MatPlotLib()
+    h = Graph("sample_graphs/H")
+    h.Plot2MatPlotLib()
+    print("-- Graph Plotted --")
 
 
 if __name__ == "__main__":
     testFreeSpaceGraph()
+    # PlotGraph()
