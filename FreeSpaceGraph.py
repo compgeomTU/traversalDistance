@@ -54,8 +54,9 @@ class FreeSpaceGraph:
                 else:
                     print("DFS -- basecase -> return path")
                     paths += [curr_path]
+                    return paths
 
-        return paths
+        # return paths
 
     def DFSTraversalDist(self, cb):
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
