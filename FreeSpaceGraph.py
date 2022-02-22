@@ -48,7 +48,7 @@ class FreeSpaceGraph:
                     else:
                         print("DFS -- basecase -> return path")
                         paths += [curr_path]
-                        # return paths
+                        return paths
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -61,7 +61,7 @@ class FreeSpaceGraph:
                 else:
                     print("DFS -- basecase -> return path")
                     paths += [curr_path]
-                    # return paths'''
+                    return paths
 
         return paths
 
