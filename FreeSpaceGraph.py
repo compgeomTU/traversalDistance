@@ -25,43 +25,43 @@ class FreeSpaceGraph:
 
     def DFS(self, cb, paths, curr_path):
         cb.visited = True
-
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
 
-            for V in [left_vertexID, right_vertexID]:
+            # for V in [left_vertexID, right_vertexID]:
+            new_CBs = []
+            if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
+                new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
+                # connect Left vertex
+                new_CBs += self.cell_boundaries[(
+                    left_vertexID, new_edgeID, cb.g_verts, cb.g_edges)]  # creating new cell boundary from "flipping" horiz --> vertical
+                # connect right vertex
+                new_CBs += self.cell_boundaries[(
+                    right_vertexID, new_edgeID, cb.g_verts, cb.g_edges)]
 
-                # or (V, neighbor) in cb.g_verts.edgeHash:
-                if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
-                    new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
-                    # creating new cell boundary from "flipping" horiz --> vertical
-                    newCB = self.cell_boundaries[(
-                        V, new_edgeID, cb.g_verts, cb.g_edges)]
+            # connect v's of same type
+            new_CBs += self.cell_boundaries[(
+                neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
 
-                    # recursive call on the edge that hasn't been called yet
-                    if newCB.visited == False:
-                        print("DFS -- add ", end="")
-                        newCB.print_cellboundary()  # print visited cb'''
-                        self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
-                    else:
-                        print("DFS -- basecase -> return path")
-                        paths += [curr_path]
-                        # return paths
-
-                # connect v's of same type
-                newCB = self.cell_boundaries[(
-                    neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
-                # recursive call on the edge that hasn't been called yet
-                if newCB.visited == False:
+            # recursive call on the edge that hasn't been called yet
+            for cb in new_CBs:
+                if cb.visited == False:
                     print("DFS -- add ", end="")
-                    newCB.print_cellboundary()  # print visited cb'''
-                    self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
+                    cb.print_cellboundary()  # print visited cb'''
+                    self.DFS(cb, paths, curr_path+(cb.add_cd_str()))
                 else:
                     print("DFS -- basecase -> return path")
                     paths += [curr_path]
-                    # return paths'''
+
+            """if newCB.visited == False:
+                print("DFS -- add ", end="")
+                newCB.print_cellboundary()  # print visited cb'''
+                self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
+            else:
+                print("DFS -- basecase -> return path")
+                paths += [curr_path]"""
 
         return paths
 
