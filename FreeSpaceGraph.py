@@ -25,7 +25,7 @@ class FreeSpaceGraph:
 
     def DFS(self, cb, paths, curr_path):
         cb.visited = True
-
+        paths += [curr_path]
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
@@ -45,10 +45,11 @@ class FreeSpaceGraph:
                         print("DFS -- add ", end="")
                         newCB.print_cellboundary()  # print visited cb'''
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
-                    else:
-                        print("DFS -- basecase -> return path")
                         paths += [curr_path]
-                        # return paths
+                    """ else:
+                        print("DFS -- basecase -> return path")
+                        
+                        # return paths"""
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -58,10 +59,11 @@ class FreeSpaceGraph:
                     print("DFS -- add ", end="")
                     newCB.print_cellboundary()  # print visited cb'''
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
-                else:
-                    print("DFS -- basecase -> return path")
                     paths += [curr_path]
-                    # return paths'''
+                """else:
+                    print("DFS -- basecase -> return path")
+                    
+                    # return paths'''"""
 
         return paths
 
