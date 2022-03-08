@@ -4,6 +4,6 @@
 - contains classes `FreeSpaceGraph` and `CellBoundary`, and function `DFSTraversalDist` with helper `DFS`. 
 
 Undergraduate Assistants: 
-* Rena Repenning
+* Rena Repenning 
 * Emily Powers
 * Will Rodman
