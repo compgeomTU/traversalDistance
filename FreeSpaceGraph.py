@@ -1,4 +1,5 @@
 from CalFreeSpace import calfreespace
+from line-intersection import find_ellipse_max_min_points
 import pdb  # what is this??????????????
 
 
@@ -98,8 +99,9 @@ class CellBoundary:
         xa = g_verts.nodes[vertexID][0]
         ya = g_verts.nodes[vertexID][1]
         # call CFS and return tuple --> compute from free space by traversing the free space
-        self.start, self.end = calfreespace(
-            x1, y1, x2, y2, xa, ya, eps)
+        self.start_fs, self.end_fs = calfreespace(
+            x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
+        self.
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
