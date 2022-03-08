@@ -1,4 +1,5 @@
 from CalFreeSpace import calfreespace
+from line-intersection import find_ellipse_max_min_points
 import pdb  # what is this??????????????
 
 
@@ -23,16 +24,18 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
+    """
+    - when in dfs want to see prinout where we are, don't care about ...
+    - computing boundaries with each run 
+    """
+
     def DFS(self, cb, paths, curr_path):
         cb.visited = True
-
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
             # get neighboring edges' nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
-
             for V in [left_vertexID, right_vertexID]:
-
                 # or (V, neighbor) in cb.g_verts.edgeHash:
                 if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
@@ -46,9 +49,9 @@ class FreeSpaceGraph:
                         newCB.print_cellboundary()  # print visited cb'''
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                     else:
-                        print("DFS -- basecase -> return path")
+                        print("DFS -- basecase -> dont return path")
                         paths += [curr_path]
-                        return paths
+                        # return paths
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
@@ -59,9 +62,9 @@ class FreeSpaceGraph:
                     newCB.print_cellboundary()  # print visited cb'''
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
-                    print("DFS -- basecase -> return path")
+                    print("DFS -- basecase -> dont return path")
                     paths += [curr_path]
-                    return paths
+                    # return paths
 
         return paths
 
@@ -96,8 +99,9 @@ class CellBoundary:
         xa = g_verts.nodes[vertexID][0]
         ya = g_verts.nodes[vertexID][1]
         # call CFS and return tuple --> compute from free space by traversing the free space
-        self.start, self.end = calfreespace(
-            x1, y1, x2, y2, xa, ya, eps)
+        self.start_fs, self.end_fs = calfreespace(
+            x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
+        self.
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
