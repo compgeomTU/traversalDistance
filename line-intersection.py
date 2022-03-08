@@ -100,7 +100,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
 
 
 #test
-line1 = [[1,0],[-4,3]]
-line2 = [[-2,3],[1,-3]]
-epsilon = 2
-print(find_ellipse_max_min_points(line1, line2, epsilon))
+#line1 = [[1,0],[-4,3]]
+#line2 = [[-2,3],[1,-3]]
+#epsilon = 2
+#print(find_ellipse_max_min_points(line1, line2, epsilon))
