@@ -102,6 +102,12 @@ def graph_2d_parameterization(file):
         poly_cell = Poly3DCollection(verticies, alpha=1.0,facecolor='dimgray')
         ax.add_collection3d(poly_cell)
 
+        #hack to change propotion of 3d projection
+        alpha = 5
+        yy_, zz_ = np.meshgrid([0], range(alpha))
+        xx_ = yy_*0
+        ax.plot_surface(xx_, yy_, zz_, alpha=0.0, color='white')
+
     xLabel = ax.set_xlabel('X')
     yLabel = ax.set_ylabel('Y')
     zLabel = ax.set_zlabel('Z')
