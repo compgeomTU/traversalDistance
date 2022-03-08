@@ -1,3 +1,14 @@
+"""
+Author:
+
+Contributors:
+Rena Repenning
+www.renarepenning.com
+
+Emily Powers
+XX@tulane.edu
+"""
+
 from CalFreeSpace import calfreespace
 from LineIntersection import find_ellipse_max_min_points
 
