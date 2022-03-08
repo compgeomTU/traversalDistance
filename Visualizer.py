@@ -1,5 +1,5 @@
 # ext file in command line:
-# python3 sample_3d_visualizer.py
+# python3 Visualizer.py
 
 # Considering the way that planes are constructed using np.meshgrid,
 # I have realized a solution to stitching ajacent planes together in matplotlib
@@ -82,6 +82,8 @@ def graph_3d_plot():
 def graph_2d_parameterization(file):
     g = Graph(file)
     ax = plt.gca(projection='3d')
+    ax.grid(False)
+    ax._axis3don = False
 
     for id, edge in g.edges.items():
         n1_id, n2_id = edge[0], edge[1]
@@ -97,15 +99,23 @@ def graph_2d_parameterization(file):
         cell = FreeSpaceCell.sampleFreeSpace()
         us, vs, ws = cell.build3DFreeSpace([n1, n2])
         verticies = [list(zip(us, vs, ws))]
-        poly_cell = Poly3DCollection(verticies, facecolor='dimgray')
+        poly_cell = Poly3DCollection(verticies, alpha=1.0,facecolor='dimgray')
         ax.add_collection3d(poly_cell)
+
+        #hack to change propotion of 3d projection
+        alpha = 5
+        yy_, zz_ = np.meshgrid([0], range(alpha))
+        xx_ = yy_*0
+        ax.plot_surface(xx_, yy_, zz_, alpha=0.0, color='white')
 
     xLabel = ax.set_xlabel('X')
     yLabel = ax.set_ylabel('Y')
     zLabel = ax.set_zlabel('Z')
 
-    plt.show()
-
+    #plt.show()
+    plt.savefig(f"{file}.svg")
+    plt.close()
 
 if __name__ == "__main__":
     graph_2d_parameterization('sample_graphs/R')
+    # add

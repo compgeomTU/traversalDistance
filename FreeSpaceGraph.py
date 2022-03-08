@@ -48,10 +48,14 @@ class FreeSpaceGraph:
                         print("DFS -- add ", end="")
                         newCB.print_cellboundary()  # print visited cb'''
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
+
                     else:
                         print("DFS -- basecase -> dont return path")
                         paths += [curr_path]
-                        # return paths
+                    """ else:
+                        print("DFS -- basecase -> return path")
+                        
+                        # return paths"""
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
