@@ -1,3 +1,16 @@
+"""
+Author:
+    Carola Wenk
+    cwenk@tulane.edu
+    
+Contributors:
+    Rena Repenning
+    renarepenning@gmail.com, www.renarepenning.com
+    
+    Will Rodman
+    wrodman@tulane.edu
+"""
+
 import geojson
 from geojson import LineString, Feature, FeatureCollection
 from Graph import Graph
