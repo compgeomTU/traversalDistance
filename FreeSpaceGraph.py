@@ -1,5 +1,5 @@
 from CalFreeSpace import calfreespace
-import pdb  # what is this??????????????
+from LineIntersection import find_ellipse_max_min_points
 
 
 class FreeSpaceGraph:
