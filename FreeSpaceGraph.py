@@ -1,7 +1,19 @@
-from CalFreeSpace import calfreespace
-from line-intersection import find_ellipse_max_min_points
-import pdb  # what is this??????????????
+"""
+Author:
+    Carola Wenk
+    cwenk@tulane.edu
 
+Contributors:
+    Rena Repenning
+    www.renarepenning.com
+
+    Emily Powers
+    epowers3@tulane.edu
+"""
+
+
+from CalFreeSpace import calfreespace
+from LineIntersection import find_ellipse_max_min_points
 
 class FreeSpaceGraph:
     def __init__(self, g1, g2, epsilon):
@@ -102,10 +114,12 @@ class CellBoundary:
         y2 = g_edges.nodes[edge[1]][0]
         xa = g_verts.nodes[vertexID][0]
         ya = g_verts.nodes[vertexID][1]
+        
         # call CFS and return tuple --> compute from free space by traversing the free space
         self.start_fs, self.end_fs = calfreespace(
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
-        self.
+        
+        self.start_p, self.end_p = find_ellipse_max_min_points()
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
