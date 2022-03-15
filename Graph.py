@@ -83,6 +83,7 @@ class Graph:
         lon1 = self.nodes[n1][0]
         lat1 = self.nodes[n1][1]
 
+        print("self.nodes = ", self.nodes)
         lon2 = self.nodes[n2][0]
         lat2 = self.nodes[n2][1]
 
