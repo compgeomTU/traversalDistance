@@ -24,7 +24,7 @@ def testFreeSpaceGraph():
     h = Graph("sample_graphs/H")
     e = 2
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
-    """
+    
     fsg = FreeSpaceGraph(g, h, e)
     print("-- created FSG")
 
@@ -36,7 +36,7 @@ def testFreeSpaceGraph():
     print("-- END -- \n")
 
     '''are we just going to traverse the whole thing? or have an end?'''
-    """
+    
     print("G edges: ", g.edges)
     print("H edges: ", h.edges)
 
