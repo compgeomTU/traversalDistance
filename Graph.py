@@ -8,8 +8,9 @@ class Graph:
         self.nodes = {}  # id -> [lon,lat]
         self.edges = {}  # id -> [n1, n2]
         self.nodeLink = {}   # id -> list of next node
-        self.nodeID = 0
-        self.edgeID = 0
+        self.nodeID = 0 # total number of nodes
+        self.edgeID = 0 # total number of edges
+        self.largestEdgeID = 0 # largest edge id
         self.edgeHash = {}  # (nid1, nid2) -> edge id
         self.edgeWeight = {}
         self.nodeWeight = {}
@@ -19,13 +20,13 @@ class Graph:
         if filename is not None:
             with open(filename+"_vertices.txt", 'r') as vf:
                 for line in vf:
-                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r":
+                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r": # No empty lines. Compatible with all OSs
                         vertex = line.strip('\n').split(',')
                         self.addNode(int(vertex[0]), float(
                         vertex[1]), float(vertex[2]))
             with open(filename+"_edges.txt", 'r') as ve:
                 for line in ve:
-                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r":
+                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r": # No empty lines. Compatible with all OSs
                         edge = line.strip('\n').split(',')
                         self.connectTwoNodes(int(edge[0]), int(edge[1]), int(edge[2]))
 
@@ -64,6 +65,9 @@ class Graph:
         self.edgeHash[(nid1, nid2)] = eid
         self.edgeWeight[eid] = edgeweight
         self.edgeID += 1
+
+        if eid > self.largestEdgeID:
+            self.largestEdgeID = eid
 
         if nid2 not in self.nodeLink[nid1]:
             self.nodeLink[nid1].append(nid2)
@@ -104,6 +108,8 @@ class Graph:
 
         for edgeid, edge in edges.items():
             self.edgeHash[(edge[0], edge[1])] = edgeid
+        
+        self.largestEdgeID = max(self.edges.keys())
 
         print("Remove", c, "Duplicated Edges")
 
@@ -111,17 +117,17 @@ class Graph:
         edgeList = list(self.edges.values())
 
         for edge in edgeList:
-            localid1 = edge[1]
-            localid2 = edge[0]
+            node1 = edge[1]
+            node2 = edge[0]
 
-            self.edges[self.edgeID] = [localid1, localid2]
-            self.edgeHash[(localid1, localid2)] = self.edgeID
-            self.edgeWeight[self.edgeID] = self.edgeWeight[self.edgeHash[(
-                localid2, localid1)]]
-            self.edgeID += 1
+            self.edges[self.largestEdgeID+1] = [node1, node2]
+            self.edgeHash[(node1, node2)] = self.largestEdgeID+1
+            self.edgeWeight[self.largestEdgeID+1] = self.edgeWeight[self.edgeHash[(
+                node2, node1)]]
+            self.largestEdgeID += 1
 
-            if localid2 not in self.nodeLink[localid1]:
-                self.nodeLink[localid1].append(localid2)
+            if node2 not in self.nodeLink[node1]:
+                self.nodeLink[node1].append(node2)
 
     def getNeighbors(self, nodeid):
         neighbor = {}
@@ -158,6 +164,7 @@ class Graph:
                         self.removeNode(nn)
 
                 node_list = node_list + cclist
+        self.largestEdgeID = max(self.edges.keys())
 
     def Dump2GeoJson(self, filename):
 
