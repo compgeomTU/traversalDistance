@@ -136,10 +136,12 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
     return min1, min2, max1, max2
 
 
-#test
+#test 
+"""
 line1 = [[0,0],[0,1]]
 line2 = [[2,-2],[2,3]]
 epsilon = 3
 print(line1)
 print(line2)
 print(find_ellipse_max_min_points(line1, line2, epsilon))
+"""

@@ -5,14 +5,12 @@ import geojson
 
 class Graph:
     def __init__(self, filename=None):
-        self.nodeHash = {}  # [local_id] ->  id
-        self.nodeHashReverse = {}
         self.nodes = {}  # id -> [lon,lat]
         self.edges = {}  # id -> [n1, n2]
         self.nodeLink = {}   # id -> list of next node
         self.nodeID = 0
         self.edgeID = 0
-        self.edgeHash = {}  # [nid1, nid2] -> edge id
+        self.edgeHash = {}  # (nid1, nid2) -> edge id
         self.edgeWeight = {}
         self.nodeWeight = {}
         self.edgeInt = {}
@@ -21,79 +19,65 @@ class Graph:
         if filename is not None:
             with open(filename+"_vertices.txt", 'r') as vf:
                 for line in vf:
-                    if line == "" or line[0] == " ":
-                        continue
-                    vertex = line.strip('\n').split(',')
-                    self.addNode(int(vertex[0]), float(
+                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r":
+                        vertex = line.strip('\n').split(',')
+                        self.addNode(int(vertex[0]), float(
                         vertex[1]), float(vertex[2]))
             with open(filename+"_edges.txt", 'r') as ve:
                 for line in ve:
-                    if line == "" or line[0] == " ":
-                        continue
-                    edge = line.strip('\n').split(',')
-                    self.connectTwoNodes(int(edge[1]), int(edge[2]))
+                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r":
+                        edge = line.strip('\n').split(',')
+                        self.connectTwoNodes(int(edge[0]), int(edge[1]), int(edge[2]))
 
     def addNode(self, nid, lon, lat, nodeweight=0):
-        if nid not in self.nodeHash.keys():
-            self.nodeHash[nid] = self.nodeID
-            self.nodeHashReverse[self.nodeID] = nid
-            self.nodes[self.nodeID] = [lon, lat]
-            self.nodeLink[self.nodeID] = []
-            self.nodeWeight[self.nodeID] = nodeweight
+        if nid not in self.nodes.keys():
+            self.nodes[nid] = [lon, lat]
+            self.nodeLink[nid] = []
+            self.nodeWeight[nid] = nodeweight
             self.nodeID += 1
         else:
             print("Duplicated Node !!!", nid)
-            return self.nodeHash[nid]
+            return self.nodes[nid]
 
         return self.nodeID - 1
 
-    def addEdge(self, nid1, lon1, lat1, nid2, lon2, lat2,  nodeweight1=0, nodeweight2=0, edgeweight=0):
+    def addEdge(self, nid1, lon1, lat1, nid2, lon2, lat2, eid, nodeweight1=0, nodeweight2=0, edgeweight=0):
 
-        if nid1 not in self.nodeHash.keys():
-            self.nodeHash[nid1] = self.nodeID
-            self.nodeHashReverse[self.nodeID] = nid1
-            self.nodes[self.nodeID] = [lon1, lat1]
-            self.nodeLink[self.nodeID] = []
-            self.nodeWeight[self.nodeID] = nodeweight1
+        if nid1 not in self.nodes.keys():
+            self.nodes[nid1] = [lon1, lat1]
+            self.nodeLink[nid1] = []
+            self.nodeWeight[nid1] = nodeweight1
             self.nodeID += 1
 
-        if nid2 not in self.nodeHash.keys():
-            self.nodeHash[nid2] = self.nodeID
-            self.nodeHashReverse[self.nodeID] = nid2
-            self.nodes[self.nodeID] = [lon2, lat2]
-            self.nodeLink[self.nodeID] = []
-            self.nodeWeight[self.nodeID] = nodeweight2
+        if nid2 not in self.nodes.keys():
+            self.nodes[nid2] = [lon2, lat2]
+            self.nodeLink[nid2] = []
+            self.nodeWeight[nid2] = nodeweight2
             self.nodeID += 1
 
-        localid1 = self.nodeHash[nid1]
-        localid2 = self.nodeHash[nid2]
+        if eid in self.edges.keys():
+            print("Duplicated Edge !!!", eid)
 
-        if localid1 * 10000000 + localid2 in self.edgeHash.keys():
-            print("Duplicated Edge !!!", nid1, nid2)
+            return self.edges[eid]
 
-            return self.edgeHash[(localid1, localid2)]
-
-        self.edges[self.edgeID] = [localid1, localid2]
-        self.edgeHash[(localid1, localid2)] = self.edgeID
-        self.edgeWeight[self.edgeID] = edgeweight
+        self.edges[eid] = [nid1, nid2]
+        self.edgeHash[(nid1, nid2)] = eid
+        self.edgeWeight[eid] = edgeweight
         self.edgeID += 1
 
-        if localid2 not in self.nodeLink[localid1]:
-            self.nodeLink[localid1].append(localid2)
+        if nid2 not in self.nodeLink[nid1]:
+            self.nodeLink[nid1].append(nid2)
 
         return self.edgeID - 1
 
-    def connectTwoNodes(self, n1, n2, edgeweight=0):
+    def connectTwoNodes(self, eid, n1, n2, edgeweight=0):
         lon1 = self.nodes[n1][0]
         lat1 = self.nodes[n1][1]
 
         lon2 = self.nodes[n2][0]
         lat2 = self.nodes[n2][1]
 
-        nn1 = self.nodeHashReverse[n1]
-        nn2 = self.nodeHashReverse[n2]
-
-        return self.addEdge(nn1, lon1, lat1, nn2, lon2, lat2, edgeweight=edgeweight)
+        return self.addEdge(n1, lon1, lat1, n2, lon2, lat2, eid, edgeweight=edgeweight)
 
     def removeNode(self, nodeid):
         for next_node in self.nodeLink[nodeid]:
