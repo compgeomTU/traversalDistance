@@ -1,3 +1,6 @@
+# Last edited: 2019-01-09
+# Author: Erfan Hosseini Sereshgi - Tulane University
+
 import math
 
 def find_ellipse_max_min_points(line1, line2, epsilon):
