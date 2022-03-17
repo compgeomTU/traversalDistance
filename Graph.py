@@ -21,11 +21,15 @@ class Graph:
         if filename is not None:
             with open(filename+"_vertices.txt", 'r') as vf:
                 for line in vf:
+                    if line == "" or line[0] == " ":
+                        continue
                     vertex = line.strip('\n').split(',')
                     self.addNode(int(vertex[0]), float(
                         vertex[1]), float(vertex[2]))
             with open(filename+"_edges.txt", 'r') as ve:
                 for line in ve:
+                    if line == "" or line[0] == " ":
+                        continue
                     edge = line.strip('\n').split(',')
                     self.connectTwoNodes(int(edge[1]), int(edge[2]))
 
