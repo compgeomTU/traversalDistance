@@ -22,7 +22,7 @@ def testFreeSpaceGraph():
     print("n\ -- TESTING FreeSpaceGraph.py -- ")
     g = Graph("sample_graphs/G")
     h = Graph("sample_graphs/H")
-    e = 2
+    e = 3
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     fsg = FreeSpaceGraph(g, h, e)

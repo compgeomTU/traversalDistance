@@ -57,26 +57,35 @@ class FreeSpaceGraph:
                         V, new_edgeID, cb.g_verts, cb.g_edges)]
 
                     # recursive call on the edge that hasn't been called yet
-                    if newCB.visited == False:
+                    print("start + end values: ",
+                          newCB.start_fs, " ", newCB.end_fs)
+                    if newCB.visited == False and newCB.start_fs < newCB.end_fs:
+                        # go in when it's not visited AND there is a white interval on the cell boundary
                         print("DFS -- add ", end="")
                         newCB.print_cellboundary()  # print visited cb'''
+
+                        self.start_p, self.end_p = find_ellipse_max_min_points(
+                            line1=[cb.vertex, neighbor], line2=new_edgeID, epsilon=self.e)  # line1, line2, eps
+
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
 
                     else:
                         print("DFS -- basecase -> dont return path")
                         paths += [curr_path]
-                    """ else:
-                        print("DFS -- basecase -> return path")
-                        
-                        # return paths"""
 
                 # connect v's of same type
                 newCB = self.cell_boundaries[(
                     neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
                 # recursive call on the edge that hasn't been called yet
-                if newCB.visited == False:
+                print("start + end values: ", newCB.start_fs, " ", newCB.end_fs)
+                if newCB.visited == False and newCB.start_fs < newCB.end_fs:
+                    # go in when it's not visited AND there is a white interval on the cell boundary
                     print("DFS -- add ", end="")
                     newCB.print_cellboundary()  # print visited cb'''
+
+                    self.start_p, self.end_p = find_ellipse_max_min_points(
+                        cb.edgeID, new_edgeID, self.e)
+
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
                     print("DFS -- basecase -> dont return path")
@@ -119,8 +128,6 @@ class CellBoundary:
         # call CFS and return tuple --> compute from free space by traversing the free space
         self.start_fs, self.end_fs = calfreespace(
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
-
-        self.start_p, self.end_p = find_ellipse_max_min_points([], [], eps)
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
