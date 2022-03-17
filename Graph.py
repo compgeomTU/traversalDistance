@@ -7,9 +7,9 @@ class Graph:
     def __init__(self, filename=None):
         self.nodes = {}  # id -> [lon,lat]
         self.edges = {}  # id -> [n1, n2]
-        self.nodeLink = {}   # id -> list of next node
-        self.nodeID = 0 # total number of nodes
-        self.edgeID = 0 # total number of edges
+        self.nodeLink = {}   # id -> list of next nodes
+        self.numberOfNodes = 0 # total number of nodes
+        self.numberOfEdges = 0 # total number of edges
         self.largestEdgeID = 0 # largest edge id
         self.edgeHash = {}  # (nid1, nid2) -> edge id
         self.edgeWeight = {}
@@ -35,12 +35,12 @@ class Graph:
             self.nodes[nid] = [lon, lat]
             self.nodeLink[nid] = []
             self.nodeWeight[nid] = nodeweight
-            self.nodeID += 1
+            self.numberOfNodes += 1
         else:
             print("Duplicated Node !!!", nid)
             return self.nodes[nid]
 
-        return self.nodeID - 1
+        return self.numberOfNodes - 1
 
     def addEdge(self, nid1, lon1, lat1, nid2, lon2, lat2, eid, nodeweight1=0, nodeweight2=0, edgeweight=0):
 
@@ -48,13 +48,13 @@ class Graph:
             self.nodes[nid1] = [lon1, lat1]
             self.nodeLink[nid1] = []
             self.nodeWeight[nid1] = nodeweight1
-            self.nodeID += 1
+            self.numberOfNodes += 1
 
         if nid2 not in self.nodes.keys():
             self.nodes[nid2] = [lon2, lat2]
             self.nodeLink[nid2] = []
             self.nodeWeight[nid2] = nodeweight2
-            self.nodeID += 1
+            self.numberOfNodes += 1
 
         if eid in self.edges.keys():
             print("Duplicated Edge !!!", eid)
@@ -64,7 +64,7 @@ class Graph:
         self.edges[eid] = [nid1, nid2]
         self.edgeHash[(nid1, nid2)] = eid
         self.edgeWeight[eid] = edgeweight
-        self.edgeID += 1
+        self.numberOfEdges += 1
 
         if eid > self.largestEdgeID:
             self.largestEdgeID = eid
@@ -72,7 +72,7 @@ class Graph:
         if nid2 not in self.nodeLink[nid1]:
             self.nodeLink[nid1].append(nid2)
 
-        return self.edgeID - 1
+        return self.numberOfEdges - 1
 
     def connectTwoNodes(self, eid, n1, n2, edgeweight=0):
         lon1 = self.nodes[n1][0]
@@ -90,11 +90,13 @@ class Graph:
             del self.edges[edgeid]
             del self.edgeWeight[edgeid]
             del self.edgeHash[(nodeid, next_node)]
+            self.numberOfEdges -= 1
 
         self.deletedNodes[nodeid] = self.nodes[nodeid]
         del self.nodes[nodeid]
         del self.nodeWeight[nodeid]
         del self.nodeLink[nodeid]
+        self.numberOfNodes -= 1
 
     def removeDuplicateEdges(self):
         edges = {}
@@ -110,7 +112,7 @@ class Graph:
             self.edgeHash[(edge[0], edge[1])] = edgeid
         
         self.largestEdgeID = max(self.edges.keys())
-
+        self.numberOfEdges -= c
         print("Remove", c, "Duplicated Edges")
 
     def BiDirection(self):
@@ -125,6 +127,7 @@ class Graph:
             self.edgeWeight[self.largestEdgeID+1] = self.edgeWeight[self.edgeHash[(
                 node2, node1)]]
             self.largestEdgeID += 1
+            self.numberOfEdges += 1
 
             if node2 not in self.nodeLink[node1]:
                 self.nodeLink[node1].append(node2)
