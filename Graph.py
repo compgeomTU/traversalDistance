@@ -12,9 +12,9 @@ class Graph:
         self.nodes = {}  # id -> [lon,lat]
         self.edges = {}  # id -> [n1, n2]
         self.nodeLink = {}   # id -> list of next nodes
-        self.numberOfNodes = 0 # total number of nodes
-        self.numberOfEdges = 0 # total number of edges
-        self.largestEdgeID = 0 # largest edge id
+        self.numberOfNodes = 0  # total number of nodes
+        self.numberOfEdges = 0  # total number of edges
+        self.largestEdgeID = 0  # largest edge id
         self.edgeHash = {}  # (nid1, nid2) -> edge id
         self.edgeWeight = {}
         self.nodeWeight = {}
@@ -24,15 +24,18 @@ class Graph:
         if filename is not None:
             with open(filename+"_vertices.txt", 'r') as vf:
                 for line in vf:
-                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r": # No empty lines. Compatible with all OSs
+                    # No empty lines. Compatible with all OSs
+                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r":
                         vertex = line.strip('\n').split(',')
                         self.addNode(int(vertex[0]), float(
-                        vertex[1]), float(vertex[2]))
+                            vertex[1]), float(vertex[2]))
             with open(filename+"_edges.txt", 'r') as ve:
                 for line in ve:
-                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r": # No empty lines. Compatible with all OSs
+                    # No empty lines. Compatible with all OSs
+                    if line != "\n" and line != "" and line != "\r\n" and line != "\r" and line != "\n\r":
                         edge = line.strip('\n').split(',')
-                        self.connectTwoNodes(int(edge[0]), int(edge[1]), int(edge[2]))
+                        self.connectTwoNodes(
+                            int(edge[0]), int(edge[1]), int(edge[2]))
 
     def addNode(self, nid, lon, lat, nodeweight=0):
         if nid not in self.nodes.keys():
@@ -82,6 +85,7 @@ class Graph:
         lon1 = self.nodes[n1][0]
         lat1 = self.nodes[n1][1]
 
+        print("self.nodes = ", self.nodes)
         lon2 = self.nodes[n2][0]
         lat2 = self.nodes[n2][1]
 
@@ -114,7 +118,7 @@ class Graph:
 
         for edgeid, edge in edges.items():
             self.edgeHash[(edge[0], edge[1])] = edgeid
-        
+
         self.largestEdgeID = max(self.edges.keys())
         self.numberOfEdges -= c
         print("Remove", c, "Duplicated Edges")
