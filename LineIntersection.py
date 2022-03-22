@@ -161,7 +161,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
     min2_normalized = fraction_of_segment(*line2, min2)
     max2_normalized = fraction_of_segment(*line2, max2)
 
-    return min1_normalized, min2_normalized, max1_normalized, max2_normalized
+    return min1_normalized, max1_normalized, min2_normalized, max2_normalized
 
 
 #test 
