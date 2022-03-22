@@ -22,6 +22,9 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
         return math.sqrt(v[0]**2 + v[1]**2)
 
     def fraction_of_segment(p1, p2, p):
+        print(p1, p2, p)
+        print(length(vector(*p1, *p)))
+        print(length(vector(*p1, *p2)))
         return (length(vector(*p1, *p)) / length(vector(*p1, *p2)))     
 
     def distance_between_two_parallel_lines(line1, line2):
@@ -80,7 +83,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
 
     cos_alpha = (v1[0] * v2[0] + v1[1] * v2[1]) / (math.sqrt(v1[0] ** 2 + v1[1] ** 2) * math.sqrt(v2[0] ** 2 + v2[1] ** 2))
     sin_alpha = math.sqrt(1-cos_alpha ** 2)
-    d = epsilon / sin_alpha
+    d = abs(epsilon / sin_alpha)
 
     m1 = slope(line1[0][0], line1[0][1], line1[1][0], line1[1][1])
     m2 = slope(line2[0][0], line2[0][1], line2[1][0], line2[1][1])
@@ -92,12 +95,16 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
     if m1 == math.inf:
         if inter_y + d > max(line1[0][1], line1[1][1]):
             max1 = (inter_x, max(line1[0][1], line1[1][1]))
-        else:
+        elif inter_y + d > min(line1[0][1], line1[1][1]):
             max1 = (inter_x,inter_y + d)
+        else:
+            max1 = (inter_x, max(line1[0][1], line1[1][1]))
         if inter_y - d < min(line1[0][1], line1[1][1]):
             min1 = (inter_x, min(line1[0][1], line1[1][1]))
+        elif inter_y - d < max(line1[0][1], line1[1][1]):
+            min1 = (inter_x, inter_y - d)
         else:
-            min1 = (inter_x,inter_y - d)
+            min1 = (inter_x, min(line1[0][1], line1[1][1]))
     else:
         x1 = d / math.sqrt(m1 * m1 + 1)
         y1 = m1 * x1
@@ -121,12 +128,16 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
     if m2 == math.inf:
         if inter_y + d > max(line2[0][1], line2[1][1]):
             max2 = (inter_x, max(line2[0][1], line2[1][1]))
-        else:
+        elif inter_y + d > min(line2[0][1], line2[1][1]):
             max2 = (inter_x, inter_y+d)
+        else:
+            max2 = (inter_x, max(line2[0][1], line2[1][1]))
         if inter_y - d < min(line2[0][1], line2[1][1]):
             min2 = (inter_x, min(line2[0][1], line2[1][1]))
-        else:
+        elif inter_y - d < max(line2[0][1], line2[1][1]):
             min2 = (inter_x, inter_y - d)
+        else:
+            min2 = (inter_x, min(line2[0][1], line2[1][1]))
     else:
         x2 = d / math.sqrt(m2 * m2 + 1)
         y2 = m2 * x2
@@ -155,7 +166,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
 
 #test 
 
-line1 = [[0, 0],[0, 3]]
+line1 = [[0, 0],[0, 1]]
 line2 = [[1, -2],[2, 3]]
 epsilon = 1
 print(line1)
