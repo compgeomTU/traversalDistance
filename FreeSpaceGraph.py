@@ -60,12 +60,17 @@ class FreeSpaceGraph:
                           newCB.start_fs, " ", newCB.end_fs)
                     if newCB.visited == False and newCB.start_fs < newCB.end_fs:
                         # go in when it's not visited AND there is a white interval on the cell boundary
-
                         print("DFS -- add ", end="")
                         newCB.print_cellboundary()
                         """calling lineintersection"""
+
+                        edge1 = [self.nodes[cb.vertexID], self.edges[neighbor]]
+                        # line1=[cb.vertexID, neighbor]
+                        edge2 = [self.edges[new_edgeID]]
+                        # line2=new_edgeID
+
                         self.start_p, self.end_p = find_ellipse_max_min_points(
-                            line1=[cb.vertex, neighbor], line2=new_edgeID, epsilon=self.e)  # line1, line2, eps
+                            line1=edge1, line2=edge2 epsilon=self.e)  # line1, line2, eps
 
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
 
