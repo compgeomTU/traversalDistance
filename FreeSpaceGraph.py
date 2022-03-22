@@ -37,10 +37,9 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    """
-    - when in dfs want to see prinout where we are, don't care about ...
-    - computing boundaries with each run 
-    """
+    """Erfan 3/20: When the DFS traversal is happening and generating new cell boundaries 
+    we want to send the corresponding edges of each new cell to LineIntersection.py 
+    (by calling the function in it) and get the values for the “start” and “end” variables."""
 
     def DFS(self, cb, paths, curr_path):
         cb.visited = True
@@ -63,7 +62,8 @@ class FreeSpaceGraph:
                         # go in when it's not visited AND there is a white interval on the cell boundary
 
                         print("DFS -- add ", end="")
-                        newCB.print_cellboundary()  # print visited cb'''
+                        newCB.print_cellboundary()
+                        """calling lineintersection"""
                         self.start_p, self.end_p = find_ellipse_max_min_points(
                             line1=[cb.vertex, neighbor], line2=new_edgeID, epsilon=self.e)  # line1, line2, eps
 
@@ -82,8 +82,8 @@ class FreeSpaceGraph:
                     # go in when it's not visited AND there is a white interval on the cell boundary
 
                     print("DFS -- add ", end="")
-                    newCB.print_cellboundary()  # print visited cb'''
-
+                    newCB.print_cellboundary()
+                    """calling lineintersection"""
                     self.start_p, self.end_p = find_ellipse_max_min_points(
                         cb.edgeID, new_edgeID, self.e)
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
