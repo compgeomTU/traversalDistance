@@ -1,14 +1,14 @@
 # traversalDistance
 
-### Authors:
-    Carola Wenk
+## Authors:
+    ### Dr. Carola Wenk
     cwenk@tulane.edu
-    Erfan Hosseini
+    ### Erfan Hosseini
     shosseinisereshgi@tulane.edu
-### Contributors:
-    Rena Repenning
+## Contributors:
+    ### Rena Repenning
     rrepenning@tulane.edu
-    Emily Powers
+    ### Emily Powers
     epowers3@tulane.edu
-    Will Rodman
+    ### Will Rodman
     wrodman@tulane.edu
