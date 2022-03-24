@@ -63,13 +63,13 @@ class FreeSpaceGraph:
                         print("DFS -- add ", end="")
                         newCB.print_cellboundary()
 
-                        """calling lineintersection"""
-                        edge1 = [self.nodes[cb.vertexID], self.edges[neighbor]]
-                        # line1=[cb.vertexID, neighbor]
-                        edge2 = [self.edges[new_edgeID]]
-                        # line2=new_edgeID
-                        self.start_p, self.end_p = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
-
+                        # Find max/min coords of ellipse
+                        G1, G2 = cb.g_verts, cb.g_edges  # get graphs according to cb we are using
+                        edge1 = [G1.nodes[cb.vertexID],
+                                 G1.edges[neighbor]]
+                        edge2 = [G2[new_edgeID]]
+                        min1, min2, max1, max1 = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
+                        """ ?? do we want these to be attributes of the new CB ?? """
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
 
                     else:
@@ -86,9 +86,13 @@ class FreeSpaceGraph:
 
                     print("DFS -- add ", end="")
                     newCB.print_cellboundary()
-                    """calling lineintersection"""
-                    self.start_p, self.end_p = find_ellipse_max_min_points(
-                        cb.edgeID, new_edgeID, self.e)
+                    """ calling lineintersection """
+                    G1 = cb.g_verts
+                    G2 = cb.g_edges
+                    edge1 = [G1.nodes[cb.vertexID],
+                             G1.edges[neighbor]]
+                    edge2 = [G2[new_edgeID]]
+                    min1, min2, max1, max1 = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
                     print("DFS -- basecase -> dont return path")
@@ -132,7 +136,7 @@ class CellBoundary:
         self.start_fs, self.end_fs = calfreespace(
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
 
-        self.start_p, self.end_p = find_ellipse_max_min_points()
+        """self.start_p, self.end_p = find_ellipse_max_min_points()"""
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
