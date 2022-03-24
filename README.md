@@ -1,9 +1,14 @@
 # traversalDistance
 
-## FreeSpaceGraph
-- contains classes `FreeSpaceGraph` and `CellBoundary`, and function `DFSTraversalDist` with helper `DFS`. 
-
-Undergraduate Assistants: 
-* Rena Repenning 
-* Emily Powers
-* Will Rodman
+### Authors:
+    Carola Wenk
+    cwenk@tulane.edu
+    Erfan Hosseini
+    shosseinisereshgi@tulane.edu
+### Contributors:
+    Rena Repenning
+    rrepenning@tulane.edu
+    Emily Powers
+    epowers3@tulane.edu
+    Will Rodman
+    wrodman@tulane.edu
