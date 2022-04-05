@@ -68,7 +68,8 @@ class FreeSpaceGraph:
                         edge1 = [G1.nodes[cb.vertexID],
                                  G1.edges[neighbor]]
                         edge2 = [G2[new_edgeID]]
-                        min1,  max1, min2, max2 = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
+                        min1,  max1, min2, max2 = find_ellipse_max_min_points(
+                            line1=edge1, line2=edge2, epsilon=self.e)
                         """ ?? do we want these to be attributes of the new CB ?? """
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
 
@@ -95,7 +96,8 @@ class FreeSpaceGraph:
                     edge1 = [G1.nodes[cb.vertexID],
                              G1.edges[neighbor]]
                     edge2 = [G2[new_edgeID]]
-                    min1, min2, max1, max1 = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
+                    min1, min2, max1, max1 = find_ellipse_max_min_points(
+                        line1=edge1, line2=edge2, epsilon=self.e)
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
                     print("DFS -- basecase -> dont return path")
@@ -138,8 +140,6 @@ class CellBoundary:
         # call CFS and return tuple --> compute from free space by traversing the free space
         self.start_fs, self.end_fs = calfreespace(
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
-
-        """self.start_p, self.end_p = find_ellipse_max_min_points()"""
 
     def print_cellboundary(self):
         print("Cell Boundary: ", self.vertexID, self.edgeID)
