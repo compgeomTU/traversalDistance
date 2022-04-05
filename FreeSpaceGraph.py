@@ -37,8 +37,8 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    """Erfan 3/20: When the DFS traversal is happening and generating new cell boundaries 
-    we want to send the corresponding edges of each new cell to LineIntersection.py 
+    """Erfan 3/20: When the DFS traversal is happening and generating new cell boundaries
+    we want to send the corresponding edges of each new cell to LineIntersection.py
     (by calling the function in it) and get the values for the “start” and “end” variables."""
 
     def DFS(self, cb, paths, curr_path):
@@ -68,7 +68,7 @@ class FreeSpaceGraph:
                         edge1 = [G1.nodes[cb.vertexID],
                                  G1.edges[neighbor]]
                         edge2 = [G2[new_edgeID]]
-                        min1, min2, max1, max1 = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
+                        min1,  max1, min2, max2 = find_ellipse_max_min_points(line1=edge1, line2=edge2 epsilon=self.e)
                         """ ?? do we want these to be attributes of the new CB ?? """
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
 
@@ -86,7 +86,10 @@ class FreeSpaceGraph:
 
                     print("DFS -- add ", end="")
                     newCB.print_cellboundary()
-                    """ calling lineintersection """
+                    """ calling lineintersection 
+                    CW == when newCB is “vertical” well use the x-values 
+                    and if newCB is “horizontal” well use the y-values
+                    """
                     G1 = cb.g_verts
                     G2 = cb.g_edges
                     edge1 = [G1.nodes[cb.vertexID],
