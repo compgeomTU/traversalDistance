@@ -96,15 +96,15 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
         if inter_y + d > max(line1[0][1], line1[1][1]):
             max1 = (inter_x, max(line1[0][1], line1[1][1]))
         elif inter_y + d > min(line1[0][1], line1[1][1]):
-            max1 = (inter_x,inter_y + d)
+            max1 = (inter_x, inter_y + d)
         else:
-            max1 = (inter_x, max(line1[0][1], line1[1][1]))
+            max1 = (inter_x, min(line1[0][1], line1[1][1]))
         if inter_y - d < min(line1[0][1], line1[1][1]):
             min1 = (inter_x, min(line1[0][1], line1[1][1]))
         elif inter_y - d < max(line1[0][1], line1[1][1]):
             min1 = (inter_x, inter_y - d)
         else:
-            min1 = (inter_x, min(line1[0][1], line1[1][1]))
+            min1 = (inter_x, max(line1[0][1], line1[1][1]))
     else:
         x1 = d / math.sqrt(m1 * m1 + 1)
         y1 = m1 * x1
@@ -122,22 +122,22 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
             else:
                 min1 = (line1[1][0], line1[1][1])
         else:
-            min1 = (inter_x - x1,inter_y - y1)
+            min1 = (inter_x - x1, inter_y - y1)
 
     # line 2
     if m2 == math.inf:
         if inter_y + d > max(line2[0][1], line2[1][1]):
             max2 = (inter_x, max(line2[0][1], line2[1][1]))
         elif inter_y + d > min(line2[0][1], line2[1][1]):
-            max2 = (inter_x, inter_y+d)
+            max2 = (inter_x, inter_y + d)
         else:
-            max2 = (inter_x, max(line2[0][1], line2[1][1]))
+            max2 = (inter_x, min(line2[0][1], line2[1][1]))
         if inter_y - d < min(line2[0][1], line2[1][1]):
             min2 = (inter_x, min(line2[0][1], line2[1][1]))
         elif inter_y - d < max(line2[0][1], line2[1][1]):
             min2 = (inter_x, inter_y - d)
         else:
-            min2 = (inter_x, min(line2[0][1], line2[1][1]))
+            min2 = (inter_x, max(line2[0][1], line2[1][1]))
     else:
         x2 = d / math.sqrt(m2 * m2 + 1)
         y2 = m2 * x2
@@ -161,14 +161,15 @@ def find_ellipse_max_min_points(line1, line2, epsilon):
     min2_normalized = fraction_of_segment(*line2, min2)
     max2_normalized = fraction_of_segment(*line2, max2)
 
-    return min1_normalized, min2_normalized, max1_normalized, max2_normalized
+    return min1_normalized, max1_normalized, min2_normalized, max2_normalized
 
 
 #test 
-
+'''
 line1 = [[0, 0],[0, 1]]
 line2 = [[1, -2],[2, 3]]
 epsilon = 1
 print(line1)
 print(line2)
 print(find_ellipse_max_min_points(line1, line2, epsilon))
+'''
