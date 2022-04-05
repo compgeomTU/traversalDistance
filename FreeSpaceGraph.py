@@ -37,73 +37,57 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    """Erfan 3/20: When the DFS traversal is happening and generating new cell boundaries
-    we want to send the corresponding edges of each new cell to LineIntersection.py
-    (by calling the function in it) and get the values for the “start” and “end” variables."""
-
     def DFS(self, cb, paths, curr_path):
         cb.visited = True
+
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
-            # get neighboring edges' nodes
+            # Find max/min coords of ellipse + get graphs according to cb we are using
+            G1, G2 = cb.g_verts, cb.g_edges
+            edge1 = [G1.nodes[cb.vertexID],
+                     G1.nodes[neighbor]]
+            dummy = [G2.edges[cb.edgeID]]  # pair of vertex ids
+            edge2 = [G2.nodes[dummy[0], G2.nodes[dummy[1]]]]
+            min1, max1, min2, max2 = find_ellipse_max_min_points(
+                line1=edge1, line2=edge2, epsilon=self.e)
+
+            # get neighboring edge nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
             for V in [left_vertexID, right_vertexID]:
-                # or (V, neighbor) in cb.g_verts.edgeHash:
+                """ CASE 1 """
                 if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
-                    # creating new cell boundary from "flipping" horiz --> vertical
                     newCB = self.cell_boundaries[(
-                        V, new_edgeID, cb.g_verts, cb.g_edges)]
-
-                    # recursive call on the edge that hasn't been called yet
+                        V, new_edgeID, cb.g_verts, cb.g_edges)]  # creating new cell boundary from "flipping" horiz --> vertical
                     print("start + end values: ",
-                          newCB.start_fs, " ", newCB.end_fs)
+                          newCB.start_fs, " ", newCB.end_fs)  # recursive call on the edge that hasn't been called yet
+
                     if newCB.visited == False and newCB.start_fs < newCB.end_fs:
-                        # go in when it's not visited AND there is a white interval on the cell boundary
                         print("DFS -- add ", end="")
                         newCB.print_cellboundary()
-
-                        # Find max/min coords of ellipse
-                        G1, G2 = cb.g_verts, cb.g_edges  # get graphs according to cb we are using
-                        edge1 = [G1.nodes[cb.vertexID],
-                                 G1.edges[neighbor]]
-                        edge2 = [G2[new_edgeID]]
-                        min1,  max1, min2, max2 = find_ellipse_max_min_points(
-                            line1=edge1, line2=edge2, epsilon=self.e)
-                        """ ?? do we want these to be attributes of the new CB ?? """
+                        newCB.start_p = min1  # from block calling ellipse
+                        newCB.end_p = max1
                         self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
-
                     else:
                         print("DFS -- basecase -> dont return path")
                         paths += [curr_path]
-
-                # connect v's of same type
+                """ CASE 2 """
                 newCB = self.cell_boundaries[(
-                    neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]
-                # recursive call on the edge that hasn't been called yet
+                    neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
+
                 print("start + end values: ", newCB.start_fs, " ", newCB.end_fs)
                 if newCB.visited == False and newCB.start_fs < newCB.end_fs:
-                    # go in when it's not visited AND there is a white interval on the cell boundary
-
                     print("DFS -- add ", end="")
                     newCB.print_cellboundary()
-                    """ calling lineintersection 
-                    CW == when newCB is “vertical” well use the x-values 
-                    and if newCB is “horizontal” well use the y-values
-                    """
-                    # Find max/min coords of ellipse
-                    G1, G2 = cb.g_verts, cb.g_edges  # get graphs according to cb we are using
-                    edge1 = [G1.nodes[cb.vertexID],
-                             G1.edges[neighbor]]
-                    edge2 = [G2[new_edgeID]]
-                    min1, min2, max1, max1 = find_ellipse_max_min_points(
-                        line1=edge1, line2=edge2, epsilon=self.e)
+                    newCB.start_p = min2  # from block calling ellipse
+                    newCB.end_p = max2
+                    # recursive call on the edge that hasn't been called yet
                     self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
                 else:
                     print("DFS -- basecase -> dont return path")
                     paths += [curr_path]
-                    # return paths
-
+            # end for thru L,R
+        # end for iterating thru Vi
         return paths
 
     def DFSTraversalDist(self, cb):
@@ -127,6 +111,8 @@ class CellBoundary:
         self.g_edges = g_edges
         self.g_verts = g_verts
         self.visited = False
+        self.start_p = -1
+        self.end_p = -1
 
         edge = g_edges.edges[self.edgeID]
         # inputs for CFS
