@@ -90,8 +90,8 @@ class FreeSpaceGraph:
                     CW == when newCB is “vertical” well use the x-values 
                     and if newCB is “horizontal” well use the y-values
                     """
-                    G1 = cb.g_verts
-                    G2 = cb.g_edges
+                    # Find max/min coords of ellipse
+                    G1, G2 = cb.g_verts, cb.g_edges  # get graphs according to cb we are using
                     edge1 = [G1.nodes[cb.vertexID],
                              G1.edges[neighbor]]
                     edge2 = [G2[new_edgeID]]
