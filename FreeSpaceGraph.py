@@ -37,7 +37,7 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb, paths):  # , curr_path):
+    def DFS(self, cb):  # , paths, curr_path):
         cb.visited = True
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
@@ -45,8 +45,9 @@ class FreeSpaceGraph:
             G1, G2 = cb.g_verts, cb.g_edges
             edge1 = [G1.nodes[cb.vertexID],
                      G1.nodes[neighbor]]
-            dummy = [G2.edges[cb.edgeID]]  # pair of vertex ids
-            edge2 = [G2.nodes[dummy[0], G2.nodes[dummy[1]]]]
+            x, y = G2.edges[cb.edgeID]  # pair of vertex ids
+            edge2 = [G2.nodes[x], G2.nodes[y]]
+            print("edge1=", edge1, "   edge2=", edge2)
             min1, max1, min2, max2 = find_ellipse_max_min_points(
                 line1=edge1, line2=edge2, epsilon=self.e)
 
@@ -82,7 +83,7 @@ class FreeSpaceGraph:
                     newCB.start_p = min2  # from block calling ellipse
                     newCB.end_p = max2
                     # recursive call on the edge that hasn't been called yet
-                    self.DFS(newCB, paths)  # , curr_path+(newCB.add_cd_str()))
+                    self.DFS(newCB)  # , curr_path+(newCB.add_cd_str()))
                 # else:
                 #     print("DFS -- basecase -> dont return path")
                 #     paths += [curr_path]
@@ -116,7 +117,7 @@ class FreeSpaceGraph:
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-        self.DFS(cb, [])  # , "")
+        self.DFS(cb)
         # paths = self.DFS(cb, [], "")
         # print("\n -- PATHS --  R=rectangle graph X=other")
         # for p in paths:
