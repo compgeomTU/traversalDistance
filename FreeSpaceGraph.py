@@ -37,12 +37,11 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb, paths, curr_path):
+    def DFS(self, cb, paths):  # , curr_path):
         cb.visited = True
-
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
-            # Find max/min coords of ellipse + get graphs according to cb we are using
+            # Find max/min coords of cb's ellipse
             G1, G2 = cb.g_verts, cb.g_edges
             edge1 = [G1.nodes[cb.vertexID],
                      G1.nodes[neighbor]]
@@ -60,17 +59,18 @@ class FreeSpaceGraph:
                     newCB = self.cell_boundaries[(
                         V, new_edgeID, cb.g_verts, cb.g_edges)]  # creating new cell boundary from "flipping" horiz --> vertical
                     print("start + end values: ",
-                          newCB.start_fs, " ", newCB.end_fs)  # recursive call on the edge that hasn't been called yet
+                          newCB.start_fs, " ", newCB.end_fs)
 
                     if newCB.visited == False and newCB.start_fs < newCB.end_fs:
-                        print("DFS -- add ", end="")
-                        newCB.print_cellboundary()
+                        # print("DFS -- add ", end="")
+                        # newCB.print_cellboundary()
                         newCB.start_p = min1  # from block calling ellipse
                         newCB.end_p = max1
-                        self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
-                    else:
-                        print("DFS -- basecase -> dont return path")
-                        paths += [curr_path]
+                        # , paths, curr_path+(newCB.add_cd_str()))
+                        self.DFS(newCB)
+                    # else:
+                    #     print("DFS -- basecase -> dont return path")
+                    #     paths += [curr_path]
                 """ CASE 2 """
                 newCB = self.cell_boundaries[(
                     neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
@@ -82,22 +82,25 @@ class FreeSpaceGraph:
                     newCB.start_p = min2  # from block calling ellipse
                     newCB.end_p = max2
                     # recursive call on the edge that hasn't been called yet
-                    self.DFS(newCB, paths, curr_path+(newCB.add_cd_str()))
-                else:
-                    print("DFS -- basecase -> dont return path")
-                    paths += [curr_path]
+                    self.DFS(newCB, paths)  # , curr_path+(newCB.add_cd_str()))
+                # else:
+                #     print("DFS -- basecase -> dont return path")
+                #     paths += [curr_path]
             # end for thru L,R
         # end for iterating thru Vi
 
         """ check_projection here """
 
-        return " retunr "
+        return " done "
 
         # TODO: 4/5
         # comment out all the path code --> not ultimately returning them , j creating the structures
         #
-        # - write this function .... erfan: do as you are making the cb's so you dont have to do it later ... needs to go after we call dfs (not recursive), post everything... will return True or False to check projection ....
-        # * go thru cb's dict and make another dictionary for that and then each key will be corrospondant to the edge id of the edges in graph 1 (only care about graph 1) then just go thru cbs, look at min/max and find local minima/maxima and update the cb's attribute
+        # - write this function .... erfan: do as you are making the cb's so you dont have to do it later ...
+        #  ... needs to go after we call dfs (not recursive), post everything
+        #  ... will return True or False to check projection ....
+        # * go thru cb's dict and make another dictionary for that and then each key will be corrospondant to the edge id of the edges in graph 1
+        #  ... (only care about graph 1) then just go thru cbs, look at min/max and find local minima/maxima and update the cb's attribute
         # dict maps edge_it to the global min/max in respect to e
         # for all edges in g1's cbs: == all cb's where edges belong to g1
         #     if edge has edge_id(e) in common
@@ -113,13 +116,11 @@ class FreeSpaceGraph:
         '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-        paths = self.DFS(cb, [], "")
-        print("\n -- PATHS --  R=rectangle graph X=other")
-        for p in paths:
-            print(p)
-        #
-        # or would we want to just track a minimum path distance? instead of tracking all of them?
-        #
+        self.DFS(cb, [])  # , "")
+        # paths = self.DFS(cb, [], "")
+        # print("\n -- PATHS --  R=rectangle graph X=other")
+        # for p in paths:
+        #     print(p)
 
 
 class CellBoundary:
