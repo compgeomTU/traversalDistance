@@ -90,7 +90,7 @@ class FreeSpaceGraph:
             # end for thru L,R
         # end for iterating thru Vi
 
-        """ check_projection here """
+        """ check_projection here or after calling self.dfs in dfstraversaldist() """
 
         return " success "
 
