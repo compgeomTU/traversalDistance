@@ -180,7 +180,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon, prnt=False):
 
         return min1_normalized, max1_normalized, min2_normalized, max2_normalized
     except:
-        print("ERR - find_ellipse_max_min_points")
+        print("ERR - find_ellipse_max_min_points --> returned 0, .2, .4, 1 for testing")
         return 0, .2, .4, 1
 
 

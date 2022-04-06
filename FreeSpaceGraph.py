@@ -92,36 +92,53 @@ class FreeSpaceGraph:
 
         """ check_projection here """
 
-        return " done "
-
-        # TODO: 4/5
-        # comment out all the path code --> not ultimately returning them , j creating the structures
-        #
-        # - write this function .... erfan: do as you are making the cb's so you dont have to do it later ...
-        #  ... needs to go after we call dfs (not recursive), post everything
-        #  ... will return True or False to check projection ....
-        # * go thru cb's dict and make another dictionary for that and then each key will be corrospondant to the edge id of the edges in graph 1
-        #  ... (only care about graph 1) then just go thru cbs, look at min/max and find local minima/maxima and update the cb's attribute
-        # dict maps edge_it to the global min/max in respect to e
-        # for all edges in g1's cbs: == all cb's where edges belong to g1
-        #     if edge has edge_id(e) in common
-        #         # find the union of all those e common in g1
-        #         take min of all mins  --? minX
-        #         max of all maxsw --> maxX
-        #
-        # - going to go thry all cb's and make an array of all edge ids and then assign
-        # the min and maxs of all the things we have
-        # - how to init??
+        return " success "
 
     def DFSTraversalDist(self, cb):
-        '''get traversal distance using dfs search -->  given one free space boundary, compute all adjacent free space boundaries'''
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
+        # given one free space boundary, compute all adjacent free space boundaries
         self.DFS(cb)
         # paths = self.DFS(cb, [], "")
         # print("\n -- PATHS --  R=rectangle graph X=other")
         # for p in paths:
         #     print(p)
+
+    def check_projection(self, g1, g2):
+        """ assumes g1 is horiz and g2 is vert """
+        union = {}
+        for cb in self.cell_boundaries:
+            if cb.edgeID in g1:
+                if cb.edgeID in union:
+                    localMin = min(union[(cb.edgeID[0], cb.start_p)])
+                    localMax = max(union[(cb.edgeID[1], cb.end_p)])
+                    union[cb.edgeID] = (localMin, localMax)
+                else:
+                    union[cb.edgeID] = (cb.start_p, cb.end_p)
+        for pairs in union:
+            if pairs[0] != 0 or pairs[1] != 1:
+                """ should this be > or < ?? """
+                return False
+
+        return True
+
+    # TODO: 4/5
+    # comment out all the path code --> not ultimately returning them , j creating the structures
+    # - write this function .... erfan: do as you are making the cb's so you dont have to do it later ...
+    #  ... needs to go after we call dfs (not recursive), post everything
+    #  ... will return True or False to check projection ....
+    # * go thru cb's dict and make another dictionary for that and then each key will be corrospondant to the edge id of the edges in graph 1
+    #  ... (only care about graph 1) then just go thru cbs, look at min/max and find local minima/maxima and update the cb's attribute
+    # dict maps edge_it to the global min/max in respect to e
+    # for all edges in g1's cbs: == all cb's where edges belong to g1
+    #     if edge has edge_id(e) in common
+    #         # find the union of all those e common in g1
+    #         take min of all mins  --? minX
+    #         max of all maxsw --> maxX
+    #
+    # - going to go thry all cb's and make an array of all edge ids and then assign
+    # the min and maxs of all the things we have
+    # - how to init??
 
 
 class CellBoundary:
