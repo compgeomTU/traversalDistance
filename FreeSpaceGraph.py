@@ -38,6 +38,7 @@ class FreeSpaceGraph:
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
     def DFS(self, cb):  # , paths, curr_path):
+        f = open("outputs/fsg_dfs.txt", "w")
         cb.visited = True
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
@@ -47,7 +48,7 @@ class FreeSpaceGraph:
                      G1.nodes[neighbor]]
             x, y = G2.edges[cb.edgeID]  # pair of vertex ids
             edge2 = [G2.nodes[x], G2.nodes[y]]
-            print("edge1=", edge1, "   edge2=", edge2)
+            f.write("edge1=" + str(edge1) + "   edge2=" + str(edge2)+"\n")
             min1, max1, min2, max2 = find_ellipse_max_min_points(
                 line1=edge1, line2=edge2, epsilon=self.e)
 
@@ -59,8 +60,8 @@ class FreeSpaceGraph:
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
                     newCB = self.cell_boundaries[(
                         V, new_edgeID, cb.g_verts, cb.g_edges)]  # creating new cell boundary from "flipping" horiz --> vertical
-                    print("start + end values: ",
-                          newCB.start_fs, " ", newCB.end_fs)
+                    f.write("start + end values: " +
+                            str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
 
                     if newCB.visited == False and newCB.start_fs < newCB.end_fs:
                         # print("DFS -- add ", end="")
@@ -76,10 +77,10 @@ class FreeSpaceGraph:
                 newCB = self.cell_boundaries[(
                     neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
 
-                print("start + end values: ", newCB.start_fs, " ", newCB.end_fs)
+                f.write("start + end values: " +
+                        str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
                 if newCB.visited == False and newCB.start_fs < newCB.end_fs:
-                    print("DFS -- add ", end="")
-                    newCB.print_cellboundary()
+                    f.write("DFS -- add "+newCB.print_cellboundary()+"\n")
                     newCB.start_p = min2  # from block calling ellipse
                     newCB.end_p = max2
                     # recursive call on the edge that hasn't been called yet
@@ -90,37 +91,56 @@ class FreeSpaceGraph:
             # end for thru L,R
         # end for iterating thru Vi
 
-        """ check_projection here or after calling self.dfs in dfstraversaldist() """
+        return "DFS success!!!"
 
-        return " success "
+    def check_projection(self):
+        """ assumes g1 is horiz and g2 is vert """
+        f = open("outputs/check_projection.txt", "w")
+
+        union = {}
+        f.write("self.cell_boundaries:\n ")
+        f.write(str(self.cell_boundaries)+"\n")
+        f.write("self.G1="+str(self.g1)+"\n")
+        f.write("\nfor cb in self.cell_boundaries")
+        for cb in self.cell_boundaries:  # .items:
+            mycb = self.cell_boundaries[cb]
+            # print(type(mycb)) THESE ARE FSGS
+            # if cb.edgeID in g1: -- WRONG bc cb.edgeID can be in g1 or g2
+            f.write("\nmycb="+str(mycb))
+            """here cb is a tuple, but the edges graph is the second one. so it's not in the form of a cb??"""
+            f.write("\n   g_edges="+str(mycb.g_edges))
+            if mycb.g_edges == self.g1:
+                if mycb.edgeID in union:
+                    f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
+                            "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
+                    localMin = min(union((mycb.edgeID, mycb.start_p)))
+                    """TOOK OUT [0] AND [1]"""
+                    localMax = max(union((mycb.edgeID, mycb.end_p)))
+                    """^"""
+                    union[mycb.edgeID] = (localMin, localMax)
+                else:
+                    union[mycb.edgeID] = (mycb.start_p, mycb.end_p)
+        f.write("\n for pairs in union")
+        for pairs in union:
+            f.write("\n pairs="+str(pairs))
+            if pairs[0] != 0 or pairs[1] != 1:
+                """ should this be > or < ?? """
+                f.write("==false")
+                return False
+        return True
 
     def DFSTraversalDist(self, cb):
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
         # given one free space boundary, compute all adjacent free space boundaries
-        self.DFS(cb)
+        print(self.DFS(cb))
         # paths = self.DFS(cb, [], "")
         # print("\n -- PATHS --  R=rectangle graph X=other")
         # for p in paths:
         #     print(p)
 
-    def check_projection(self, g1, g2):
-        """ assumes g1 is horiz and g2 is vert """
-        union = {}
-        for cb in self.cell_boundaries:
-            if cb.edgeID in g1:
-                if cb.edgeID in union:
-                    localMin = min(union[(cb.edgeID[0], cb.start_p)])
-                    localMax = max(union[(cb.edgeID[1], cb.end_p)])
-                    union[cb.edgeID] = (localMin, localMax)
-                else:
-                    union[cb.edgeID] = (cb.start_p, cb.end_p)
-        for pairs in union:
-            if pairs[0] != 0 or pairs[1] != 1:
-                """ should this be > or < ?? """
-                return False
-
-        return True
+        C = self.check_projection()
+        print("Projection check: ", C)
 
 
 class CellBoundary:
@@ -148,7 +168,8 @@ class CellBoundary:
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
 
     def print_cellboundary(self):
-        print("Cell Boundary: ", self.vertexID, self.edgeID)
+        #print("Cell Boundary: ", self.vertexID, self.edgeID)
+        return "Cell Boundary: " + str(self.vertexID) + str(self.edgeID)
         # print("Start: ", self.start)
         # print("End: ", self.end)
 
@@ -158,4 +179,3 @@ class CellBoundary:
         else:
             isRectangleGraph = "u"
         return isRectangleGraph+str(self.vertexID) + "," + str(self.edgeID)+" -> "
-        """possibly want to add a flag for which graph is first ..."""

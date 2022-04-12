@@ -24,19 +24,19 @@ def testFreeSpaceGraph():
     h = Graph("sample_graphs/H")
     e = 3
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
-    
+
     fsg = FreeSpaceGraph(g, h, e)
-    print("-- created FSG")
+    # print("-- created FSG")
 
     cb = fsg.cell_boundaries[(0, 0, g, h)]
-    print("-- take test cell bound:   ", end="")
-    cb.print_cellboundary()
+    # print("-- take test cell bound:   ", end="")
+    # cb.print_cellboundary()
 
     fsg.DFSTraversalDist(cb)
-    print("-- END -- \n")
+    # print("-- END -- \n")
 
     '''are we just going to traverse the whole thing? or have an end?'''
-    
+
     print("G edges: ", g.edges)
     print("H edges: ", h.edges)
 
