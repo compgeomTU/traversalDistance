@@ -37,8 +37,7 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb, f):  # , paths, curr_path):
-
+    def DFS(self, cb, f, p, paths, curr_path):
         f.write("\n")  # new line means new dfs call
         cb.visited = True
         # go thru neighboring edges from given vertexID
@@ -65,16 +64,15 @@ class FreeSpaceGraph:
                             str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
 
                     if newCB.visited == False and newCB.start_fs < newCB.end_fs:
-                        # print("DFS -- add ", end="")
-                        # newCB.print_cellboundary()
+                        p.write("DFS -- add "+newCB.print_cellboundary()+"\n")
                         newCB.start_p = min1  # from block calling ellipse
                         newCB.end_p = max1
-                        # , paths, curr_path+(newCB.add_cd_str()))
-                        self.DFS(newCB, f)
-                    # else:
-                    #     print("DFS -- basecase -> dont return path")
-                    #     paths += [curr_path]
-                """ CASE 2 """
+                        self.DFS(newCB, f, p, paths,
+                                 curr_path+(newCB.add_cd_str()))
+                    else:
+                        #p.write("DFS -- basecase -> dont return path\n")
+                        paths += [curr_path]
+
                 newCB = self.cell_boundaries[(
                     neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
 
@@ -85,13 +83,15 @@ class FreeSpaceGraph:
                     newCB.start_p = min2  # from block calling ellipse
                     newCB.end_p = max2
                     # recursive call on the edge that hasn't been called yet
-                    self.DFS(newCB, f)  # , curr_path+(newCB.add_cd_str()))
-                # else:
-                #     print("DFS -- basecase -> dont return path")
-                #     paths += [curr_path]
+                    self.DFS(newCB, f, p, paths,
+                             curr_path+(newCB.add_cd_str()))
+                else:
+                    #p.write("DFS -- basecase -> dont return path\n")
+                    paths += [curr_path]
             # end for thru L,R
         # end for iterating thru Vi
         f.write("\nDFS success!!!\n")
+        p.write("returned: "+str(paths)+"\n")
         return "DFS success!!!"
 
     def check_projection(self):
@@ -102,43 +102,36 @@ class FreeSpaceGraph:
         f.write(str(self.cell_boundaries)+"\n")
         f.write("self.G1="+str(self.g1)+"\n")
         f.write("\nfor cb in self.cell_boundaries")
-        for cb in self.cell_boundaries:  # .items:
+        for cb in self.cell_boundaries:
             mycb = self.cell_boundaries[cb]
-            # print(type(mycb)) THESE ARE FSGS
-            # if cb.edgeID in g1: -- WRONG bc cb.edgeID can be in g1 or g2
             f.write("\nmycb="+str(mycb))
-            """here cb is a tuple, but the edges graph is the second one. so it's not in the form of a cb??"""
             f.write("\n   g_edges="+str(mycb.g_edges))
             if mycb.g_edges == self.g1:
                 if mycb.edgeID in all_cbs:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                    localMin = min(all_cbs[mycb.edgeID, mycb.start_p])
-                    localMax = max(all_cbs[mycb.edgeID, mycb.end_p])
-                    """TOOK OUT [0] AND [1]"""
+                    localMin = min(all_cbs[mycb.edgeID][0], mycb.start_p)
+                    localMax = max(all_cbs[mycb.edgeID][1], mycb.end_p)
                     all_cbs[mycb.edgeID] = (localMin, localMax)
                 else:
                     all_cbs[mycb.edgeID] = (mycb.start_p, mycb.end_p)
-        f.write("\n for pairs in union")
+        f.write("\n\n for pairs in union:")
         for pairs in all_cbs:
-            f.write("\n pairs="+str(pairs))
-            if pairs[0] != 0 or pairs[1] != 1:
+            edge_ids = all_cbs[pairs]
+            f.write("\n edge_ids="+str(edge_ids))
+            if edge_ids[0] != 0 or edge_ids[1] != 1:
                 """ should this be > or < ?? """
-                f.write("==false")
+                f.write(" --> is false")
                 return False
         return True
 
     def DFSTraversalDist(self, cb):
+        # given one free space boundary, compute all adjacent free space boundaries
         f = open("outputs/fsg_dfs.txt", "w")
+        p = open("outputs/path.txt", "w")
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-        # given one free space boundary, compute all adjacent free space boundaries
-        print(self.DFS(cb, f))
-        # paths = self.DFS(cb, [], "")
-        # print("\n -- PATHS --  R=rectangle graph X=other")
-        # for p in paths:
-        #     print(p)
-
+        print(self.DFS(cb, f, p, [], ""))
         C = self.check_projection()
         print("Projection check: ", C)
 
@@ -168,8 +161,8 @@ class CellBoundary:
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
 
     def print_cellboundary(self):
-        #print("Cell Boundary: ", self.vertexID, self.edgeID)
-        return "Cell Boundary: " + str(self.vertexID) + str(self.edgeID)
+        # print("Cell Boundary: ", self.vertexID, self.edgeID)
+        return "Cell Boundary: (" + str(self.vertexID)+", " + str(self.edgeID)+")"
         # print("Start: ", self.start)
         # print("End: ", self.end)
 
