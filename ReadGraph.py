@@ -19,7 +19,7 @@ from FreeSpaceGraph import FreeSpaceGraph
 
 
 def testFreeSpaceGraph():
-    print("n\ -- TESTING FreeSpaceGraph.py -- ")
+    print("\n -- TESTING FreeSpaceGraph.py -- ")
     g = Graph("sample_graphs/G")
     h = Graph("sample_graphs/H")
     e = 3
