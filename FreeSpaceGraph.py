@@ -97,7 +97,6 @@ class FreeSpaceGraph:
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
         f = open("outputs/check_projection.txt", "w")
-
         all_cbs = {}
         f.write("self.cell_boundaries:\n ")
         f.write(str(self.cell_boundaries)+"\n")
