@@ -37,8 +37,9 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb):  # , paths, curr_path):
-        f = open("outputs/fsg_dfs.txt", "w")
+    def DFS(self, cb, f):  # , paths, curr_path):
+
+        f.write("\n")  # new line means new dfs call
         cb.visited = True
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
@@ -69,7 +70,7 @@ class FreeSpaceGraph:
                         newCB.start_p = min1  # from block calling ellipse
                         newCB.end_p = max1
                         # , paths, curr_path+(newCB.add_cd_str()))
-                        self.DFS(newCB)
+                        self.DFS(newCB, f)
                     # else:
                     #     print("DFS -- basecase -> dont return path")
                     #     paths += [curr_path]
@@ -84,20 +85,20 @@ class FreeSpaceGraph:
                     newCB.start_p = min2  # from block calling ellipse
                     newCB.end_p = max2
                     # recursive call on the edge that hasn't been called yet
-                    self.DFS(newCB)  # , curr_path+(newCB.add_cd_str()))
+                    self.DFS(newCB, f)  # , curr_path+(newCB.add_cd_str()))
                 # else:
                 #     print("DFS -- basecase -> dont return path")
                 #     paths += [curr_path]
             # end for thru L,R
         # end for iterating thru Vi
-
+        f.write("\nDFS success!!!\n")
         return "DFS success!!!"
 
     def check_projection(self):
-        """ assumes g1 is horiz and g2 is vert """
+        # assumes g1 is horiz and g2 is vert
         f = open("outputs/check_projection.txt", "w")
 
-        union = {}
+        all_cbs = {}
         f.write("self.cell_boundaries:\n ")
         f.write(str(self.cell_boundaries)+"\n")
         f.write("self.G1="+str(self.g1)+"\n")
@@ -110,18 +111,17 @@ class FreeSpaceGraph:
             """here cb is a tuple, but the edges graph is the second one. so it's not in the form of a cb??"""
             f.write("\n   g_edges="+str(mycb.g_edges))
             if mycb.g_edges == self.g1:
-                if mycb.edgeID in union:
+                if mycb.edgeID in all_cbs:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                    localMin = min(union((mycb.edgeID, mycb.start_p)))
+                    localMin = min(all_cbs[mycb.edgeID, mycb.start_p])
+                    localMax = max(all_cbs[mycb.edgeID, mycb.end_p])
                     """TOOK OUT [0] AND [1]"""
-                    localMax = max(union((mycb.edgeID, mycb.end_p)))
-                    """^"""
-                    union[mycb.edgeID] = (localMin, localMax)
+                    all_cbs[mycb.edgeID] = (localMin, localMax)
                 else:
-                    union[mycb.edgeID] = (mycb.start_p, mycb.end_p)
+                    all_cbs[mycb.edgeID] = (mycb.start_p, mycb.end_p)
         f.write("\n for pairs in union")
-        for pairs in union:
+        for pairs in all_cbs:
             f.write("\n pairs="+str(pairs))
             if pairs[0] != 0 or pairs[1] != 1:
                 """ should this be > or < ?? """
@@ -130,10 +130,11 @@ class FreeSpaceGraph:
         return True
 
     def DFSTraversalDist(self, cb):
+        f = open("outputs/fsg_dfs.txt", "w")
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
         # given one free space boundary, compute all adjacent free space boundaries
-        print(self.DFS(cb))
+        print(self.DFS(cb, f))
         # paths = self.DFS(cb, [], "")
         # print("\n -- PATHS --  R=rectangle graph X=other")
         # for p in paths:
