@@ -1,0 +1,70 @@
+
+edge1=[[-2.0, -1.0], [-1.0, -2.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
+start + end values: 0 1
+
+edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-2.0, -1.0], [-1.0, -2.0]]
+start + end values: 0 0.9142135623730951
+start + end values: -1 -1
+start + end values: 0 0.1180339887498949
+
+edge1=[[-1.0, -2.0], [1.0, -2.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
+start + end values: 0 0.1180339887498949
+
+edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-1.0, -2.0], [1.0, -2.0]]
+start + end values: 0 0.1180339887498949
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: 0 0.1180339887498949
+start + end values: -1 -1
+start + end values: 0 0.1180339887498949
+edge1=[[-2.0, -1.0], [0.0, 0.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
+start + end values: 0 1.0
+
+edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-2.0, -1.0], [0.0, 0.0]]
+start + end values: 0 0.9142135623730951
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+edge1=[[-2.0, -1.0], [0.0, 1.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
+start + end values: 0 0.9354143466934853
+
+edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-2.0, -1.0], [0.0, 1.0]]
+start + end values: 0 0.9142135623730951
+start + end values: 0.1464466094067262 0.8535533905932737
+DFS -- add Cell Boundary: (1, 2)
+
+edge1=[[2.0, -3.0], [2.0, 3.0]]   edge2=[[-2.0, -1.0], [0.0, 1.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: 0.02859547920896836 0.9714045207910316
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: 0.1464466094067262 0.8535533905932737
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: 0.1464466094067262 0.8535533905932737
+start + end values: -1 -1
+
+DFS success!!!
