@@ -128,7 +128,7 @@ class FreeSpaceGraph:
     def DFSTraversalDist(self, cb):
         # given one free space boundary, compute all adjacent free space boundaries
         f = open("outputs/fsg_dfs.txt", "w")
-        p = open("outputs/path.txt", "w")
+        p = open("outputs/fsg_path.txt", "w")
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
         print(self.DFS(cb, f, p, [], ""))
