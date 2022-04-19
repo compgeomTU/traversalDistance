@@ -1,9 +1,17 @@
 
-edge1=[[-2.0, -1.0], [-1.0, -3.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
-start + end values: 0 0.7266499161421599
+edge1=[[-2.0, -1.0], [-1.0, -2.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
+start + end values: 0 1
 
-edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-2.0, -1.0], [-1.0, -3.0]]
+edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-2.0, -1.0], [-1.0, -2.0]]
 start + end values: 0 0.9142135623730951
+start + end values: -1 -1
+start + end values: 0 0.1180339887498949
+
+edge1=[[-1.0, -2.0], [1.0, -2.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
+start + end values: 0 0.1180339887498949
+
+edge1=[[0.0, -3.0], [2.0, -3.0]]   edge2=[[-1.0, -2.0], [1.0, -2.0]]
+start + end values: 0 0.1180339887498949
 start + end values: -1 -1
 start + end values: -1 -1
 start + end values: -1 -1
@@ -12,6 +20,14 @@ DFS success!!!
 start + end values: -1 -1
 start + end values: -1 -1
 start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: 0 0.1180339887498949
+start + end values: -1 -1
+start + end values: 0 0.1180339887498949
 edge1=[[-2.0, -1.0], [0.0, 0.0]]   edge2=[[0.0, -3.0], [2.0, -3.0]]
 start + end values: 0 1.0
 
