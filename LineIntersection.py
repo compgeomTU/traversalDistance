@@ -63,8 +63,8 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
             if not full_line:  # If only considering the segment, filter out intersections that do not fall within the segment
                 fraction_along_segment = [
                     (xi - p1x) / dx if abs(dx) > abs(dy) else (yi - p1y) / dy for xi, yi in intersections]
-                #intersections = [pt for pt, frac in zip(intersections, fraction_along_segment) if 0 <= frac <= 1]
-                print("intersections:",intersections)
+                if debug:
+                    print("intersections:",intersections)
                 inter = []
                 for pt, frac in zip(intersections, fraction_along_segment):
                     if 0 <= frac <= 1:
@@ -85,7 +85,8 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
 
     div = det(xdiff, ydiff)
     if div == 0:  # lines do not intersect
-        print(line1, line2)
+        if debug:
+            print(line1, line2)
         distance = distance_between_two_parallel_lines(
                 line1, line2)  # distance between two parallel lines
         point1 = circle_line_segment_intersection(
@@ -117,7 +118,9 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
         else:
             min2 = min(point3[0], point4[0])
             max2 = max(point3[1], point4[1])
-        print(min1, max1, min2, max2)
+        
+        if debug:
+            print(min1, max1, min2, max2)
         return min1, max1, min2, max2  # max and min points
 
     d = (det(*line1), det(*line2))
