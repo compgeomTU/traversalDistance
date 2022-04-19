@@ -94,16 +94,6 @@ class FreeSpaceGraph:
         p.write("returned: "+str(paths)+"\n")
         return "DFS success!!!"
 
-    def compute_union(self, current_intervals, mycb):
-
-        list_of_intervals = current_intervals  # + comparison with new one
-        # have all intervals, now compare with mycb.start_p and mycb.end_p
-
-        # TODO: compare these two with the items we have in the list
-        #[(mycb.start_p, mycb.end_p)]
-
-        return list_of_intervals
-
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
         f = open("outputs/check_projection.txt", "w")
@@ -120,9 +110,9 @@ class FreeSpaceGraph:
                 if mycb.edgeID in all_cbs:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                    # TODO: need to take union of all intervals
-                    all_cbs[mycb.edgeID] = self.compute_union(
-                        all_cbs[mycb.edgeID], mycb)
+                    # TODO: INSERT COMPUTE UNION FXN
+                    """all_cbs[mycb.edgeID] = self.compute_union(
+                        all_cbs[mycb.edgeID], mycb)"""
                 else:
                     # adds first (single white interval)
                     # map --> [pairs] --- sorted list of (s,e) pairs will be the val
