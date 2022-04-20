@@ -31,20 +31,23 @@ def compute_union(intervals, mycb):
     print("Sx = ", Sx)
 
     # print(i, len(intervals))
-    l = len(intervals)
+    l = len(intervals)-1
+    print(l)
+    # for x in range(0, l, -1):
 
-    for x in range(0, l, -1):
+    for x in [1, 0]:
         print("x = ", x)
         print("- ", intervals[x])
         if Ex >= intervals[x][1]:
             intervals[x] = (intervals[x][0], Ex)
             break
-        elif Ex > intervals[i][0]:
+        elif Ex >= intervals[x][0]:
+            """ADD CASE HERE INCASE THE LINE IS GOING TO BE ABSORBED"""
             # absorbed into inverval
-            Ex = intervals[i][0]
+            Ex = intervals[x][0]
             break
         else:
-            print("x = ", x)
+            print("next")
 
     # print(intervals)
     return intervals
@@ -53,10 +56,11 @@ def compute_union(intervals, mycb):
 # assume current intervals are sorted
 case1 = [(0, .1), (.2, .5), (.8, 1)], (.6, .7)  # works
 case2 = [(0, .1), (.2, .5), (.7, .9)], (.6, .8)  # works
+case5 = [(.2, .5), (.7, .9)], (.1, .3)  # works
 case3 = [(0, .1), (.2, .5)], (.6, .8)  # works
 case4 = [(.3, .4), (.6, .8)], (0, .1)  # works
+case6 = [(.2, .7),  (.8, .9)], (.6, .75)  # works but not with -1 step
+case7 = [(.2, .5), (.7, .9)], (.3, .8)
 
-case5 = [(.2, .7),  (.8, .9)], (.6, .85)
-
-c = case2
+c = case7
 print("final = ", compute_union(c[0], c[1]))
