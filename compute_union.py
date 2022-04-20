@@ -38,9 +38,9 @@ def compute_union(intervals, mycb):
     # print(i, len(intervals))
     l = len(intervals)-1
     print(l)
-    # for x in range(0, l, -1):
 
-    for x in [1, 0]:
+    # for x in range(0, 2, -1): ## THIS DOESNT WORK
+    for x in [2, 1, 0]:
         print("x = ", x)
         print("- ", intervals[x])
         if Ex >= intervals[x][1]:
@@ -69,6 +69,9 @@ case3 = [(0, .1), (.2, .5)], (.6, .8)  # works
 case4 = [(.3, .4), (.6, .8)], (0, .1)  # works
 case6 = [(.2, .7),  (.8, .9)], (.6, .75)  # works but not with -1 step
 case7 = [(.2, .5), (.7, .9)], (.3, .8)
+case8 = [(0, .1), (.2, .5), (.7, .9)
+         ], (.3, .8)  # """spans multiple is an issue"""
 
-c = case7
+
+c = case8
 print("final = ", compute_union(c[0], c[1]))
