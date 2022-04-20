@@ -3,9 +3,13 @@
 # compare these two with the items we have in the list
 # [(mycb.start_p, mycb.end_p)]
 
+from operator import invert
+
+
 def compute_union(intervals, mycb):
     print("--my cbs: ", mycb, "  --intervals: ", intervals)
     Sx, Ex = mycb
+    flag = ""
 
     # entirely before
     if Sx > intervals[len(intervals)-1][1]:
@@ -25,6 +29,7 @@ def compute_union(intervals, mycb):
         elif Sx <= intervals[i][1]:
             # sx is in the middle of an interval
             # Sx becomes absorbed into this interval and then we look at the end
+            flag = "inside"
             Sx = intervals[i][0]
             break
 
@@ -42,9 +47,12 @@ def compute_union(intervals, mycb):
             intervals[x] = (intervals[x][0], Ex)
             break
         elif Ex >= intervals[x][0]:
-            """ADD CASE HERE INCASE THE LINE IS GOING TO BE ABSORBED"""
-            # absorbed into inverval
-            Ex = intervals[x][0]
+            if flag == "inside":
+                intervals[x] = (Sx, intervals[x][1])
+                intervals[x-1] = (None)
+            else:
+                # absorbed into interval
+                Ex = intervals[x][0]
             break
         else:
             print("next")
