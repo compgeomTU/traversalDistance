@@ -1,7 +1,7 @@
 
 # TODO: need to take union of all intervals
 # compare these two with the items we have in the list
-#[(mycb.start_p, mycb.end_p)]
+# [(mycb.start_p, mycb.end_p)]
 
 def compute_union(intervals, mycb):
     print("--my cbs: ", mycb, "  --intervals: ", intervals)
@@ -30,8 +30,10 @@ def compute_union(intervals, mycb):
 
     print("Sx = ", Sx)
 
-    print(i, len(intervals))
-    for x in range(0, len(intervals)):
+    # print(i, len(intervals))
+    l = len(intervals)
+
+    for x in range(0, l, -1):
         print("x = ", x)
         print("- ", intervals[x])
         if Ex >= intervals[x][1]:
@@ -41,6 +43,8 @@ def compute_union(intervals, mycb):
             # absorbed into inverval
             Ex = intervals[i][0]
             break
+        else:
+            print("x = ", x)
 
     # print(intervals)
     return intervals
@@ -54,5 +58,5 @@ case4 = [(.3, .4), (.6, .8)], (0, .1)  # works
 
 case5 = [(.2, .7),  (.8, .9)], (.6, .85)
 
-c = case5
-print(compute_union(c[0], c[1]))
+c = case2
+print("final = ", compute_union(c[0], c[1]))
