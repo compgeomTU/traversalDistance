@@ -61,16 +61,19 @@ def compute_union(intervals, mycb):
     return intervals
 
 
-# assume current intervals are sorted
-case1 = [(0, .1), (.2, .5), (.8, 1)], (.6, .7)  # works
-case2 = [(0, .1), (.2, .5), (.7, .9)], (.6, .8)  # works
-case5 = [(.2, .5), (.7, .9)], (.1, .3)  # works
-case3 = [(0, .1), (.2, .5)], (.6, .8)  # works
-case4 = [(.3, .4), (.6, .8)], (0, .1)  # works
+"""assume current intervals are sorted"""
+# works
+case1 = [(0, .1), (.2, .5), (.8, 1)], (.6, .7)
+case2 = [(0, .1), (.2, .5), (.7, .9)], (.6, .8)
+case5 = [(.2, .5), (.7, .9)], (.1, .3)
+case3 = [(0, .1), (.2, .5)], (.6, .8)
+case4 = [(.3, .4), (.6, .8)], (0, .1)
 case6 = [(.2, .7),  (.8, .9)], (.6, .75)  # works but not with -1 step
-case7 = [(.2, .5), (.7, .9)], (.3, .8)
+case7 = [(.1, .19), (.2, .5), (.7, .9), (.91, .93)
+         ], (.15, .22)  # (.3, .8)  # needs to drop none -- spans two
+# fails
 case8 = [(0, .1), (.2, .5), (.7, .9)
-         ], (.3, .8)  # """spans multiple is an issue"""
+         ], (.01, .8)  # spans multiple --> needs to drop one smaller
 
 
 c = case8
