@@ -37,24 +37,24 @@ def compute_union(intervals, mycb):
 
     # print(i, len(intervals))
     l = len(intervals)-1
-    print(l)
 
     # for x in range(0, 2, -1): ## THIS DOESNT WORK
     for x in [2, 1, 0]:
-        print("\nEx = ", Ex, end=" ")
-        print("intervals[x]", intervals[x], end=" ")
+        print("\nEx=", Ex, end=" ")
+        print("intervals[x]=", intervals[x], end=" ")
         if Ex >= intervals[x][1]:
             intervals[x] = (intervals[x][0], Ex)
             """need to drop one to the right if"""
             # if intervals[x+1] != None:
             if x+1 < len(intervals):
-                print("CUT OFF ", intervals[x+1], end=" ")
+                print("rm'd=", intervals[x+1], end=" ")
                 intervals = intervals[:-1]
             # break
         elif Ex >= intervals[x][0]:
             if flag == "inside":
                 intervals[x] = (Sx, intervals[x][1])
-                intervals[x-1] = (None)
+                intervals.pop(x-1)
+                #intervals[x-1] = (None)
             else:
                 # absorbed into interval
                 Ex = intervals[x][0]
@@ -74,13 +74,12 @@ case4 = [(.3, .4), (.6, .8)], (0, .1)
 case6 = [(.2, .7),  (.8, .9)], (.6, .75)  # works but not with -1 step
 case7 = [(.1, .19), (.2, .5), (.7, .9), (.91, .93)
          ], (.15, .22)  # (.3, .8)  # needs to drop none -- spans two
+case9 = [(.01, .1), (.2, .5), (.7, .9)
+         ], (.3, .9)
 # fails
 case8 = [(.01, .1), (.2, .5), (.7, .9)
          ], (.03, .8)  # spans multiple --> needs to drop one smaller
 
-case9 = [(.01, .1), (.2, .5), (.7, .9)
-         ], (.3, .9)
 
-
-c = case9
+c = case6
 print("\nfinal = ", compute_union(c[0], c[1]))
