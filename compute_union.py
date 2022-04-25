@@ -41,11 +41,12 @@ def compute_union(intervals, mycb):
 
     # for x in range(0, 2, -1): ## THIS DOESNT WORK
     for x in [2, 1, 0]:
-        print("x = ", x)
-        print("- ", intervals[x])
+        print("Ex = ", Ex)
+        print("intervals[x]", intervals[x])
         if Ex >= intervals[x][1]:
             intervals[x] = (intervals[x][0], Ex)
-            break
+            """need to drop one to the right if possible"""
+            # break
         elif Ex >= intervals[x][0]:
             if flag == "inside":
                 intervals[x] = (Sx, intervals[x][1])
@@ -72,9 +73,12 @@ case6 = [(.2, .7),  (.8, .9)], (.6, .75)  # works but not with -1 step
 case7 = [(.1, .19), (.2, .5), (.7, .9), (.91, .93)
          ], (.15, .22)  # (.3, .8)  # needs to drop none -- spans two
 # fails
-case8 = [(0, .1), (.2, .5), (.7, .9)
-         ], (.01, .8)  # spans multiple --> needs to drop one smaller
+case8 = [(.01, .1), (.2, .5), (.7, .9)
+         ], (.03, .8)  # spans multiple --> needs to drop one smaller
+
+case9 = [(.01, .1), (.2, .5), (.7, .9)
+         ], (.3, .9)
 
 
-c = case8
+c = case9
 print("final = ", compute_union(c[0], c[1]))
