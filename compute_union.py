@@ -41,11 +41,15 @@ def compute_union(intervals, mycb):
 
     # for x in range(0, 2, -1): ## THIS DOESNT WORK
     for x in [2, 1, 0]:
-        print("Ex = ", Ex)
-        print("intervals[x]", intervals[x])
+        print("\nEx = ", Ex, end=" ")
+        print("intervals[x]", intervals[x], end=" ")
         if Ex >= intervals[x][1]:
             intervals[x] = (intervals[x][0], Ex)
-            """need to drop one to the right if possible"""
+            """need to drop one to the right if"""
+            # if intervals[x+1] != None:
+            if x+1 < len(intervals):
+                print("CUT OFF ", intervals[x+1], end=" ")
+                intervals = intervals[:-1]
             # break
         elif Ex >= intervals[x][0]:
             if flag == "inside":
@@ -55,8 +59,6 @@ def compute_union(intervals, mycb):
                 # absorbed into interval
                 Ex = intervals[x][0]
             break
-        else:
-            print("next")
 
     # print(intervals)
     return intervals
@@ -81,4 +83,4 @@ case9 = [(.01, .1), (.2, .5), (.7, .9)
 
 
 c = case9
-print("final = ", compute_union(c[0], c[1]))
+print("\nfinal = ", compute_union(c[0], c[1]))
