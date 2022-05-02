@@ -1,3 +1,8 @@
+"""
+Author:
+Rena Repenning
+renarepenning@gmail.com
+"""
 
 # TODO: need to take union of all intervals
 # compare these two with the items we have in the list
