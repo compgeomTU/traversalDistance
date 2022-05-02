@@ -15,6 +15,7 @@ def compute_union(intervals, mycb):
     print("--my cbs: ", mycb, "  --intervals: ", intervals)
     Sx, Ex = mycb
     flag = ""
+    new_interval = (-1, -1)
 
     # entirely before
     if Sx > intervals[len(intervals)-1][1]:
@@ -33,7 +34,7 @@ def compute_union(intervals, mycb):
             beginningIndex = i
             # change the current interval to start at Sx
             ### intervals[i] = (Sx, intervals[i][1])
-            intervals.append((Sx, intervals[i][1]))
+            new_interval = (Sx, intervals[i][1])
             break  # and now find what we do with the larger
         elif Sx <= intervals[i][1]:
             # sx is in the middle of an interval
@@ -42,12 +43,6 @@ def compute_union(intervals, mycb):
             flag = "inside"
             Sx = intervals[i][0]
             break
-
-    print("beginning index: ", i)
-
-    print("Sx = ", Sx)
-
-    print("len intervals", len(intervals))
     # l = len(intervals)-1
     """for x in range(0, len(intervals), -1):  # THIS DOESNT WORK"""
 
@@ -57,7 +52,7 @@ def compute_union(intervals, mycb):
         if Ex >= intervals[x][1]:
             endIndex = x-1
             # intervals[x] = (intervals[x][0], Ex)
-            intervals.append((intervals[x][0], Ex))
+            new_interval = (intervals[x][0], Ex)
             """need to drop one to the right if"""
             # if x+1 < len(intervals):
             #     print("rm'd=", intervals[x+1], end=" ")
@@ -67,15 +62,29 @@ def compute_union(intervals, mycb):
             endIndex = x-1
             if flag == "inside":
                 ## intervals[x] = (Sx, intervals[x][1])
-                intervals.append((Sx, intervals[x][1]))
+                new_interval = (Sx, intervals[x][1])
                 # intervals.pop(x-1)
                 ## intervals[x-1] = (None)
             else:
                 # absorbed into interval
                 Ex = intervals[x][0]
             break
-    print("\nbeginning index=", beginningIndex, " end index=", endIndex)
-    # print(intervals)
+    print("new interval=", new_interval)
+    remove_is = []
+    for i in range(len(intervals)):
+        if new_interval[0] <= Sx:
+            while i < len(intervals):
+                remove_is.append(i)
+                if new_interval[1] >= Ex:
+                    break
+                else:
+                    i += 1
+            break
+
+    # take out intervals we dont need
+    for i in remove_is:
+        intervals.pop(i)
+
     return intervals
 
 
@@ -99,4 +108,4 @@ case10 = [(0, .1), (.2, .3), (.4, .5), (.6, .7), (.8, .9)], (.25, .65)
 
 
 c = case10
-print("\nfinal = ", compute_union(c[0], c[1]))
+print("final = ", compute_union(c[0], c[1]))
