@@ -64,12 +64,12 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
                 fraction_along_segment = [
                     (xi - p1x) / dx if abs(dx) > abs(dy) else (yi - p1y) / dy for xi, yi in intersections]
                 if debug:
-                    print("intersections:",intersections)
+                    print("intersections:", intersections)
                 inter = []
                 for pt, frac in zip(intersections, fraction_along_segment):
                     if 0 <= frac <= 1:
                         inter.append(frac)
-                    elif frac >=1:
+                    elif frac >= 1:
                         inter.append(1)
                     else:
                         inter.append(0)
@@ -78,7 +78,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
                 if inter[0] == 0 or inter[0] == 1:
                     return []
             # If line is tangent to circle, return just one point (as both intersections have same location)
-            #if len(inter) == 2 and abs(discriminant) <= tangent_tol:
+            # if len(inter) == 2 and abs(discriminant) <= tangent_tol:
             #    return [inter[0]]
             else:
                 return inter
@@ -88,37 +88,37 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
         if debug:
             print(line1, line2)
         distance = distance_between_two_parallel_lines(
-                line1, line2)  # distance between two parallel lines
+            line1, line2)  # distance between two parallel lines
         point1 = circle_line_segment_intersection(
-                line1[0][0], line1[0][1], line1[1][0], line1[1][1], line2[0][0], line2[0][1], epsilon, full_line=False, tangent_tol=1e-9)
+            line1[0][0], line1[0][1], line1[1][0], line1[1][1], line2[0][0], line2[0][1], epsilon, full_line=False, tangent_tol=1e-9)
         point2 = circle_line_segment_intersection(
-                line1[0][0], line1[0][1], line1[1][0], line1[1][1], line2[1][0], line2[1][1], epsilon, full_line=False, tangent_tol=1e-9)
+            line1[0][0], line1[0][1], line1[1][0], line1[1][1], line2[1][0], line2[1][1], epsilon, full_line=False, tangent_tol=1e-9)
         point3 = circle_line_segment_intersection(
-                line2[0][0], line2[0][1], line2[1][0], line2[1][1], line1[0][0], line1[0][1], epsilon, full_line=False, tangent_tol=1e-9)
+            line2[0][0], line2[0][1], line2[1][0], line2[1][1], line1[0][0], line1[0][1], epsilon, full_line=False, tangent_tol=1e-9)
         point4 = circle_line_segment_intersection(
-                line2[0][0], line2[0][1], line2[1][0], line2[1][1], line1[1][0], line1[1][1], epsilon, full_line=False, tangent_tol=1e-9)
+            line2[0][0], line2[0][1], line2[1][0], line2[1][1], line1[1][0], line1[1][1], epsilon, full_line=False, tangent_tol=1e-9)
 
         # line 1
         if point1 == [] and point2 == []:
-            [min1, max1] = [0,0]
+            [min1, max1] = [0, 0]
         elif point1 == []:
-            [min1 , max1] = point2
+            [min1, max1] = point2
         elif point2 == []:
-            [min1 , max1] = point1
+            [min1, max1] = point1
         else:
             min1 = min(point1[0], point2[0])
             max1 = max(point1[1], point2[1])
         # line 2
         if point3 == [] and point4 == []:
-            [min2, max2] = [0,0]
+            [min2, max2] = [0, 0]
         elif point3 == []:
-            [min2 , max2] = point4
+            [min2, max2] = point4
         elif point4 == []:
-            [min2 , max2] = point3
+            [min2, max2] = point3
         else:
             min2 = min(point3[0], point4[0])
             max2 = max(point3[1], point4[1])
-        
+
         if debug:
             print(min1, max1, min2, max2)
         return min1, max1, min2, max2  # max and min points
@@ -133,7 +133,8 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
     v1 = vector(line1[0][0], line1[0][1], line1[1][0], line1[1][1])
     v2 = vector(line2[0][0], line2[0][1], line2[1][0], line2[1][1])
 
-    cos_alpha = (v1[0] * v2[0] + v1[1] * v2[1]) / (math.sqrt(v1[0]** 2 + v1[1] ** 2) * math.sqrt(v2[0] ** 2 + v2[1] ** 2))
+    cos_alpha = (v1[0] * v2[0] + v1[1] * v2[1]) / (math.sqrt(v1[0]
+                                                             ** 2 + v1[1] ** 2) * math.sqrt(v2[0] ** 2 + v2[1] ** 2))
     sin_alpha = math.sqrt(1-cos_alpha ** 2)
     d = abs(epsilon / sin_alpha)
 
