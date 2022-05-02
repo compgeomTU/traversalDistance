@@ -27,7 +27,8 @@ def compute_union(intervals, mycb):
         if Sx <= intervals[i][0]:
             beginningIndex = i
             # change the current interval to start at Sx
-            intervals[i] = (Sx, intervals[i][1])
+            ### intervals[i] = (Sx, intervals[i][1])
+            intervals.append((Sx, intervals[i][1]))
             break  # and now find what we do with the larger
         elif Sx <= intervals[i][1]:
             # sx is in the middle of an interval
@@ -50,7 +51,8 @@ def compute_union(intervals, mycb):
         print("intervals[x]=", intervals[x], end=" ")
         if Ex >= intervals[x][1]:
             endIndex = x-1
-            intervals[x] = (intervals[x][0], Ex)
+            # intervals[x] = (intervals[x][0], Ex)
+            intervals.append((intervals[x][0], Ex))
             """need to drop one to the right if"""
             # if x+1 < len(intervals):
             #     print("rm'd=", intervals[x+1], end=" ")
@@ -59,9 +61,10 @@ def compute_union(intervals, mycb):
         elif Ex >= intervals[x][0]:
             endIndex = x-1
             if flag == "inside":
-                intervals[x] = (Sx, intervals[x][1])
+                ## intervals[x] = (Sx, intervals[x][1])
+                intervals.append((Sx, intervals[x][1]))
                 # intervals.pop(x-1)
-                intervals[x-1] = (None)
+                ## intervals[x-1] = (None)
             else:
                 # absorbed into interval
                 Ex = intervals[x][0]
