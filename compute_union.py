@@ -2,6 +2,10 @@
 Author:
 Rena Repenning
 renarepenning@gmail.com
+
+Contributor:
+Emily Powers
+epowers3@tulane.edu
 """
 
 # TODO: need to take union of all intervals
@@ -30,6 +34,10 @@ def compute_union(intervals, mycb):
 
     for i in range(len(intervals)):
         """check space before and in next interval"""
+        # can possibly combine these into one step
+        #beginning index is supposed to be index of first interval we are removing
+        #new interval either falls between or before and we want to remove the old interval
+        #start is minimum of both and end is maximum of both
         if Sx <= intervals[i][0]:
             beginningIndex = i
             # change the current interval to start at Sx
@@ -46,7 +54,8 @@ def compute_union(intervals, mycb):
     # l = len(intervals)-1
     """for x in range(0, len(intervals), -1):  # THIS DOESNT WORK"""
 
-    for x in [4, 3, 2, 1, 0]:
+    #REMOVE THIS FOR LOOP AND CONDENSE
+    for x in [4, 3, 2, 1, 0]: #don't go from end to the beginning
         print("\nEx=", Ex, end=" ")
         print("intervals[x]=", intervals[x], end=" ")
         if Ex >= intervals[x][1]:
