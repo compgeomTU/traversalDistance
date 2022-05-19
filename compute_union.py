@@ -30,8 +30,23 @@ def compute_union(intervals, mycb):
         intervals = [(mycb)] + intervals
         return intervals
 
+    #to remove
     inside_intervals = []
-
+    
+    for i in range(len(intervals)):
+        if Sx <= intervals[i][0]:
+            #add smaller interval to list to remove
+            inside_intervals.append(intervals[i])  
+            #check if Ex covers more than current interval
+            if Ex <= intervals[i][1]:
+                #readjust the new interval to include Sx 
+                new_interval = (Sx, intervals[i][1])
+                break
+        elif Sx <= intervals[i][1]:
+            #reset starting index to be min in interval
+            Sx = intervals[i][0]
+            inside_intervals.append(intervals[i])
+    '''
     for i in range(len(intervals)):
         """check space before and in next interval"""
         # can possibly combine these into one step
@@ -53,7 +68,7 @@ def compute_union(intervals, mycb):
             break
     # l = len(intervals)-1
     """for x in range(0, len(intervals), -1):  # THIS DOESNT WORK"""
-
+    
     #REMOVE THIS FOR LOOP AND CONDENSE
     for x in [4, 3, 2, 1, 0]: #don't go from end to the beginning
         print("\nEx=", Ex, end=" ")
@@ -78,9 +93,17 @@ def compute_union(intervals, mycb):
                 # absorbed into interval
                 Ex = intervals[x][0]
             break
+    '''
+    print("to remove:", inside_intervals)
     print("new interval=", new_interval)
-    remove_is = []
-    for i in range(len(intervals)):
+    #remove the intervals and add the new one
+    #GIVING A LIST INDEX OUT OF RANGE ERROR LINE 103
+    for j in range(len(intervals)):
+        # if the interval is flagged remove it
+        if intervals[j] in inside_intervals:
+            intervals.pop(j)
+    intervals.append(new_interval)
+    '''
         if new_interval[0] <= Sx:
             while i < len(intervals):
                 remove_is.append(i)
@@ -89,11 +112,7 @@ def compute_union(intervals, mycb):
                 else:
                     i += 1
             break
-
-    # take out intervals we dont need
-    for i in remove_is:
-        intervals.pop(i)
-
+    '''
     return intervals
 
 
