@@ -98,11 +98,12 @@ def compute_union(intervals, mycb):
     print("new interval=", new_interval)
     #remove the intervals and add the new one
     #GIVING A LIST INDEX OUT OF RANGE ERROR LINE 103
-    for j in range(len(intervals)):
+    new = [i for j in intervals if j not in inside_intervals]
+    '''for j in range(len(intervals)):
         # if the interval is flagged remove it
         if intervals[j] in inside_intervals:
-            intervals.pop(j)
-    intervals.append(new_interval)
+            intervals.pop(j)'''
+    new.append(new_interval)
     '''
         if new_interval[0] <= Sx:
             while i < len(intervals):
@@ -113,7 +114,7 @@ def compute_union(intervals, mycb):
                     i += 1
             break
     '''
-    return intervals
+    return new
 
 
 """assume current intervals are sorted"""
