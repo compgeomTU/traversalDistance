@@ -98,7 +98,7 @@ def compute_union(intervals, mycb):
     print("new interval=", new_interval)
     #remove the intervals and add the new one
     #GIVING A LIST INDEX OUT OF RANGE ERROR LINE 103
-    new = [i for j in intervals if j not in inside_intervals]
+    new = [i for i in intervals if i not in inside_intervals]
     '''for j in range(len(intervals)):
         # if the interval is flagged remove it
         if intervals[j] in inside_intervals:
