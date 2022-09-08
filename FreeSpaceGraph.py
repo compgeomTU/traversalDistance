@@ -37,7 +37,7 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
-    def DFS(self, cb, f, p, paths, curr_path):
+    def DFS(self, cb, f, p, paths, curr_path): # f is written to a file, p is written for the path
         f.write("\n")  # new line means new dfs call
         cb.visited = True
         # go thru neighboring edges from given vertexID
@@ -55,7 +55,7 @@ class FreeSpaceGraph:
             # get neighboring edge nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
             for V in [left_vertexID, right_vertexID]:
-                """ CASE 1 """
+                """ CASE 1 """ #there isn't another case? 
                 if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
                     newCB = self.cell_boundaries[(
@@ -71,7 +71,7 @@ class FreeSpaceGraph:
                                  curr_path+(newCB.add_cd_str()))
                     else:
                         #p.write("DFS -- basecase -> dont return path\n")
-                        paths += [curr_path]
+                        paths += [curr_path] # curr_path is never updated so we are just adding whatever is passed into function call
 
                 newCB = self.cell_boundaries[(
                     neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
@@ -81,18 +81,18 @@ class FreeSpaceGraph:
                 if newCB.visited == False and newCB.start_fs < newCB.end_fs:
                     f.write("DFS -- add "+newCB.print_cellboundary()+"\n")
                     newCB.start_p = min2  # from block calling ellipse
-                    newCB.end_p = max2
+                    newCB.end_p = max2 # only two lines that are different 
                     # recursive call on the edge that hasn't been called yet
                     self.DFS(newCB, f, p, paths,
                              curr_path+(newCB.add_cd_str()))
                 else:
                     #p.write("DFS -- basecase -> dont return path\n")
-                    paths += [curr_path]
+                    paths += [curr_path] # again the current path isn't updated ever 
             # end for thru L,R
         # end for iterating thru Vi
         f.write("\nDFS success!!!\n")
         p.write("returned: "+str(paths)+"\n")
-        return "DFS success!!!"
+        return "DFS success!!!" #should we return the paths?? doesn't make sense to return a random string
 
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
@@ -111,8 +111,8 @@ class FreeSpaceGraph:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
                     # TODO: INSERT COMPUTE UNION FXN
-                    """all_cbs[mycb.edgeID] = self.compute_union(
-                        all_cbs[mycb.edgeID], mycb)"""
+                    # is this the proper call for compute union?
+                    all_cbs[mycb.edgeID] = self.compute_union(all_cbs[mycb.edgeID], mycb)
                 else:
                     # adds first (single white interval)
                     # map --> [pairs] --- sorted list of (s,e) pairs will be the val
