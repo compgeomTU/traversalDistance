@@ -37,8 +37,29 @@ class FreeSpaceGraph:
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
+
+
+    """ DFS Diagram: for all neighbors--> for 2 horizontals and one vertical
+        boundaries are lined, vertices are in (), the ellipse boundaries are shown without outlining ellipse
+
+            G2 g_edges
+                .
+                .
+                .
+ (right vertex) .________________
+                |         |  __ .
+                |               .
+            cb  |   (ellipse)   .
+         edge 2 | __            .
+                |    |          .
+                |_______________..  .  .  .  . G1 g_verts
+              (V)     edge 1    (neighbor)
+    (left vertex)
+    
+    """
     def DFS(self, cb, f, p, paths, curr_path): # f is written to a file, p is written for the path
-        f.write("\n")  # new line means new dfs call
+        #new line in f is a new dfs call
+        f.write("\n")
         cb.visited = True
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
@@ -46,7 +67,7 @@ class FreeSpaceGraph:
             G1, G2 = cb.g_verts, cb.g_edges
             edge1 = [G1.nodes[cb.vertexID],
                      G1.nodes[neighbor]]
-            x, y = G2.edges[cb.edgeID]  # pair of vertex ids
+            x, y = G2.edges[cb.edgeID] # pair of vertex ids
             edge2 = [G2.nodes[x], G2.nodes[y]]
             f.write("edge1=" + str(edge1) + "   edge2=" + str(edge2)+"\n")
             min1, max1, min2, max2 = find_ellipse_max_min_points(
@@ -55,14 +76,13 @@ class FreeSpaceGraph:
             # get neighboring edge nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
             for V in [left_vertexID, right_vertexID]:
-                """ CASE 1 """ #there isn't another case? 
-                if (cb.vertexID, neighbor) in cb.g_verts.edgeHash:
+                """ HORIZONTAL Boundaries --> left_vertex:bottom, right_vertex:top """ 
+                if (cb.vertexID, neighbor) in cb.g_verts.edgeHash: 
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)]
                     newCB = self.cell_boundaries[(
                         V, new_edgeID, cb.g_verts, cb.g_edges)]  # creating new cell boundary from "flipping" horiz --> vertical
                     f.write("start + end values: " +
                             str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-
                     if newCB.visited == False and newCB.start_fs < newCB.end_fs:
                         p.write("DFS -- add "+newCB.print_cellboundary()+"\n")
                         newCB.start_p = min1  # from block calling ellipse
@@ -71,32 +91,32 @@ class FreeSpaceGraph:
                                  curr_path+(newCB.add_cd_str()))
                     else:
                         #p.write("DFS -- basecase -> dont return path\n")
-                        paths += [curr_path] # curr_path is never updated so we are just adding whatever is passed into function call
-
-                newCB = self.cell_boundaries[(
-                    neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
-
-                f.write("start + end values: " +
-                        str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-                if newCB.visited == False and newCB.start_fs < newCB.end_fs:
-                    f.write("DFS -- add "+newCB.print_cellboundary()+"\n")
-                    newCB.start_p = min2  # from block calling ellipse
-                    newCB.end_p = max2 # only two lines that are different 
-                    # recursive call on the edge that hasn't been called yet
-                    self.DFS(newCB, f, p, paths,
-                             curr_path+(newCB.add_cd_str()))
-                else:
-                    #p.write("DFS -- basecase -> dont return path\n")
-                    paths += [curr_path] # again the current path isn't updated ever 
+                        paths += [curr_path] 
             # end for thru L,R
+            """ VERTICAL Boundary""" 
+            newCB = self.cell_boundaries[(
+                neighbor, cb.edgeID, cb.g_edges, cb.g_verts)]  # connect v's of same type
+
+            f.write("start + end values: " +
+                    str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
+            if newCB.visited == False and newCB.start_fs < newCB.end_fs:
+                f.write("DFS -- add "+newCB.print_cellboundary()+"\n")
+                newCB.start_p = min2  # from block calling ellipse
+                newCB.end_p = max2 
+                # recursive call on the edge that hasn't been called yet
+                self.DFS(newCB, f, p, paths, curr_path+(newCB.add_cd_str()))
+            else:
+                #p.write("DFS -- basecase -> dont return path\n")
+                paths += [curr_path] 
         # end for iterating thru Vi
         f.write("\nDFS success!!!\n")
-        p.write("returned: "+str(paths)+"\n")
-        return "DFS success!!!" #should we return the paths?? doesn't make sense to return a random string
+        p.write("paths: "+str(paths)+"\n")
+        
 
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
         f = open("outputs/check_projection.txt", "w")
+        # all_cbs = { edgeID : output of compute_union }
         all_cbs = {}
         f.write("self.cell_boundaries:\n ")
         f.write(str(self.cell_boundaries)+"\n")
@@ -110,21 +130,23 @@ class FreeSpaceGraph:
                 if mycb.edgeID in all_cbs:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                    # TODO: INSERT COMPUTE UNION FXN
-                    # is this the proper call for compute union?
                     all_cbs[mycb.edgeID] = self.compute_union(all_cbs[mycb.edgeID], mycb)
                 else:
                     # adds first (single white interval)
                     # map --> [pairs] --- sorted list of (s,e) pairs will be the val
                     all_cbs[mycb.edgeID] = [(mycb.start_p, mycb.end_p)]
         f.write("\n\n for pairs in union:")
-        for pairs in all_cbs:
-            edge_ids = all_cbs[pairs]
-            f.write("\n edge_ids="+str(edge_ids))
-            if edge_ids[0] != 0 or edge_ids[1] != 1:
-                """ should this be > or < ?? """
-                f.write(" --> is false")
+        for key in all_cbs:
+            intervals = all_cbs[key]
+            f.write("\n intervals="+str(intervals))
+            # we want intervals to be start=0 and end=1
+            if len(intervals) == 1:
+                if intervals[0][0] != 0 or intervals[0][1] != 1:
+                    f.write(" --> is false")
+                    return False
+            else:
                 return False
+        # if intervals cover all edges
         return True
 
     def DFSTraversalDist(self, cb):
