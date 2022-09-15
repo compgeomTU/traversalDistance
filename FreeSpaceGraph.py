@@ -111,8 +111,49 @@ class FreeSpaceGraph:
         # end for iterating thru Vi
         f.write("\nDFS success!!!\n")
         p.write("paths: "+str(paths)+"\n")
-        
+    
+    #STEP 1: print mycb's w function to figure out start and end intervals
+    def compute_union(self, intervals, mycb):
+        Sx, Ex = mycb.start_p, mycb.end_p
+        print("--start: ", Sx, "--end: ", Ex, "  --intervals: ", intervals)
+        flag = ""
+        new_interval = (-1, -1)
 
+        # entirely before
+        if Sx > intervals[len(intervals)-1][1]:
+            intervals += [(Sx, Ex)]
+            return intervals
+        # entirely after
+        elif Ex < intervals[0][0]:
+            intervals = [(Sx, Ex)] + intervals
+            return intervals
+
+        #to remove
+        inside_intervals = []
+    
+        for i in range(len(intervals)):
+            if Sx <= intervals[i][0]:
+                #add smaller interval to list to remove
+                inside_intervals.append(intervals[i])  
+                #check if Ex covers more than current interval
+                if Ex <= intervals[i][1]:
+                    #readjust the new interval to include Sx 
+                    new_interval = (Sx, intervals[i][1])
+                    break
+            elif Sx <= intervals[i][1]:
+                #reset starting index to be min in interval
+                Sx = intervals[i][0]
+                inside_intervals.append(intervals[i])
+
+        print("to remove:", inside_intervals)
+        print("new interval=", new_interval)
+
+        new = [i for i in intervals if i not in inside_intervals]
+        new.append(new_interval)
+    
+        return new
+
+    #STEP 2: check with compute union to track cbs, print what you are inputting into calls
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
         f = open("outputs/check_projection.txt", "w")
@@ -122,6 +163,7 @@ class FreeSpaceGraph:
         f.write(str(self.cell_boundaries)+"\n")
         f.write("self.G1="+str(self.g1)+"\n")
         f.write("\nfor cb in self.cell_boundaries")
+        #pick an edge id and only look at contents of that edge id just for a single edge 
         for cb in self.cell_boundaries:
             mycb = self.cell_boundaries[cb]
             f.write("\nmycb="+str(mycb))
@@ -130,6 +172,9 @@ class FreeSpaceGraph:
                 if mycb.edgeID in all_cbs:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
+                    #FIX BELOW
+                    print(all_cbs[mycb.edgeID])
+                    print(mycb)
                     all_cbs[mycb.edgeID] = self.compute_union(all_cbs[mycb.edgeID], mycb)
                 else:
                     # adds first (single white interval)
@@ -184,6 +229,8 @@ class CellBoundary:
         self.start_fs, self.end_fs = calfreespace(
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
 
+    #FIX THIS FUNCTION TO PRINT MORE INFO NICER --> should print not return
+    # vertex id, edge id | start_p, end_p | start, end (in one line)
     def print_cellboundary(self):
         # print("Cell Boundary: ", self.vertexID, self.edgeID)
         return "Cell Boundary: (" + str(self.vertexID)+", " + str(self.edgeID)+")"

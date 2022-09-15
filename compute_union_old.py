@@ -15,7 +15,7 @@ epowers3@tulane.edu
 from operator import invert
 
 
-def compute_union(intervals, mycb):
+def compute_union_old(intervals, mycb):
     print("--my cbs: ", mycb, "  --intervals: ", intervals)
     Sx, Ex = mycb
     flag = ""
@@ -76,4 +76,4 @@ case10 = [(0, .1), (.2, .3), (.4, .5), (.6, .7), (.8, .9)], (.25, .65)
 
 
 c = case10
-print("final = ", compute_union(c[0], c[1]))
+print("final = ", compute_union_old(c[0], c[1]))

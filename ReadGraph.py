@@ -6,6 +6,9 @@ Author:
 Contributors:
     Rena Repenning
     renarepenning@gmail.com, www.renarepenning.com
+
+    Emily Powers
+    epowers3@tulane.edu
     
     Will Rodman
     wrodman@tulane.edu
@@ -21,7 +24,10 @@ from FreeSpaceGraph import FreeSpaceGraph
 def testFreeSpaceGraph():
     print("\n -- TESTING FreeSpaceGraph.py -- ")
     g = Graph("sample_graphs/G")
+    g.Plot2MatPlotLib()
     h = Graph("sample_graphs/H")
+    h.Plot2MatPlotLib()
+    #epsilon: 3
     e = 3
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
