@@ -19,8 +19,9 @@ def compute_union_old(intervals, mycb):
     print("--my cbs: ", mycb, "  --intervals: ", intervals)
     Sx, Ex = mycb
     flag = ""
-    new_interval = (-1, -1)
-
+    if len(intervals) == 0:
+        intervals += [(mycb)]
+        return intervals
     # entirely before
     if Sx > intervals[len(intervals)-1][1]:
         intervals += [(mycb)]
@@ -55,9 +56,15 @@ def compute_union_old(intervals, mycb):
     
     return new
 
+'''we will start with an empty list of tuples beacuse initializing one doesn't run properly
+we will add in at least one? tuple cell boundary at a time?? 
+    if it's just one we can just add an if statement for the intervals being empty
+    it would need to get called for each cb we look at while tracking the same intervals list
+    
+    if its more than one im confused i think'''
 
 """assume current intervals are sorted"""
-# works
+# Have empty set and try to insert several intervals to merge together (recursively)
 case1 = [(0, .1), (.2, .5), (.8, 1)], (.6, .7)
 case2 = [(0, .1), (.2, .5), (.7, .9)], (.6, .8)
 case5 = [(.2, .5), (.7, .9)], (.1, .3)
@@ -72,7 +79,7 @@ case9 = [(.01, .1), (.2, .5), (.7, .9)
 case8 = [(.01, .1), (.2, .5), (.7, .9)
          ], (.03, .8)  # spans multiple --> needs to drop one smaller
 
-case10 = [(0, .1), (.2, .3), (.4, .5), (.6, .7), (.8, .9)], (.25, .65)
+case10 = [], (.25, .65)
 
 
 c = case10
