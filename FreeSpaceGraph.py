@@ -248,10 +248,10 @@ class CellBoundary:
 
         edge = g_edges.edges[self.edgeID]
         # inputs for CFS
-        x1 = g_edges.nodes[edge[0]][1]  # --> id of vertex, x-coord
-        y1 = g_edges.nodes[edge[0]][0]
-        x2 = g_edges.nodes[edge[1]][1]
-        y2 = g_edges.nodes[edge[1]][0]
+        x1 = g_edges.nodes[edge[0]][0]  # --> id of vertex, x-coord
+        y1 = g_edges.nodes[edge[0]][1]
+        x2 = g_edges.nodes[edge[1]][0]
+        y2 = g_edges.nodes[edge[1]][1]
         xa = g_verts.nodes[vertexID][0]
         ya = g_verts.nodes[vertexID][1]
 
