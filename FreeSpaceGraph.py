@@ -74,12 +74,15 @@ class FreeSpaceGraph:
             for V in [left_vertexID, right_vertexID]:
                 """ HORIZONTAL Boundaries --> left_vertex:bottom, right_vertex:top """ 
                 if (cb.vertexID, neighbor) in cb.g_verts.edgeHash: 
-                    new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)] 
-                    newCB = self.cell_boundaries[(cb.g_verts, V, cb.g_edges, new_edgeID)] # creating new cell boundary from "flipping" horiz --> vertical
+                    new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)] #on vertex graph
+                    #newCB doesn't find the key
+                    newCB = self.cell_boundaries[(cb.g_edges, V, cb.g_verts, new_edgeID)] # creating new cell boundary from "flipping" horiz --> vertical
                     f.write("start + end values: " +
                             str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-                    if newCB.visited == False and newCB.start_fs < newCB.end_fs:
+                    #SHOULD THIS BE <= OR STRICTLY <
+                    if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                         p.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
+                        print("horizontal start_p min1", min1)
                         newCB.start_p = min1  # from block calling ellipse
                         newCB.end_p = max1
                         self.DFS(newCB, f, p, paths,
@@ -91,8 +94,10 @@ class FreeSpaceGraph:
             """ VERTICAL Boundary"""  
             newCB = self.cell_boundaries[(cb.g_verts, neighbor, cb.g_edges, cb.edgeID)] # connect v's of same type
             f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-            if newCB.visited == False and newCB.start_fs < newCB.end_fs:
+            #SHOULD THIS BE <= OR STRICTLY <
+            if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                 f.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
+                print("vertical start_p min2", min2)
                 newCB.start_p = min2  # from block calling ellipse
                 newCB.end_p = max2 
                 # recursive call on the edge that hasn't been called yet
@@ -106,13 +111,18 @@ class FreeSpaceGraph:
     
     # TODO: FIX TO TEST INSERTING IN EMPTY SET
     # STEP 1: print mycb's w function to figure out start and end intervals
+    #TODO: try to see if we can rewrite this to be simplier to compute union because this is messy
+    # list of intervals and then a new interval and you have to place it properly without overlapping
+    #start point is either inside or outside an interval and adjusting from there
     def compute_union(self, intervals, mycb):
         Sx, Ex = mycb.start_p, mycb.end_p
         mycb.print_cellboundary()
         #print("--start: ", Sx, "--end: ", Ex, "  --intervals: ", intervals)
         flag = ""
+        print("ALL INT", intervals)
+        #print("INTERVAL", intervals[len(intervals)-1])
         if len(intervals) == 0:
-            intervals += [(mycb)]
+            intervals = [(Sx, Ex)] + intervals
             print("WAS EMPTY", intervals)
             return intervals
         # entirely before
@@ -128,6 +138,8 @@ class FreeSpaceGraph:
 
         #to remove
         inside_intervals = []
+        #to keep
+        new = []
     
         for i in range(len(intervals)):
             if Sx <= intervals[i][0]:
@@ -137,18 +149,32 @@ class FreeSpaceGraph:
                 if Ex <= intervals[i][1]:
                     #readjust the new interval to include Sx 
                     new_interval = (Sx, intervals[i][1])
-                    break
+                    new.append(new_interval)
+                    return new
+                    #NEST BELOW LOGIC INTO HERE JUST RETURN DON'T BREAK AND A RETURN IN THE END
+                else:
+                    new += (i for i in intervals if i not in inside_intervals)
+                    #THIS MIGHT NOT BE THE RIGHT LINE
+                    new += [(Sx, Ex)]
+                    return new
+            #less than the end and greater than start (inside)
             elif Sx <= intervals[i][1]:
                 #reset starting index to be min in interval
                 Sx = intervals[i][0]
                 inside_intervals.append(intervals[i])
+                new += (i for i in intervals if i not in inside_intervals)
+                #need to add in new interval or check for the end
+                return new
+            else:
+                return new
 
-        print("to remove:", inside_intervals)
-        print("new interval=", new_interval)
+
+        #print("to remove:", inside_intervals)
+        #print("new interval=", new_interval)
 
         new = [i for i in intervals if i not in inside_intervals]
         new.append(new_interval)
-        print("THIS ONE" , new)
+        #print("NEW INTERVAL" , new)
         return new
 
     # TODO: 
@@ -172,9 +198,14 @@ class FreeSpaceGraph:
                     f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                             "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
                     #FIX BELOW
-                    print(all_cbs[mycb.edgeID])
-                    print(mycb)
-                    all_cbs[mycb.edgeID] = self.compute_union(all_cbs[mycb.edgeID], mycb)
+                    print("ALL CBS" , all_cbs[mycb.edgeID])
+                    print("MY CB", mycb)
+                    print("EDGEID", mycb.edgeID)
+                    all_cbs[mycb.edgeID] 
+                    #temp is generator object here
+                    temp = self.compute_union(all_cbs[mycb.edgeID], mycb)
+                    print(temp)
+                    all_cbs[mycb.edgeID] = temp
                 else:
                     # adds first (single white interval)
                     # map --> [pairs] --- sorted list of (s,e) pairs will be the val
@@ -199,7 +230,7 @@ class FreeSpaceGraph:
         p = open("outputs/fsg_path.txt", "w")
         for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
             i.visited = False
-        print(self.DFS(cb, f, p, [], ""))
+        print("DFS", self.DFS(cb, f, p, [], ""))
         C = self.check_projection()
         print("Projection check: ", C)
 
@@ -230,7 +261,7 @@ class CellBoundary:
 
 
     def print_cellboundary(self):
-        print("V: " + str(self.vertexID) + " E: " + str(self.edgeID) + " start: " + str(self.start_p) + " end: " + str(self.end_p))
+        print("V_ID: " + str(self.vertexID) + " E_ID: " + str(self.edgeID) + " start: " + str(self.start_p) + " end: " + str(self.end_p))
         
 
     def add_cd_str(self):
