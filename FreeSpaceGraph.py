@@ -114,7 +114,12 @@ class FreeSpaceGraph:
         p.write("paths: "+str(paths)+"\n")
 
 
-    def compute_union(self, intervals, mycb):
+    def compute_union(self, intervalsNested, mycb):
+        #NEED TO APPEND INSTEAD OF CONCATENATE
+        #intervals = sum(intervalsNested, [])
+        intervals = intervalsNested.append([])
+        #intervals is NoneType currently
+        logging.info("INTERVALS: "+ str(intervals))
         sx = int(mycb.start_p)
         ex = int(mycb.end_p)
         i = 0
@@ -149,6 +154,7 @@ class FreeSpaceGraph:
         elif sxi % 2 == 1 and exi % 2 == 1:
             intervals = intervals[0:sxi] + intervals[exi:]
         
+        #iterate through to reconvert to list of tuples, list comprehension?
         return intervals
 
 
@@ -234,15 +240,19 @@ class FreeSpaceGraph:
             if mycb.edgeID in all_cbs:
                 f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                         "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                #FIX BELOW
+                #FIX BELOW: input of intervals need to be a sorted list not a list of tuple pairs
                 logging.info("ALL CBS"+ str(all_cbs[mycb.edgeID]))
                 logging.info("MY CB"+ str(mycb))
                 logging.info("EDGEID"+ str(mycb.edgeID))
-                all_cbs[mycb.edgeID] 
+                listTup = all_cbs[mycb.edgeID] 
+                listEdges = [i[0] for i in listTup]
                 #temp is generator object here
-                temp = self.compute_union(all_cbs[mycb.edgeID], mycb)
+                #flattening function that gets rid of the tuple layer ?
+                #list comprehension? itertools? sum (with list and empty list)?
+                #TODO: fix the input of compute union call so that it is just a list of floats (no tuples)
+                temp = self.compute_union(listEdges, mycb)
                 logging.info("INTERVAL: " + str(temp))
-                all_cbs[mycb.edgeID] = temp
+                listTup = temp
             else:
                 # adds first (single white interval)
                 # map --> [pairs] --- sorted list of (s,e) pairs will be the val
