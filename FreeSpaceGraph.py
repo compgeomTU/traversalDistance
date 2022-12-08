@@ -83,12 +83,12 @@ class FreeSpaceGraph:
                     newCB = self.cell_boundaries[(cb.g_edges, V, cb.g_verts, new_edgeID)] # creating new cell boundary from "flipping" horiz --> vertical
                     f.write("start + end values: " +
                             str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-                    #SHOULD THIS BE <= OR STRICTLY <
                     if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                         p.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
                         print("horizontal start_p min1", min1)
                         newCB.start_p = min1  # from block calling ellipse
                         newCB.end_p = max1
+                        logging.info("START_P, END_P: "+ str(newCB.start_p)+ " " + str(newCB.end_p))
                         self.DFS(newCB, f, p, paths,
                                  curr_path+(newCB.add_cd_str()))
                     else:
@@ -98,7 +98,6 @@ class FreeSpaceGraph:
             """ VERTICAL Boundary"""  
             newCB = self.cell_boundaries[(cb.g_verts, neighbor, cb.g_edges, cb.edgeID)] # connect v's of same type
             f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-            #SHOULD THIS BE <= OR STRICTLY <
             if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                 f.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
                 print("vertical start_p min2", min2)
@@ -114,18 +113,16 @@ class FreeSpaceGraph:
         p.write("paths: "+str(paths)+"\n")
 
 
-    def compute_union(self, intervalsNested, mycb):
-        #NEED TO APPEND INSTEAD OF CONCATENATE
-        #intervals = sum(intervalsNested, [])
-        intervals = intervalsNested.append([])
-        #intervals is NoneType currently
-        logging.info("INTERVALS: "+ str(intervals))
+    def compute_union(self, intervals, mycb):
+        logging.info("INTERVALS: "+str(intervals))
         sx = int(mycb.start_p)
         ex = int(mycb.end_p)
+        logging.info("SX-Compute union:"+str(sx))
+        logging.info("EX-Compute union:"+str(ex))
         i = 0
         sxi = -1
         exi = -1
-        while i < len(intervals) + 2:
+        while i < len(intervals):
             if sxi == -1:
                 if sx < intervals[i]:
                     intervals.insert(i,sx)
@@ -153,9 +150,12 @@ class FreeSpaceGraph:
             intervals = intervals[0:sxi] + intervals[exi+1:]
         elif sxi % 2 == 1 and exi % 2 == 1:
             intervals = intervals[0:sxi] + intervals[exi:]
-        
+        intervalsRETUP = []
         #iterate through to reconvert to list of tuples, list comprehension?
-        return intervals
+        for k in range(0,len(intervals)-2):
+            intervalsRETUP.append((intervals[k],intervals[k+1]))
+        logging.info("intervalsRETUP: "+str(intervalsRETUP))
+        return intervalsRETUP
 
 
     ''' OLD COMPUTE UNION
@@ -240,16 +240,13 @@ class FreeSpaceGraph:
             if mycb.edgeID in all_cbs:
                 f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
                         "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                #FIX BELOW: input of intervals need to be a sorted list not a list of tuple pairs
                 logging.info("ALL CBS"+ str(all_cbs[mycb.edgeID]))
                 logging.info("MY CB"+ str(mycb))
                 logging.info("EDGEID"+ str(mycb.edgeID))
                 listTup = all_cbs[mycb.edgeID] 
-                listEdges = [i[0] for i in listTup]
-                #temp is generator object here
-                #flattening function that gets rid of the tuple layer ?
-                #list comprehension? itertools? sum (with list and empty list)?
-                #TODO: fix the input of compute union call so that it is just a list of floats (no tuples)
+                listEdges = list(sum(listTup,()))
+                logging.info("LISTUP: "+str(listTup))
+                logging.info("LISTEDGES: "+str(listEdges))
                 temp = self.compute_union(listEdges, mycb)
                 logging.info("INTERVAL: " + str(temp))
                 listTup = temp

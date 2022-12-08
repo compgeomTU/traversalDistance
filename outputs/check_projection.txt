@@ -1,16 +1,146 @@
 self.cell_boundaries:
- {(<Graph.Graph object at 0x1088bcf10>, 0, <Graph.Graph object at 0x1088bfd30>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170ed960>, (<Graph.Graph object at 0x1088bcf10>, 0, <Graph.Graph object at 0x1088bfd30>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170ed030>, (<Graph.Graph object at 0x1088bcf10>, 0, <Graph.Graph object at 0x1088bfd30>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170eceb0>, (<Graph.Graph object at 0x1088bcf10>, 0, <Graph.Graph object at 0x1088bfd30>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170ed330>, (<Graph.Graph object at 0x1088bcf10>, 1, <Graph.Graph object at 0x1088bfd30>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170ec760>, (<Graph.Graph object at 0x1088bcf10>, 1, <Graph.Graph object at 0x1088bfd30>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170ec790>, (<Graph.Graph object at 0x1088bcf10>, 1, <Graph.Graph object at 0x1088bfd30>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170ecc10>, (<Graph.Graph object at 0x1088bcf10>, 1, <Graph.Graph object at 0x1088bfd30>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170eedd0>, (<Graph.Graph object at 0x1088bcf10>, 2, <Graph.Graph object at 0x1088bfd30>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170edcc0>, (<Graph.Graph object at 0x1088bcf10>, 2, <Graph.Graph object at 0x1088bfd30>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170edcf0>, (<Graph.Graph object at 0x1088bcf10>, 2, <Graph.Graph object at 0x1088bfd30>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170eecb0>, (<Graph.Graph object at 0x1088bcf10>, 2, <Graph.Graph object at 0x1088bfd30>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170eece0>, (<Graph.Graph object at 0x1088bcf10>, 3, <Graph.Graph object at 0x1088bfd30>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170edc00>, (<Graph.Graph object at 0x1088bcf10>, 3, <Graph.Graph object at 0x1088bfd30>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170ef340>, (<Graph.Graph object at 0x1088bcf10>, 3, <Graph.Graph object at 0x1088bfd30>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170ef370>, (<Graph.Graph object at 0x1088bcf10>, 3, <Graph.Graph object at 0x1088bfd30>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170ef070>, (<Graph.Graph object at 0x1088bcf10>, 4, <Graph.Graph object at 0x1088bfd30>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170ef580>, (<Graph.Graph object at 0x1088bcf10>, 4, <Graph.Graph object at 0x1088bfd30>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170ef5b0>, (<Graph.Graph object at 0x1088bcf10>, 4, <Graph.Graph object at 0x1088bfd30>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170ef430>, (<Graph.Graph object at 0x1088bcf10>, 4, <Graph.Graph object at 0x1088bfd30>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170ef8b0>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170ef8e0>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170ef760>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170eff10>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170efeb0>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 4): <FreeSpaceGraph.CellBoundary object at 0x1170eff70>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 5): <FreeSpaceGraph.CellBoundary object at 0x1170effa0>, (<Graph.Graph object at 0x1088bfd30>, 0, <Graph.Graph object at 0x1088bcf10>, 6): <FreeSpaceGraph.CellBoundary object at 0x1170efca0>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170efcd0>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170efd00>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170ed990>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170eda80>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 4): <FreeSpaceGraph.CellBoundary object at 0x1170edab0>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 5): <FreeSpaceGraph.CellBoundary object at 0x1170ed930>, (<Graph.Graph object at 0x1088bfd30>, 1, <Graph.Graph object at 0x1088bcf10>, 6): <FreeSpaceGraph.CellBoundary object at 0x1170ed9f0>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 0): <FreeSpaceGraph.CellBoundary object at 0x1170eda20>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 1): <FreeSpaceGraph.CellBoundary object at 0x1170ed720>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 2): <FreeSpaceGraph.CellBoundary object at 0x1170ed750>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 3): <FreeSpaceGraph.CellBoundary object at 0x1170ed780>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 4): <FreeSpaceGraph.CellBoundary object at 0x10886b760>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 5): <FreeSpaceGraph.CellBoundary object at 0x1088c3cd0>, (<Graph.Graph object at 0x1088bfd30>, 2, <Graph.Graph object at 0x1088bcf10>, 6): <FreeSpaceGraph.CellBoundary object at 0x1088c3d00>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 0): <FreeSpaceGraph.CellBoundary object at 0x1088c3d30>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 1): <FreeSpaceGraph.CellBoundary object at 0x1088c3bb0>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 2): <FreeSpaceGraph.CellBoundary object at 0x1088c3be0>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 3): <FreeSpaceGraph.CellBoundary object at 0x1088c3c10>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 4): <FreeSpaceGraph.CellBoundary object at 0x1088c18d0>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 5): <FreeSpaceGraph.CellBoundary object at 0x1088c1900>, (<Graph.Graph object at 0x1088bfd30>, 3, <Graph.Graph object at 0x1088bcf10>, 6): <FreeSpaceGraph.CellBoundary object at 0x1088c1930>}
-self.G1=<Graph.Graph object at 0x1088bfd30>
+ {(<Graph.Graph object at 0x1138c3040>, 0, <Graph.Graph object at 0x1138c0310>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0fdbd0>, (<Graph.Graph object at 0x1138c3040>, 0, <Graph.Graph object at 0x1138c0310>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0fd2d0>, (<Graph.Graph object at 0x1138c3040>, 0, <Graph.Graph object at 0x1138c0310>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0fd0f0>, (<Graph.Graph object at 0x1138c3040>, 0, <Graph.Graph object at 0x1138c0310>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0fd120>, (<Graph.Graph object at 0x1138c3040>, 1, <Graph.Graph object at 0x1138c0310>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0fcc40>, (<Graph.Graph object at 0x1138c3040>, 1, <Graph.Graph object at 0x1138c0310>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0fcc70>, (<Graph.Graph object at 0x1138c3040>, 1, <Graph.Graph object at 0x1138c0310>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0fc970>, (<Graph.Graph object at 0x1138c3040>, 1, <Graph.Graph object at 0x1138c0310>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0fedd0>, (<Graph.Graph object at 0x1138c3040>, 2, <Graph.Graph object at 0x1138c0310>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0fc040>, (<Graph.Graph object at 0x1138c3040>, 2, <Graph.Graph object at 0x1138c0310>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0fdd20>, (<Graph.Graph object at 0x1138c3040>, 2, <Graph.Graph object at 0x1138c0310>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0feec0>, (<Graph.Graph object at 0x1138c3040>, 2, <Graph.Graph object at 0x1138c0310>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0fdcc0>, (<Graph.Graph object at 0x1138c3040>, 3, <Graph.Graph object at 0x1138c0310>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0fddb0>, (<Graph.Graph object at 0x1138c3040>, 3, <Graph.Graph object at 0x1138c0310>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0ff160>, (<Graph.Graph object at 0x1138c3040>, 3, <Graph.Graph object at 0x1138c0310>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0ff250>, (<Graph.Graph object at 0x1138c3040>, 3, <Graph.Graph object at 0x1138c0310>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0ff280>, (<Graph.Graph object at 0x1138c3040>, 4, <Graph.Graph object at 0x1138c0310>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0ff520>, (<Graph.Graph object at 0x1138c3040>, 4, <Graph.Graph object at 0x1138c0310>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0ff550>, (<Graph.Graph object at 0x1138c3040>, 4, <Graph.Graph object at 0x1138c0310>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0ff580>, (<Graph.Graph object at 0x1138c3040>, 4, <Graph.Graph object at 0x1138c0310>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0ff850>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0ff910>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0ff940>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0fffa0>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0ffd90>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 4): <FreeSpaceGraph.CellBoundary object at 0x11d0ffdc0>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 5): <FreeSpaceGraph.CellBoundary object at 0x11d0ffdf0>, (<Graph.Graph object at 0x1138c0310>, 0, <Graph.Graph object at 0x1138c3040>, 6): <FreeSpaceGraph.CellBoundary object at 0x11d0fda80>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0fdb70>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 1): <FreeSpaceGraph.CellBoundary object at 0x11d0fdba0>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 2): <FreeSpaceGraph.CellBoundary object at 0x11d0fda20>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 3): <FreeSpaceGraph.CellBoundary object at 0x11d0fdae0>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 4): <FreeSpaceGraph.CellBoundary object at 0x11d0fdb10>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 5): <FreeSpaceGraph.CellBoundary object at 0x11d0fd810>, (<Graph.Graph object at 0x1138c0310>, 1, <Graph.Graph object at 0x1138c3040>, 6): <FreeSpaceGraph.CellBoundary object at 0x11d0fd840>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 0): <FreeSpaceGraph.CellBoundary object at 0x11d0fd870>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 1): <FreeSpaceGraph.CellBoundary object at 0x11386b490>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 2): <FreeSpaceGraph.CellBoundary object at 0x11386b880>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 3): <FreeSpaceGraph.CellBoundary object at 0x11386b850>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 4): <FreeSpaceGraph.CellBoundary object at 0x11386ba30>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 5): <FreeSpaceGraph.CellBoundary object at 0x11386ba00>, (<Graph.Graph object at 0x1138c0310>, 2, <Graph.Graph object at 0x1138c3040>, 6): <FreeSpaceGraph.CellBoundary object at 0x11386b910>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 0): <FreeSpaceGraph.CellBoundary object at 0x11389e200>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 1): <FreeSpaceGraph.CellBoundary object at 0x11389e1d0>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 2): <FreeSpaceGraph.CellBoundary object at 0x11389e1a0>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 3): <FreeSpaceGraph.CellBoundary object at 0x11389e320>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 4): <FreeSpaceGraph.CellBoundary object at 0x11389e2f0>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 5): <FreeSpaceGraph.CellBoundary object at 0x11389e2c0>, (<Graph.Graph object at 0x1138c0310>, 3, <Graph.Graph object at 0x1138c3040>, 6): <FreeSpaceGraph.CellBoundary object at 0x11389f520>}
+self.G1=<Graph.Graph object at 0x1138c0310>
 
 for cb in self.cell_boundaries
-mycb=<FreeSpaceGraph.CellBoundary object at 0x1170ed960>
-   g_edges=<Graph.Graph object at 0x1088bfd30>
-mycb=<FreeSpaceGraph.CellBoundary object at 0x1170ed030>
-   g_edges=<Graph.Graph object at 0x1088bfd30>
-mycb=<FreeSpaceGraph.CellBoundary object at 0x1170eceb0>
-   g_edges=<Graph.Graph object at 0x1088bfd30>
-mycb=<FreeSpaceGraph.CellBoundary object at 0x1170ed330>
-   g_edges=<Graph.Graph object at 0x1088bfd30>
-mycb=<FreeSpaceGraph.CellBoundary object at 0x1170ec760>
-   g_edges=<Graph.Graph object at 0x1088bfd30>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdbd0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fd2d0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fd0f0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fd120>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fcc40>
+   g_edges=<Graph.Graph object at 0x1138c0310>
    mycb:   edgeID=0   start_p=0   end_p=1
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fcc70>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=1   start_p=0.0   end_p=0.6666666666666666
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fc970>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=2   start_p=0   end_p=0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fedd0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=3   start_p=1.0   end_p=0.29289321881345254
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fc040>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=0   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdd20>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=1   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0feec0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=2   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdcc0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=3   start_p=1.0   end_p=0.3333333333333333
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fddb0>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=0   start_p=0.0   end_p=0.9270509831248424
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff160>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=1   start_p=0.04863267791677206   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff250>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=2   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff280>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=3   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff520>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=0   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff550>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=1   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff580>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=2   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff850>
+   g_edges=<Graph.Graph object at 0x1138c0310>
+   mycb:   edgeID=3   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff910>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=0   start_p=0   end_p=0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ff940>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=1   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fffa0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=2   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ffd90>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=3   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ffdc0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0ffdf0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fda80>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdb70>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=0   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdba0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=1   start_p=0.0   end_p=0.999999999999999
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fda20>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=2   start_p=0.0   end_p=0.4999999999999998
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdae0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=3   start_p=0   end_p=1
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fdb10>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=4   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fd810>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=5   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fd840>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=6   start_p=0.6666666666666666   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11d0fd870>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=0   start_p=1.0000000000000002   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11386b490>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=1   start_p=0.5   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11386b880>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=2   start_p=0.5000000000000001   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11386b850>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=3   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11386ba30>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=4   start_p=0.999999999999999   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11386ba00>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=5   start_p=0.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11386b910>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=6   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389e200>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=0   start_p=0.0   end_p=1.0000000000000002
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389e1d0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=1   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389e1a0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=2   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389e320>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=3   start_p=0.0   end_p=1.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389e2f0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=4   start_p=1.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389e2c0>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=5   start_p=0.0   end_p=0.0
+mycb=<FreeSpaceGraph.CellBoundary object at 0x11389f520>
+   g_edges=<Graph.Graph object at 0x1138c3040>
+   mycb:   edgeID=6   start_p=1.0   end_p=0.0
+
+ for pairs in union:
+ intervals=[(0.0, 1.0)]
+ intervals=[(0.0, 0.37377344785321415)] --> is false
