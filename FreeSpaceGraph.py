@@ -12,7 +12,7 @@ Contributors:
 """
 
 
-from types import NoneType
+#from types import NoneType
 from CalFreeSpace import calfreespace
 from LineIntersection import find_ellipse_max_min_points
 import logging
