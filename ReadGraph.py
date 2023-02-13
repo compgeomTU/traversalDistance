@@ -24,12 +24,12 @@ from FreeSpaceGraph import FreeSpaceGraph
 
 def testFreeSpaceGraph():
     print("\n -- TESTING FreeSpaceGraph.py -- ")
-    g = Graph("sample_graphs/G")
+    g = Graph("sample_graphs/test1")
     g.Plot2MatPlotLib()
-    h = Graph("sample_graphs/H")
+    h = Graph("sample_graphs/test2")
     h.Plot2MatPlotLib()
     #epsilon: 3
-    e = 3
+    e = 1
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     for vertex in g.nodes.keys():

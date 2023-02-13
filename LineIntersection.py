@@ -73,10 +73,12 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
                         inter.append(1)
                     else:
                         inter.append(0)
-            # If both fractions are 0 or 1 there is not intersection between the circle and the line segment
+            # If both fractions are 0 or 1 there is no intersection between the circle and the line segment
             if inter[0] == inter[1]:
                 if inter[0] == 0 or inter[0] == 1:
                     return []
+                else:
+                    return inter
             # If line is tangent to circle, return just one point (as both intersections have same location)
             # if len(inter) == 2 and abs(discriminant) <= tangent_tol:
             #    return [inter[0]]
@@ -163,7 +165,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
             min1 = (inter_x, max(line1[0][1], line1[1][1]))
     else:
         x1 = d / math.sqrt(m1 * m1 + 1)
-        y1 = m1 * x1
+        y1 = m1 * x1    
         if inter_x + x1 > max(line1[0][0], line1[1][0]):
             if line1[0][0] > line1[1][0]:
                 max1 = (line1[0][0], line1[0][1])
