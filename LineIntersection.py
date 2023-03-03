@@ -1,4 +1,3 @@
-
 import math
 
 def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
