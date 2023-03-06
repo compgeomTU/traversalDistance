@@ -1,145 +1,16 @@
 self.cell_boundaries:
- {(<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 0): <CellBoundary.CellBoundary object at 0x12c305d00>, (<Graph.Graph object at 0x10b9195e0>, 0, <Graph.Graph object at 0x10761dfa0>, 0): <CellBoundary.CellBoundary object at 0x12c3196d0>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 0): <CellBoundary.CellBoundary object at 0x12c31eee0>, (<Graph.Graph object at 0x10b9195e0>, 0, <Graph.Graph object at 0x10761dfa0>, 1): <CellBoundary.CellBoundary object at 0x12c31ec40>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 0): <CellBoundary.CellBoundary object at 0x12c31eb20>, (<Graph.Graph object at 0x10b9195e0>, 0, <Graph.Graph object at 0x10761dfa0>, 2): <CellBoundary.CellBoundary object at 0x12c31ea00>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 0): <CellBoundary.CellBoundary object at 0x12c31e820>, (<Graph.Graph object at 0x10b9195e0>, 0, <Graph.Graph object at 0x10761dfa0>, 3): <CellBoundary.CellBoundary object at 0x12c31e790>, (<Graph.Graph object at 0x10b9195e0>, 1, <Graph.Graph object at 0x10761dfa0>, 3): <CellBoundary.CellBoundary object at 0x12c31e4f0>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 3): <CellBoundary.CellBoundary object at 0x12c31e5b0>, (<Graph.Graph object at 0x10b9195e0>, 2, <Graph.Graph object at 0x10761dfa0>, 3): <CellBoundary.CellBoundary object at 0x12c31e310>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 6): <CellBoundary.CellBoundary object at 0x12c31e1f0>, (<Graph.Graph object at 0x10b9195e0>, 4, <Graph.Graph object at 0x10761dfa0>, 3): <CellBoundary.CellBoundary object at 0x12c30fc40>, (<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 6): <CellBoundary.CellBoundary object at 0x12c30f490>, (<Graph.Graph object at 0x10b9195e0>, 2, <Graph.Graph object at 0x10761dfa0>, 0): <CellBoundary.CellBoundary object at 0x12c30fcd0>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 6): <CellBoundary.CellBoundary object at 0x12c30aa60>, (<Graph.Graph object at 0x10b9195e0>, 2, <Graph.Graph object at 0x10761dfa0>, 1): <CellBoundary.CellBoundary object at 0x12c30a400>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 6): <CellBoundary.CellBoundary object at 0x12c30afd0>, (<Graph.Graph object at 0x10b9195e0>, 2, <Graph.Graph object at 0x10761dfa0>, 2): <CellBoundary.CellBoundary object at 0x12c30aee0>, (<Graph.Graph object at 0x10b9195e0>, 4, <Graph.Graph object at 0x10761dfa0>, 2): <CellBoundary.CellBoundary object at 0x12c30adc0>, (<Graph.Graph object at 0x10b9195e0>, 4, <Graph.Graph object at 0x10761dfa0>, 1): <CellBoundary.CellBoundary object at 0x12c30ae80>, (<Graph.Graph object at 0x10b9195e0>, 4, <Graph.Graph object at 0x10761dfa0>, 0): <CellBoundary.CellBoundary object at 0x12c30f040>, (<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 3): <CellBoundary.CellBoundary object at 0x12c31e340>, (<Graph.Graph object at 0x10b9195e0>, 1, <Graph.Graph object at 0x10761dfa0>, 0): <CellBoundary.CellBoundary object at 0x12c31e220>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 3): <CellBoundary.CellBoundary object at 0x12c30fb20>, (<Graph.Graph object at 0x10b9195e0>, 1, <Graph.Graph object at 0x10761dfa0>, 1): <CellBoundary.CellBoundary object at 0x12c30a880>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 3): <CellBoundary.CellBoundary object at 0x12c30aeb0>, (<Graph.Graph object at 0x10b9195e0>, 1, <Graph.Graph object at 0x10761dfa0>, 2): <CellBoundary.CellBoundary object at 0x12c2edf10>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 1): <CellBoundary.CellBoundary object at 0x12c31e5e0>, (<Graph.Graph object at 0x10b9195e0>, 3, <Graph.Graph object at 0x10761dfa0>, 3): <CellBoundary.CellBoundary object at 0x12c31e2e0>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 4): <CellBoundary.CellBoundary object at 0x12c30afa0>, (<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 4): <CellBoundary.CellBoundary object at 0x12c30ad60>, (<Graph.Graph object at 0x10b9195e0>, 3, <Graph.Graph object at 0x10761dfa0>, 0): <CellBoundary.CellBoundary object at 0x12c30a100>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 4): <CellBoundary.CellBoundary object at 0x12c2edeb0>, (<Graph.Graph object at 0x10b9195e0>, 3, <Graph.Graph object at 0x10761dfa0>, 1): <CellBoundary.CellBoundary object at 0x12a3cad60>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 4): <CellBoundary.CellBoundary object at 0x12c2fa640>, (<Graph.Graph object at 0x10b9195e0>, 3, <Graph.Graph object at 0x10761dfa0>, 2): <CellBoundary.CellBoundary object at 0x12c2fa5b0>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 5): <CellBoundary.CellBoundary object at 0x12c2fa760>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 5): <CellBoundary.CellBoundary object at 0x12c2fa6d0>, (<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 5): <CellBoundary.CellBoundary object at 0x12c37ef70>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 5): <CellBoundary.CellBoundary object at 0x12c37eeb0>, (<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 1): <CellBoundary.CellBoundary object at 0x12c31e1c0>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 1): <CellBoundary.CellBoundary object at 0x12c30ff40>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 1): <CellBoundary.CellBoundary object at 0x10c1fc7f0>, (<Graph.Graph object at 0x10761dfa0>, 3, <Graph.Graph object at 0x10b9195e0>, 2): <CellBoundary.CellBoundary object at 0x12c31e670>, (<Graph.Graph object at 0x10761dfa0>, 0, <Graph.Graph object at 0x10b9195e0>, 2): <CellBoundary.CellBoundary object at 0x12c30a790>, (<Graph.Graph object at 0x10761dfa0>, 1, <Graph.Graph object at 0x10b9195e0>, 2): <CellBoundary.CellBoundary object at 0x12a3b0cd0>, (<Graph.Graph object at 0x10761dfa0>, 2, <Graph.Graph object at 0x10b9195e0>, 2): <CellBoundary.CellBoundary object at 0x12a3f0be0>}
-self.G1=<Graph.Graph object at 0x10761dfa0>
+ {(4457500000, 0, 4387360720, 0): <CellBoundary.CellBoundary object at 0x12a41d280>, (4457500000, 1, 4387360720, 0): <CellBoundary.CellBoundary object at 0x12a3f98b0>, (4387360720, 1, 4457500000, 0): <CellBoundary.CellBoundary object at 0x12a41d2b0>}
+self.G1=<Graph.Graph object at 0x10581cfd0>
 
 for cb in self.cell_boundaries
-mycb=|0.586 --- 1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
 mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=0   start_p=0.0   end_p=1.0
+   g_edges=<Graph.Graph object at 0x10581cfd0>
 mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=0   start_p=2.220446049250313e-16   end_p=1.0
+   g_edges=<Graph.Graph object at 0x10581cfd0>
+   mycb:   edgeID=0   start_p=0.0   end_p=0.7071067811865475
 mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=0   start_p=2.0   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=0   start_p=0.0   end_p=2.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-mycb=|0.545 --- 1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=3   start_p=1.0   end_p=0.5285954792089683
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=3   start_p=0.0   end_p=1.0
-mycb=|0.545 --- 1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=3   start_p=1.0   end_p=0.5
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-mycb=|0.0 --- 0.667|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=3   start_p=1.0   end_p=0.0
-mycb=|0 --- 0.29|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=6   start_p=1.0   end_p=0.0
-mycb=|0 --- 1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=0   start_p=0.0   end_p=1.0
-mycb=|0 --- 0.2|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=6   start_p=0.3333333333333333   end_p=0.0
-mycb=|0 --- 0.455|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=1   start_p=0.0   end_p=0.720759220056126
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=6   start_p=0.999999999999999   end_p=0.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=2   start_p=1.0   end_p=0.2792407799438734
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=2   start_p=1.0   end_p=0.2792407799438734
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=1   start_p=0.0   end_p=0.720759220056126
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=0   start_p=0.0   end_p=1.0
-mycb=|0 --- 1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=3   start_p=0.0   end_p=1.0
-mycb=|0 --- 0.366|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=0   start_p=0   end_p=1
-mycb=|0.634 --- 1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=3   start_p=0   end_p=1
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=1   start_p=0.0   end_p=0.5
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=3   start_p=0.5   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=2   start_p=0   end_p=0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=1   start_p=0.0   end_p=1.0
-mycb=|0.167 --- 0.833|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=3   start_p=0.872677996249965   end_p=0.12732200375003502
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-mycb=|0.537 --- 1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=4   start_p=1.0   end_p=0.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=0   start_p=0.0   end_p=0.3680339887498949
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=4   start_p=1.0   end_p=0.5
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=1   start_p=0.4213106741667369   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=4   start_p=4.440892098500626e-16   end_p=0.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10761dfa0>
-   mycb:   edgeID=2   start_p=1.0   end_p=0.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=5   start_p=0.0   end_p=0.5
-mycb=|0.537 --- 1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=5   start_p=0.0   end_p=1.0
-mycb=|0.728 --- 1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=5   start_p=0.5   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=1   start_p=0.0   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=1   start_p=0.0   end_p=4.440892098500626e-16
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=1   start_p=1.0   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=2   start_p=1.1102230246251565e-16   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=2   start_p=1.1102230246251565e-16   end_p=1.0
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=2   start_p=0.0   end_p=7.850462293418875e-17
-mycb=|-1 --- -1|
-   g_edges=<Graph.Graph object at 0x10b9195e0>
-   mycb:   edgeID=2   start_p=1.0   end_p=1.0
+   g_edges=<Graph.Graph object at 0x109b00d60>
+   mycb:   edgeID=0   start_p=1.0   end_p=1.0
 
  for pairs in union:
- intervals=[(0, 0)] --> is false
+ intervals=[(0.0, 0.7071067811865475)] --> is false

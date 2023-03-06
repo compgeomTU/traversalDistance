@@ -12,6 +12,7 @@ from math import sqrt
 
 class CellBoundary:
     def __init__(self, g_verts, vertexID, g_edges, edgeID, eps):
+
         # use ID's consistant with Erfan's code
         self.vertexID = vertexID
         self.edgeID = edgeID
@@ -21,8 +22,8 @@ class CellBoundary:
         self.start_p = 0
         self.end_p = 0
 
-        edge = g_edges.edges[self.edgeID]
         # inputs for CFS
+        edge = g_edges.edges[self.edgeID]
         x1 = g_edges.nodes[edge[0]][0]  # --> id of vertex, x-coord
         y1 = g_edges.nodes[edge[0]][1]
         x2 = g_edges.nodes[edge[1]][0]
