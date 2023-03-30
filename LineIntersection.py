@@ -33,7 +33,55 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
             print(length(vector(*p1, *p2)))
             if length(vector(*p1, *p)) > length(vector(*p1, *p2)):
                 print("DON'T!")
-        return (length(vector(*p1, *p)) / length(vector(*p1, *p2)))
+        return round(length(vector(*p1, *p)) / length(vector(*p1, *p2)), 2)
+
+    def overlap_line_segments(p11, p12, p21, p22):
+        if p11[0] < p12[0]:
+            if  p11[0] <= p21[0] <= p12[0] and p11[0] <= p22[0] <= p12[0]:
+                p = p21
+                q = p22
+            elif p11[0] <= p21[0] <= p12[0] and p22[0] > p12[0]:
+                p = p21
+                q = p12
+            elif p21[0] < p11[0] and p11[0] <= p22[0] <= p12[0]:
+                p = p11
+                q = p22
+            elif p21[0] < p11[0] and p22[0] < p11[0]:
+                p = p11
+                q = p11
+            elif p21[0] < p11[0] and p22[0] > p12[0]:
+                p = p11
+                q = p12
+            elif p21[0] > p12[0] and p22[0] > p12[0]:
+                p = p11
+                q = p11
+            else:
+                if debug:
+                    print("you shouldn't be here")
+                    
+        else: #p12[0] < p11[0]
+            if  p12[0] <= p21[0] <= p11[0] and p12[0] <= p22[0] <= p11[0]:
+                p = p22
+                q = p21
+            elif p12[0] <= p21[0] <= p11[0] and p22[0] > p11[0]:
+                p = p11
+                q = p21
+            elif p21[0] < p12[0] and p12[0] <= p22[0] <= p11[0]:
+                p = p22
+                q = p12
+            elif p21[0] < p12[0] and p22[0] < p12[0]:
+                p = p11
+                q = p11
+            elif p21[0] < p12[0] and p22[0] > p11[0]:
+                p = p11
+                q = p12
+            elif p21[0] > p11[0] and p22[0] > p11[0]:
+                p = p11
+                q = p11
+            else:
+                if debug:
+                    print("you shouldn't be here")
+        return p,q
 
     def distance_between_two_parallel_lines(line1, line2):
         # Find the distance between line1 and an end-point of line2
@@ -166,31 +214,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
     else:
         x1 = d / math.sqrt(m1 * m1 + 1)
         y1 = m1 * x1    
-        if inter_x + x1 > max(line1[0][0], line1[1][0]):
-            if line1[0][0] > line1[1][0]:
-                max1 = (line1[0][0], line1[0][1])
-            else:
-                max1 = (line1[1][0], line1[1][1])
-        elif  inter_x + x1 < min(line1[0][0], line1[1][0]):
-            if line1[0][0] > line1[1][0]:
-                max1 = (line1[0][0], line1[0][1])
-            else:
-                max1 = (line1[1][0], line1[1][1])
-        else:
-                max1 = (inter_x + x1, inter_y + y1)
-
-        if inter_x - x1 < min(line1[0][0], line1[1][0]):
-            if line1[0][0] < line1[1][0]:
-                min1 = (line1[0][0], line1[0][1])
-            else:
-                min1 = (line1[1][0], line1[1][1])
-        elif inter_x - x1 > max(line1[0][0], line1[1][0]):
-            if line1[0][0] < line1[1][0]:
-                min1 = (line1[0][0], line1[0][1])
-            else:
-                min1 = (line1[1][0], line1[1][1])
-        else:
-            min1 = (inter_x - x1, inter_y - y1)
+        min1, max1 = overlap_line_segments(*line1,(inter_x - x1, inter_y - y1), (inter_x + x1, inter_y + y1))
 
     # line 2
     if m2 == math.inf:
@@ -209,41 +233,12 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
     else:
         x2 = d / math.sqrt(m2 * m2 + 1)
         y2 = m2 * x2
-        if inter_x + x2 > max(line2[0][0], line2[1][0]):
-            if line2[0][0] > line2[1][0]:
-                max2 = (line2[0][0], line2[0][1])
-            else:
-                max2 = (line2[1][0], line2[1][1])
-        elif inter_x + x2 < min(line2[0][0], line2[1][0]):
-            if line2[0][0] > line2[1][0]:
-                max2 = (line2[0][0], line2[0][1])
-            else:
-                max2 = (line2[1][0], line2[1][1])
-        else:
-            max2 = (inter_x + x2, inter_y + y2)
-
-        if inter_x - x2 < min(line2[0][0], line2[1][0]):
-            if line2[0][0] < line2[1][0]:
-                min2 = (line2[0][0], line2[0][1])
-            else:
-                min2 = (line2[1][0], line2[1][1])
-        elif inter_x - x2 > max(line2[0][0], line2[1][0]):
-            if line2[0][0] < line2[1][0]:
-                min2 = (line2[0][0], line2[0][1])
-            else:
-                min2 = (line2[1][0], line2[1][1])
-        else:
-            min2 = (inter_x - x2, inter_y - y2)
+        min2, max2 = overlap_line_segments(*line2,(inter_x - x2,inter_y - y2),(inter_x + x2,inter_y + y2))
 
     min1 = fraction_of_segment(*line1, min1)
     max1 = fraction_of_segment(*line1, max1)
     min2 = fraction_of_segment(*line2, min2)
     max2 = fraction_of_segment(*line2, max2)
-
-    if min1 > max1:
-        min1, max1 = max1, min1
-    if min2 > max2:
-        min2, max2 = max2, min2
 
     return min1, max1, min2, max2
 
