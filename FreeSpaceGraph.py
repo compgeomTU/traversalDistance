@@ -236,22 +236,25 @@ class FreeSpaceGraph:
             f.write("\n   g_edges="+str(mycb.g_edges))
             #if mycb.g_edges == self.g1:
             if mycb.edgeID in all_cbs:
-                f.write("\n   mycb:   edgeID="+str(mycb.edgeID) +
-                        "   start_p="+str(mycb.start_p)+"   end_p="+str(mycb.end_p))
-                logging.info("ALL CBS"+ str(all_cbs[mycb.edgeID]))
-                logging.info("MY CB"+ str(mycb))
-                logging.info("EDGEID"+ str(mycb.edgeID))
-                listTup = all_cbs[mycb.edgeID] 
-                listEdges = list(sum(listTup,()))
-                logging.info("LISTUP: "+str(listTup))
+                f.write("\n   mycb:   edgeID= "+str(mycb.edgeID) +
+                        "   start_p= "+str(mycb.start_p)+"   end_p= "+str(mycb.end_p))
+                logging.info("ALL CBS "+ str(all_cbs[mycb.edgeID]))
+                logging.info("MY CB "+ str(mycb))
+                logging.info("EDGEID "+ str(mycb.edgeID))
+                if all_cbs[mycb.edgeID] == [(0.0,1.0)]: #if the union of all the processed ranges already covers [0,1] there's no need to include the new range
+                    continue
+                if mycb.start_p == 0.0 and mycb.end_p == 1.0: #if the new range covers [0,1], this is our new union so no need to find the union between the new range and the previous union
+                    all_cbs[mycb.edgeID] = [(0.0,1.0)]
+                    continue
+                listEdges = list(sum(all_cbs[mycb.edgeID],()))
+                logging.info("LISTUP: "+str(all_cbs[mycb.edgeID]))
                 logging.info("LISTEDGES: "+str(listEdges))
-                temp = self.compute_union(listEdges, mycb)
-                logging.info("INTERVAL: " + str(temp))
-                listTup = temp
+                all_cbs[mycb.edgeID] = self.compute_union(listEdges, mycb)
+                logging.info("INTERVAL: " + str(all_cbs[mycb.edgeID]))
             else:
                 # adds first (single white interval)
                 # map --> [pairs] --- sorted list of (s,e) pairs will be the val
-                    all_cbs[mycb.edgeID] = [(mycb.start_p, mycb.end_p)]
+                all_cbs[mycb.edgeID] = [(mycb.start_p, mycb.end_p)]
         f.write("\n\n for pairs in union:")
         for key in all_cbs:
             intervals = all_cbs[key]
