@@ -18,6 +18,7 @@ class Graph:
         self.edgeHash = {}  # (nid1, nid2) -> edge id
         self.edgeWeight = {}
         self.nodeWeight = {}
+        self.nodeDegree = {}
         self.edgeInt = {}
         self.deletedNodes = {}
         self.breadcrumbs = {}  # id -> [[lon,lat],[lon,lat], ...]
