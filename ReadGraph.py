@@ -29,7 +29,7 @@ def testFreeSpaceGraph():
     h = Graph("sample_graphs/test2")
     h.Plot2MatPlotLib()
     #epsilon: 3
-    e = 2
+    e = 1.107
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     for vertex in g.nodes.keys():

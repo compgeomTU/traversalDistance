@@ -9,6 +9,9 @@ Contributors:
 
     Emily Powers
     epowers3@tulane.edu
+
+    Erfan Hosseini Sereshgi
+    shosseinisereshgi@tulane.edu
 """
 
 
@@ -154,71 +157,6 @@ class FreeSpaceGraph:
             intervalsRETURN.append((intervals[k],intervals[k+1]))
         logging.info("intervalsRETURN: "+str(intervalsRETURN))
         return intervalsRETURN
-
-
-    ''' OLD COMPUTE UNION
-    def compute_union(self, intervals, mycb):
-        Sx, Ex = mycb.start_p, mycb.end_p
-        mycb.print_cellboundary()
-        #print("--start: ", Sx, "--end: ", Ex, "  --intervals: ", intervals)
-        flag = ""
-        #print("INTERVAL", intervals[len(intervals)-1])
-        if len(intervals) == 0:
-            intervals = [(Sx, Ex)] + intervals
-            logging.info("WAS EMPTY"+ str(intervals))
-            return intervals
-        # entirely before
-        if Sx > intervals[len(intervals)-1][1]:
-            intervals += [(Sx, Ex)]
-            logging.info("BEFORE"+ str(intervals))
-            return intervals
-        # entirely after
-        elif Ex < intervals[0][0]:
-            intervals = [(Sx, Ex)] + intervals
-            logging.info("AFTER"+ str(intervals))
-            return intervals
-
-        #to remove
-        inside_intervals = []
-        #to keep
-        new = []
-    
-        for i in range(len(intervals)):
-            if Sx <= intervals[i][0]:
-                #add smaller interval to list to remove
-                inside_intervals.append(intervals[i])  
-                #check if Ex covers more than current interval
-                if Ex <= intervals[i][1]:
-                    #readjust the new interval to include Sx 
-                    new_interval = (Sx, intervals[i][1])
-                    new.append(new_interval)
-                    return new
-                    #NEST BELOW LOGIC INTO HERE JUST RETURN DON'T BREAK AND A RETURN IN THE END
-                else:
-                    new += (i for i in intervals if i not in inside_intervals)
-                    #THIS MIGHT NOT BE THE RIGHT LINE
-                    new += [(Sx, Ex)]
-                    return new
-            #less than the end and greater than start (inside)
-            elif Sx <= intervals[i][1]:
-                #reset starting index to be min in interval
-                Sx = intervals[i][0]
-                inside_intervals.append(intervals[i])
-                new += (i for i in intervals if i not in inside_intervals)
-                #need to add in new interval or check for the end
-                return new
-            else:
-                return new
-
-
-        #print("to remove:", inside_intervals)
-        #print("new interval=", new_interval)
-
-        new = [i for i in intervals if i not in inside_intervals]
-        new.append(new_interval)
-        #print("NEW INTERVAL" , new)
-        return new
-    '''
 
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
