@@ -117,8 +117,8 @@ class FreeSpaceGraph:
 
     def compute_union(self, intervals, mycb):
         logging.info("INTERVALS: "+str(intervals))
-        sx = int(mycb.start_p)
-        ex = int(mycb.end_p)
+        sx = mycb.start_p
+        ex = mycb.end_p
         logging.info("SX-Compute union:"+str(sx))
         logging.info("EX-Compute union:"+str(ex))
         i = 0
@@ -129,14 +129,10 @@ class FreeSpaceGraph:
                 if sx < intervals[i]:
                     intervals.insert(i,sx)
                     sxi = i
-                    i +=1
-                    flag = 1
             elif exi == -1:
                 if ex < intervals[i]:
                     intervals.insert(i,ex)
                     exi = i
-                    i +=1
-                    flag = 2
             i+=1
         if sxi == -1 and exi == -1:
             intervals.append(sx)
@@ -152,12 +148,12 @@ class FreeSpaceGraph:
             intervals = intervals[0:sxi] + intervals[exi+1:]
         elif sxi % 2 == 1 and exi % 2 == 1:
             intervals = intervals[0:sxi] + intervals[exi:]
-        intervalsRETUP = []
+        intervalsRETURN = []
         #iterate through to reconvert to list of tuples, list comprehension?
-        for k in range(0,len(intervals)-2):
-            intervalsRETUP.append((intervals[k],intervals[k+1]))
-        logging.info("intervalsRETUP: "+str(intervalsRETUP))
-        return intervalsRETUP
+        for k in range(0,len(intervals)//2,2):
+            intervalsRETURN.append((intervals[k],intervals[k+1]))
+        logging.info("intervalsRETURN: "+str(intervalsRETURN))
+        return intervalsRETURN
 
 
     ''' OLD COMPUTE UNION
@@ -262,7 +258,7 @@ class FreeSpaceGraph:
             f.write("\n intervals="+str(intervals))
             # we want intervals to be start=0 and end=1
             if len(intervals) == 1:
-                if intervals[0][0] != 0 or intervals[0][1] != 1:
+                if intervals[0][0] != 0.0 or intervals[0][1] != 1.0:
                     f.write(" --> is false")
                     return False
             else:

@@ -1,6 +1,5 @@
 
 edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
-<<<<<<< HEAD
 start + end values: 0 0.8660254037844386
 
 edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
@@ -13,26 +12,11 @@ start + end values: -1 -1
 edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
 start + end values: 0.06604396703516535 1
 start + end values: 0.5233728905610283 1
-=======
-start + end values: -1 -1
-
-edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
-start + end values: 0.0 0.3076923076923077
-start + end values: 0.3489152603740189 0.8818539703952119
-
-edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
-start + end values: -1 -1
-
-edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
-start + end values: 0.3489152603740189 0.8818539703952119
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 
 edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
 start + end values: -1 -1
 
 edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
-<<<<<<< HEAD
 start + end values: 0.5233728905610283 1
 start + end values: -1 -1
 
@@ -120,86 +104,6 @@ DFS success!!!
 start + end values: -1 -1
 DFS -- add None
 
-=======
-start + end values: -1 -1
-start + end values: -1 -1
-
-edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
-start + end values: -1 -1
-
-edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
-start + end values: -1 -1
-start + end values: 0.3489152603740189 0.8818539703952119
-start + end values: -1 -1
-DFS -- add None
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
-start + end values: -1 -1
-
-edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-
-
-DFS success!!!
-start + end values: -1 -1
-DFS -- add None
-
-edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: -1 -1
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-
-edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: -1 -1
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-start + end values: -1 -1
-DFS -- add None
-
-
-DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
-start + end values: 0.11814602960478812 0.651084739625981
-
-edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-
-
-DFS success!!!
-start + end values: 0.6923076923076923 1.0
-DFS -- add None
-
-edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-
-
-DFS success!!!
-start + end values: -1 -1
-DFS -- add None
-
-edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-
-
-DFS success!!!
-start + end values: 0.11814602960478812 0.651084739625981
-
-DFS success!!!
-
-DFS success!!!
-
-DFS success!!!
-start + end values: 0.6923076923076923 1.0
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 
 DFS success!!!
 edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
@@ -209,20 +113,9 @@ start + end values: -1 -1
 
 DFS success!!!
 start + end values: -1 -1
-<<<<<<< HEAD
 start + end values: 0 1.0
 
 DFS success!!!
-=======
-DFS -- add None
-
-
-DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
-start + end values: -1 -1
-start + end values: 0.11814602960478812 0.651084739625981
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 
 DFS success!!!
 start + end values: 0 0.41421356237309515
@@ -235,23 +128,13 @@ start + end values: 0 0.4114378277661477
 DFS success!!!
 
 DFS success!!!
-<<<<<<< HEAD
 start + end values: 0.5 1
 start + end values: 0.06604396703516535 1
-=======
-start + end values: -1 -1
-start + end values: -1 -1
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
-start + end values: 0.6923076923076923 1.0
-start + end values: -1 -1
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 
 DFS success!!!
 start + end values: 0 0.3660254037844386
 
 DFS success!!!
-<<<<<<< HEAD
 start + end values: 0 0.3660254037844386
 start + end values: -1 -1
 
@@ -279,61 +162,17 @@ start + end values: 0 0.41421356237309515
 
 DFS success!!!
 start + end values: 0 0.41421356237309515
-=======
-start + end values: -1 -1
-start + end values: 0.3489152603740189 0.8818539703952119
-
-DFS success!!!
-start + end values: -1 -1
-
-DFS success!!!
-start + end values: -1 -1
-start + end values: -1 -1
-
-DFS success!!!
-start + end values: -1 -1
-
-DFS success!!!
-start + end values: -1 -1
-start + end values: -1 -1
-
-DFS success!!!
-start + end values: -1 -1
-DFS -- add None
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
-start + end values: -1 -1
-
-edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: -1 -1
-start + end values: -1 -1
-
-
-DFS success!!!
-start + end values: -1 -1
-
-DFS success!!!
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 start + end values: -1 -1
 edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
 start + end values: -1 -1
 
 edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-<<<<<<< HEAD
 start + end values: 0.6339745962155614 1
-=======
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 start + end values: -1 -1
 
 
 DFS success!!!
-<<<<<<< HEAD
 start + end values: 0 0.4766271094389717
-=======
-start + end values: -1 -1
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 
 DFS success!!!
 start + end values: 0 0.4766271094389717
@@ -342,12 +181,7 @@ start + end values: -1 -1
 DFS success!!!
 
 DFS success!!!
-<<<<<<< HEAD
 start + end values: 0.6339745962155614 1
 start + end values: 0.06604396703516535 1
-=======
-start + end values: -1 -1
-start + end values: 0.3489152603740189 0.8818539703952119
->>>>>>> d6ecab43f58fb659c3a8d1e0c7d9f10e9e561eb7
 
 DFS success!!!
