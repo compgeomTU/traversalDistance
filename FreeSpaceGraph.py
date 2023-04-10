@@ -24,22 +24,9 @@ class FreeSpaceGraph:
     def __init__(self, g1, g2, epsilon):
         self.g1 = g1  # g1, g2 are Graph objects
         self.g2 = g2
-        self.e = epsilon
+        self.epsilon = epsilon
         self.cell_boundaries = {}
-        '''get these dynamically, for each --> given one fsbound print the adjacent'''
-        # Horizontal boundaries
-        logging.info("Horizontal: vertices from H, edges from G")
-        for v in self.g2.nodes.keys():
-            for e in self.g1.edges.keys():
-                self.cell_boundaries[(g2, v, g1, e)] = CellBoundary(g2, v, g1, e, self.e)
-                logging.info("v: " + str(v) + " e: " + str(e) + " mycb: " + str(self.cell_boundaries[(g2, v, g1, e)]))
-        # Verticle boundaries
-        logging.info("Vertical: vertices from G, edges from H")
-        for v in self.g1.nodes.keys():
-            for e in self.g2.edges.keys():
-                self.cell_boundaries[(g1, v, g2, e)] = CellBoundary(g1, v, g2, e, self.e)
-                logging.info("v: " + str(v) + " e: " + str(e) + " mycb: " + str(self.cell_boundaries[(g1, v, g2, e)]))
-
+                
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
 
@@ -74,7 +61,7 @@ class FreeSpaceGraph:
             x, y = G2.edges[cb.edgeID] # pair of vertex ids
             edge2 = [G2.nodes[x], G2.nodes[y]]
             f.write("edge1=" + str(edge1) + "   edge2=" + str(edge2)+"\n")
-            min1, max1, min2, max2 = find_ellipse_max_min_points(line1=edge1, line2=edge2, epsilon=self.e)
+            min1, max1, min2, max2 = find_ellipse_max_min_points(line1=edge1, line2=edge2, epsilon=self.epsilon)
 
             # get neighboring edge nodes
             left_vertexID, right_vertexID = cb.g_edges.edges[cb.edgeID]
@@ -82,8 +69,8 @@ class FreeSpaceGraph:
                 """ HORIZONTAL Boundaries --> left_vertex:bottom, right_vertex:top """ 
                 if (cb.vertexID, neighbor) in cb.g_verts.edgeHash: 
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)] #on vertex graph
-                    #newCB doesn't find the key
-                    newCB = self.cell_boundaries[(cb.g_edges, V, cb.g_verts, new_edgeID)] # creating new cell boundary from "flipping" horiz --> vertical
+                    ### DYNAMIC STEP ###
+                    newCB = self.get_cell_boundry(cb.g_edges, V, cb.g_verts, new_edgeID) # creating new cell boundary from "flipping" horiz --> vertical
                     f.write("start + end values: " +
                             str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
                     if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
@@ -100,7 +87,8 @@ class FreeSpaceGraph:
                         paths += [curr_path] 
             # end for thru L,R
             """ VERTICAL Boundary"""  
-            newCB = self.cell_boundaries[(cb.g_verts, neighbor, cb.g_edges, cb.edgeID)] # connect v's of same type
+            ### DYNAMIC STEP ###
+            newCB = self.get_cell_boundry(cb.g_verts, neighbor, cb.g_edges, cb.edgeID) # connect v's of same type
             f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
             if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                 f.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
@@ -217,6 +205,30 @@ class FreeSpaceGraph:
         C = self.check_projection()
         print("Projection check: ", C)
 
+    def brute_force(self):
+        self.cell_boundaries = dict()
+
+        # Horizontal boundaries
+        for v in self.g2.nodes.keys():
+            for e in self.g1.edges.keys():
+                cb = self.set_cell_boundry(self.g2, v, self.g1, e)
+                logging.info("v: " + str(v) + " e: " + str(e) + " mycb: " + str(cb))
+
+        # Verticle boundaries
+        for v in self.g1.nodes.keys():
+            for e in self.g2.edges.keys():
+                cb = self.set_cell_boundry(self.g1, v, self.g2, e)
+                logging.info("v: " + str(v) + " e: " + str(e) + " mycb: " + str(cb))
+
+    def get_cell_boundry(self, ga, v, gb, e):
+        cb = self.cell_boundaries.get((id(ga), v, id(gb), e))
+        if cb is None:
+            cb = CellBoundary(ga, v, gb, e, self.epsilon)
+            self.cell_boundaries[(id(ga), v, id(gb), e)] = cb
+        return cb
+    
+    def set_cell_boundry(self, ga, v, gb, e):
+        self.cell_boundaries[(id(ga), v, id(gb), e)] = CellBoundary(ga, v, gb, e, self.epsilon)
 
 class CellBoundary:
     def __init__(self, g_verts, vertexID, g_edges, edgeID, eps):
