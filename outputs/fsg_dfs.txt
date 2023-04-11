@@ -1,15 +1,10 @@
 
-edge1=[[0.0, -6.0], [0.0, -12.0]]   edge2=[[-1.0, -12.0], [1.0, -8.0]]
-start + end values: -1 -1
-
 edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[0.0, -6.0], [0.0, -12.0]]
 start + end values: -1 -1
-start + end values: 0.0 0.2
 
-
-DFS success!!!
+edge1=[[0.0, -6.0], [0.0, -12.0]]   edge2=[[-1.0, -12.0], [1.0, -8.0]]
 start + end values: -1 -1
-DFS -- add None
+start + end values: -1 -1
 
 edge1=[[1.0, -8.0], [1.0, -4.0]]   edge2=[[0.0, -6.0], [0.0, -12.0]]
 start + end values: -1 -1
@@ -2337,10 +2332,11 @@ start + end values: -1 -1
 start + end values: -1 -1
 
 DFS success!!!
+start + end values: 0.0 0.2
+DFS -- add None
+
 
 DFS success!!!
-start + end values: -1 -1
-start + end values: 0.0 0.2
 edge1=[[0.0, -6.0], [-4.5, -4.5]]   edge2=[[-1.0, -12.0], [1.0, -8.0]]
 start + end values: -1 -1
 
@@ -2550,6 +2546,635 @@ start + end values: -1 -1
 edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[4.5, -4.5], [0.0, -6.0]]
 start + end values: -1 -1
 start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: 0.0 0.2
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-4.5, -4.5], [-12.0, -12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-6.0, 0.0], [-7.5, 0.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-4.5, 4.5], [-12.0, 12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[0.0, 6.0], [0.0, 12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[4.5, 4.5], [12.0, 12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[6.0, 0.0], [12.0, 0.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[4.5, -4.5], [12.0, -12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[0.0, -6.0], [-4.5, -4.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-4.5, -4.5], [-6.0, 0.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-6.0, 0.0], [-4.5, 4.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-4.5, 4.5], [0.0, 6.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[0.0, 6.0], [4.5, 4.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[4.5, 4.5], [6.0, 0.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[6.0, 0.0], [4.5, -4.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[4.5, -4.5], [0.0, -6.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-7.5, 0.0], [-9.0, -2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-7.5, 0.0], [-9.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-9.0, -2.0], [-12.0, -2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[1.0, -8.0], [1.0, -4.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[1.0, -4.0], [-3.0, -5.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-3.0, -5.0], [-5.0, -3.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-5.0, -3.0], [-6.0, -1.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-6.0, -1.0], [-5.0, 2.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-5.0, 2.0], [-4.0, 4.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-4.0, 4.0], [-8.0, 7.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-8.0, 7.0], [-11.0, 12.0]]   edge2=[[-9.0, 2.0], [-12.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+start + end values: -1 -1
+DFS -- add None
+
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-1.0, -12.0], [1.0, -8.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[1.0, -8.0], [1.0, -4.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[1.0, -8.0], [1.0, -4.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[1.0, -4.0], [-3.0, -5.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[1.0, -4.0], [-3.0, -5.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-3.0, -5.0], [-5.0, -3.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-3.0, -5.0], [-5.0, -3.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-5.0, -3.0], [-6.0, -1.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-5.0, -3.0], [-6.0, -1.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-6.0, -1.0], [-5.0, 2.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-6.0, -1.0], [-5.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-5.0, 2.0], [-4.0, 4.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-5.0, 2.0], [-4.0, 4.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-4.0, 4.0], [-8.0, 7.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: -1 -1
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-4.0, 4.0], [-8.0, 7.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-8.0, 7.0], [-11.0, 12.0]]   edge2=[[-9.0, 9.0], [-7.5, 9.0]]
+start + end values: 0.21339521627829328 0.5513106660746478
+
+edge1=[[-9.0, 9.0], [-7.5, 9.0]]   edge2=[[-8.0, 7.0], [-11.0, 12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-8.0, 7.0], [-11.0, 12.0]]
+start + end values: -1 -1
+
+edge1=[[-8.0, 7.0], [-11.0, 12.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-4.0, 4.0], [-8.0, 7.0]]
+start + end values: -1 -1
+
+edge1=[[-4.0, 4.0], [-8.0, 7.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-5.0, 2.0], [-4.0, 4.0]]
+start + end values: -1 -1
+
+edge1=[[-5.0, 2.0], [-4.0, 4.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-6.0, -1.0], [-5.0, 2.0]]
+start + end values: -1 -1
+
+edge1=[[-6.0, -1.0], [-5.0, 2.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-5.0, -3.0], [-6.0, -1.0]]
+start + end values: -1 -1
+
+edge1=[[-5.0, -3.0], [-6.0, -1.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-3.0, -5.0], [-5.0, -3.0]]
+start + end values: -1 -1
+
+edge1=[[-3.0, -5.0], [-5.0, -3.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[1.0, -4.0], [-3.0, -5.0]]
+start + end values: -1 -1
+
+edge1=[[1.0, -4.0], [-3.0, -5.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[1.0, -8.0], [1.0, -4.0]]
+start + end values: -1 -1
+
+edge1=[[1.0, -8.0], [1.0, -4.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[-7.5, 9.0], [9.0, -7.5]]   edge2=[[-1.0, -12.0], [1.0, -8.0]]
+start + end values: -1 -1
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[-7.5, 9.0], [9.0, -7.5]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+edge1=[[-1.0, -12.0], [1.0, -8.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-1.0, -12.0], [1.0, -8.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[1.0, -8.0], [1.0, -4.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[1.0, -8.0], [1.0, -4.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[1.0, -4.0], [-3.0, -5.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[1.0, -4.0], [-3.0, -5.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-3.0, -5.0], [-5.0, -3.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-3.0, -5.0], [-5.0, -3.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-5.0, -3.0], [-6.0, -1.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-5.0, -3.0], [-6.0, -1.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-6.0, -1.0], [-5.0, 2.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-6.0, -1.0], [-5.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-5.0, 2.0], [-4.0, 4.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-5.0, 2.0], [-4.0, 4.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-4.0, 4.0], [-8.0, 7.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-4.0, 4.0], [-8.0, 7.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[-8.0, 7.0], [-11.0, 12.0]]   edge2=[[9.0, -9.0], [9.0, -7.5]]
+start + end values: -1 -1
+
+edge1=[[9.0, -9.0], [9.0, -7.5]]   edge2=[[-8.0, 7.0], [-11.0, 12.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
 start + end values: -1 -1
 
 DFS success!!!

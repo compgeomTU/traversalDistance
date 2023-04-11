@@ -26,10 +26,10 @@ class FreeSpaceGraph:
         self.g2 = g2
         self.epsilon = epsilon
         self.cell_boundaries = {}
+        self.cb_count  = len(g2.nodes) * len(g1.edges) + len(g1.nodes) * len(g2.edges)
                 
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
-
 
     """ DFS Diagram: for all neighbors--> for 2 horizontals and one vertical
         boundaries are lined, vertices are in (), the ellipse boundaries are shown without outlining ellipse
@@ -195,31 +195,35 @@ class FreeSpaceGraph:
         # if intervals cover all edges
         return True
 
-    def DFSTraversalDist(self, cb):
+    def DFSTraversalDist(self):
         # given one free space boundary, compute all adjacent free space boundaries
         f = open("outputs/fsg_dfs.txt", "w")
         p = open("outputs/fsg_path.txt", "w")
-        for i in self.cell_boundaries.values():  # mark all bounds in graph false --> incase this has been ran before
-            i.visited = False
-        print("DFS", self.DFS(cb, f, p, [], ""))
-        C = self.check_projection()
-        print("Projection check: ", C)
-
-    def brute_force(self):
-        self.cell_boundaries = dict()
 
         # Horizontal boundaries
         for v in self.g2.nodes.keys():
             for e in self.g1.edges.keys():
-                cb = self.set_cell_boundry(self.g2, v, self.g1, e)
-                logging.info("v: " + str(v) + " e: " + str(e) + " mycb: " + str(cb))
+                seed_cb = self.get_cell_boundry(self.g2, v, self.g1, e)
+                logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
+                print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                check_projection = self.check_projection()
+                print("Projection check: ", check_projection)
+                if check_projection or len(self.cell_boundaries) == self.cb_count:
+                    return check_projection
 
         # Verticle boundaries
         for v in self.g1.nodes.keys():
             for e in self.g2.edges.keys():
-                cb = self.set_cell_boundry(self.g1, v, self.g2, e)
-                logging.info("v: " + str(v) + " e: " + str(e) + " mycb: " + str(cb))
-
+                seed_cb = self.get_cell_boundry(self.g1, v, self.g2, e)
+                logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
+                print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                check_projection = self.check_projection()
+                print("Projection check: ", check_projection)
+                if check_projection or len(self.cell_boundaries) == self.cb_count:
+                    return check_projection
+                
+        return None
+   
     def get_cell_boundry(self, ga, v, gb, e):
         cb = self.cell_boundaries.get((id(ga), v, id(gb), e))
         if cb is None:
@@ -254,10 +258,8 @@ class CellBoundary:
         self.start_fs, self.end_fs = calfreespace(
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
 
-
     def print_cellboundary(self):
         print("V_ID: " + str(self.vertexID) + " E_ID: " + str(self.edgeID) + " start: " + str(self.start_p) + " end: " + str(self.end_p))
-        
 
     def add_cd_str(self):
         if self.g_verts.nodes[0][0] == 0 and self.g_verts.nodes[0][1] == -3:
