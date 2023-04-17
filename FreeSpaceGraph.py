@@ -26,7 +26,8 @@ class FreeSpaceGraph:
         self.g2 = g2
         self.epsilon = epsilon
         self.cell_boundaries = {}
-        self.cb_count  = len(g2.nodes) * len(g1.edges) + len(g1.nodes) * len(g2.edges)
+        self.cb_count = len(g2.nodes) * len(g1.edges) + len(g1.nodes) * len(g2.edges)
+        self.DFS_calls = 0
                 
     def print_cbs(self):
         print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
@@ -204,25 +205,31 @@ class FreeSpaceGraph:
         for v in self.g2.nodes.keys():
             for e in self.g1.edges.keys():
                 seed_cb = self.get_cell_boundry(self.g2, v, self.g1, e)
-                logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
-                print("DFS", self.DFS(seed_cb, f, p, [], ""))
-                check_projection = self.check_projection()
-                print("Projection check: ", check_projection)
-                if check_projection or len(self.cell_boundaries) == self.cb_count:
-                    return check_projection
+                ### check visted 
+                if not seed_cb.visited:
+                    logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
+                    print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                    check_projection = self.check_projection()
+                    print("Projection check: ", check_projection)
+                    self.DFS_calls += 1
+                    if check_projection:
+                        return True
 
         # Verticle boundaries
         for v in self.g1.nodes.keys():
             for e in self.g2.edges.keys():
                 seed_cb = self.get_cell_boundry(self.g1, v, self.g2, e)
-                logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
-                print("DFS", self.DFS(seed_cb, f, p, [], ""))
-                check_projection = self.check_projection()
-                print("Projection check: ", check_projection)
-                if check_projection or len(self.cell_boundaries) == self.cb_count:
-                    return check_projection
+                ### check visited
+                if not seed_cb.visited:
+                    logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
+                    print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                    check_projection = self.check_projection()
+                    print("Projection check: ", check_projection)
+                    self.DFS_calls += 1
+                    if check_projection:
+                        return True
                 
-        return None
+        return False
    
     def get_cell_boundry(self, ga, v, gb, e):
         cb = self.cell_boundaries.get((id(ga), v, id(gb), e))
