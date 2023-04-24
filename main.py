@@ -9,10 +9,11 @@ from FreeSpaceGraph import FreeSpaceGraph
 
 graph_a = Graph("sample_graphs/sample_1/arc_de_triomphe")
 graph_b = Graph("sample_graphs/sample_1/vehicle_path")
-graph_a = Graph("sample_graphs/sample_2/athens_small_1")
-graph_b = Graph("sample_graphs/sample_2/athens_small_2")
-epsilon = 1000
-fsg = FreeSpaceGraph(graph_a, graph_b, epsilon)
+#graph_a = Graph("sample_graphs/sample_2/athens_small_1")
+#graph_b = Graph("sample_graphs/sample_2/athens_small_2")
+epsilon = 10
+
+fsg = FreeSpaceGraph(graph_a, graph_b, epsilon, log=True)
 fsg.plot()
 
 pg = fsg.DFSTraversalDist()
