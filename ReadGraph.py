@@ -20,6 +20,7 @@ from geojson import LineString, Feature, FeatureCollection
 from Graph import Graph
 from CalFreeSpace import calfreespace
 from FreeSpaceGraph import FreeSpaceGraph
+import os
 
 
 def testFreeSpaceGraph():
@@ -29,7 +30,7 @@ def testFreeSpaceGraph():
     h = Graph("sample_graphs/test2")
     h.Plot2MatPlotLib()
     #epsilon: 3
-    e = 1.107
+    e = 1.1067
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     for vertex in g.nodes.keys():
@@ -67,6 +68,7 @@ def PlotGraph():
 
 
 if __name__ == "__main__":
+    os.remove("dfs.log")
     logging.basicConfig(filename='dfs.log', encoding='utf-8', level=logging.INFO)
     testFreeSpaceGraph()
     # PlotGraph()
