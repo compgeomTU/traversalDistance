@@ -12,6 +12,9 @@ Contributors:
 
     Erfan Hosseini Sereshgi
     shosseinisereshgi@tulane.edu
+
+    Will Rodman
+    wrodman@tulane.edu
 """
 
 
@@ -19,6 +22,10 @@ Contributors:
 from CalFreeSpace import calfreespace
 from LineIntersection import find_ellipse_max_min_points
 import logging
+import matplotlib.pyplot as plt
+import sys
+
+
 
 class FreeSpaceGraph:
     def __init__(self, g1, g2, epsilon):
@@ -30,7 +37,8 @@ class FreeSpaceGraph:
         self.DFS_calls = 0
                 
     def print_cbs(self):
-        print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
+        #print("-- Cell Boundaries --\n", print(self.cell_boundaries), "\n")
+        pass
 
     """ DFS Diagram: for all neighbors--> for 2 horizontals and one vertical
         boundaries are lined, vertices are in (), the ellipse boundaries are shown without outlining ellipse
@@ -52,7 +60,7 @@ class FreeSpaceGraph:
     """
     def DFS(self, cb, f, p, paths, curr_path): # f is written to a file, p is written for the path
         #new line in f is a new dfs call
-        f.write("\n")
+        #f.write("\n")
         cb.visited = True
         # go thru neighboring edges from given vertexID
         for neighbor in cb.g_verts.nodeLink[cb.vertexID]:
@@ -61,7 +69,7 @@ class FreeSpaceGraph:
             edge1 = [G1.nodes[cb.vertexID], G1.nodes[neighbor]]
             x, y = G2.edges[cb.edgeID] # pair of vertex ids
             edge2 = [G2.nodes[x], G2.nodes[y]]
-            f.write("edge1=" + str(edge1) + "   edge2=" + str(edge2)+"\n")
+            #f.write("edge1=" + str(edge1) + "   edge2=" + str(edge2)+"\n")
             min1, max1, min2, max2 = find_ellipse_max_min_points(line1=edge1, line2=edge2, epsilon=self.epsilon)
 
             # get neighboring edge nodes
@@ -72,17 +80,15 @@ class FreeSpaceGraph:
                     new_edgeID = cb.g_verts.edgeHash[(cb.vertexID, neighbor)] #on vertex graph
                     ### DYNAMIC STEP ###
                     newCB = self.get_cell_boundry(cb.g_edges, V, cb.g_verts, new_edgeID) # creating new cell boundary from "flipping" horiz --> vertical
-                    f.write("start + end values: " +
-                            str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
+                    #f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
                     if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                         p.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
-                        print("horizontal start_p min1:", min1)
+                        #print("horizontal start_p min1:", min1)
                         newCB.start_p = min1  # from block calling ellipse
-                        print("horizontal end_p max1:", max1)
+                        #print("horizontal end_p max1:", max1)
                         newCB.end_p = max1
-                        logging.info("START_P, END_P: "+ str(newCB.start_p)+ " " + str(newCB.end_p))
-                        self.DFS(newCB, f, p, paths,
-                                 curr_path+(newCB.add_cd_str()))
+                        #logging.info("START_P, END_P: "+ str(newCB.start_p)+ " " + str(newCB.end_p))
+                        self.DFS(newCB, f, p, paths, curr_path+(newCB.add_cd_str()))
                     else:
                         #p.write("DFS -- basecase -> dont return path\n")
                         paths += [curr_path] 
@@ -90,12 +96,12 @@ class FreeSpaceGraph:
             """ VERTICAL Boundary"""  
             ### DYNAMIC STEP ###
             newCB = self.get_cell_boundry(cb.g_verts, neighbor, cb.g_edges, cb.edgeID) # connect v's of same type
-            f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
+            #f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
             if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
-                f.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
-                print("vertical start_p min2:", min2)
+                #f.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
+                #print("vertical start_p min2:", min2)
                 newCB.start_p = min2  # from block calling ellipse
-                print("vertical end_p max2:", max2)
+                #print("vertical end_p max2:", max2)
                 newCB.end_p = max2 
                 # recursive call on the edge that hasn't been called yet
                 self.DFS(newCB, f, p, paths, curr_path+(newCB.add_cd_str()))
@@ -103,8 +109,8 @@ class FreeSpaceGraph:
                 #p.write("DFS -- basecase -> dont return path\n")
                 paths += [curr_path] 
         # end for iterating thru Vi
-        f.write("\nDFS success!!!\n")
-        p.write("paths: "+str(paths)+"\n")
+        #f.write("\nDFS success!!!\n")
+        #p.write("paths: "+str(paths)+"\n")
 
 
     def compute_union(self, intervals, mycb):
@@ -149,47 +155,46 @@ class FreeSpaceGraph:
 
     def check_projection(self):
         # assumes g1 is horiz and g2 is vert
-        f = open("outputs/check_projection.txt", "w")
+        #f = open("outputs/check_projection.txt", "w")
         # all_cbs = { edgeID : output of compute_union }
         all_cbs = {}
-        f.write("self.cell_boundaries:\n ")
-        f.write(str(self.cell_boundaries)+"\n")
-        f.write("self.G1="+str(self.g1)+"\n")
-        f.write("\nfor cb in self.cell_boundaries")
+        #f.write("self.cell_boundaries:\n ")
+        #f.write(str(self.cell_boundaries)+"\n")
+        #f.write("self.G1="+str(self.g1)+"\n")
+        #f.write("\nfor cb in self.cell_boundaries")
         #pick an edge id and only look at contents of that edge id just for a single edge 
         for cb in self.cell_boundaries:
             mycb = self.cell_boundaries[cb]
-            f.write("\nmycb="+str(mycb))
-            f.write("\n   g_edges="+str(mycb.g_edges))
+            #f.write("\nmycb="+str(mycb))
+            #f.write("\n   g_edges="+str(mycb.g_edges))
             #if mycb.g_edges == self.g1:
             if mycb.edgeID in all_cbs:
-                f.write("\n   mycb:   edgeID= "+str(mycb.edgeID) +
-                        "   start_p= "+str(mycb.start_p)+"   end_p= "+str(mycb.end_p))
-                logging.info("ALL CBS "+ str(all_cbs[mycb.edgeID]))
-                logging.info("MY CB "+ str(mycb))
-                logging.info("EDGEID "+ str(mycb.edgeID))
+                #f.write("\n   mycb:   edgeID= "+str(mycb.edgeID) + "   start_p= "+str(mycb.start_p)+"   end_p= "+str(mycb.end_p))
+                #logging.info("ALL CBS "+ str(all_cbs[mycb.edgeID]))
+                #logging.info("MY CB "+ str(mycb))
+                #logging.info("EDGEID "+ str(mycb.edgeID))
                 if all_cbs[mycb.edgeID] == [(0.0,1.0)]: #if the union of all the processed ranges already covers [0,1] there's no need to include the new range
                     continue
                 if mycb.start_p == 0.0 and mycb.end_p == 1.0: #if the new range covers [0,1], this is our new union so no need to find the union between the new range and the previous union
                     all_cbs[mycb.edgeID] = [(0.0,1.0)]
                     continue
                 listEdges = list(sum(all_cbs[mycb.edgeID],()))
-                logging.info("LISTUP: "+str(all_cbs[mycb.edgeID]))
-                logging.info("LISTEDGES: "+str(listEdges))
+                #logging.info("LISTUP: "+str(all_cbs[mycb.edgeID]))
+                #logging.info("LISTEDGES: "+str(listEdges))
                 all_cbs[mycb.edgeID] = self.compute_union(listEdges, mycb)
-                logging.info("INTERVAL: " + str(all_cbs[mycb.edgeID]))
+                #logging.info("INTERVAL: " + str(all_cbs[mycb.edgeID]))
             else:
                 # adds first (single white interval)
                 # map --> [pairs] --- sorted list of (s,e) pairs will be the val
                 all_cbs[mycb.edgeID] = [(mycb.start_p, mycb.end_p)]
-        f.write("\n\n for pairs in union:")
+        #f.write("\n\n for pairs in union:")
         for key in all_cbs:
             intervals = all_cbs[key]
-            f.write("\n intervals="+str(intervals))
+            #f.write("\n intervals="+str(intervals))
             # we want intervals to be start=0 and end=1
             if len(intervals) == 1:
                 if intervals[0][0] != 0.0 or intervals[0][1] != 1.0:
-                    f.write(" --> is false")
+                    #f.write(" --> is false")
                     return False
             else:
                 return False
@@ -200,6 +205,7 @@ class FreeSpaceGraph:
         # given one free space boundary, compute all adjacent free space boundaries
         f = open("outputs/fsg_dfs.txt", "w")
         p = open("outputs/fsg_path.txt", "w")
+        sys.setrecursionlimit(3000)
 
         # Horizontal boundaries
         for v in self.g2.nodes.keys():
@@ -207,10 +213,11 @@ class FreeSpaceGraph:
                 seed_cb = self.get_cell_boundry(self.g2, v, self.g1, e)
                 ### check visted 
                 if not seed_cb.visited:
-                    logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
-                    print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                    #logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
+                    #print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                    self.DFS(seed_cb, f, p, [], "")
                     check_projection = self.check_projection()
-                    print("Projection check: ", check_projection)
+                    #print("Projection check: ", check_projection)
                     self.DFS_calls += 1
                     if check_projection:
                         return True
@@ -221,10 +228,11 @@ class FreeSpaceGraph:
                 seed_cb = self.get_cell_boundry(self.g1, v, self.g2, e)
                 ### check visited
                 if not seed_cb.visited:
-                    logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
-                    print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                    #logging.info("v: " + str(v) + " e: " + str(e) + " seed_cb: " + str(seed_cb))
+                    #print("DFS", self.DFS(seed_cb, f, p, [], ""))
+                    self.DFS(seed_cb, f, p, [], "")
                     check_projection = self.check_projection()
-                    print("Projection check: ", check_projection)
+                    #print("Projection check: ", check_projection)
                     self.DFS_calls += 1
                     if check_projection:
                         return True
@@ -240,6 +248,29 @@ class FreeSpaceGraph:
     
     def set_cell_boundry(self, ga, v, gb, e):
         self.cell_boundaries[(id(ga), v, id(gb), e)] = CellBoundary(ga, v, gb, e, self.epsilon)
+
+    def plot(self):
+        plt.gca().set_aspect(1.0)
+        G_n = list()
+
+        for id, edge in self.g1.edges.items():
+            n1_id, n2_id = edge[0], edge[1]
+            n1, n2 = self.g1.nodes[n1_id], self.g1.nodes[n2_id]
+
+            if n1 not in G_n: G_n.append(n1)
+            if n2 not in G_n: G_n.append(n2)
+
+            plt.plot([n1[0], n2[0]], [n1[1], n2[1]], color='black', linewidth=1.5)
+
+        lons, lats = map(list, zip(*G_n))
+        plt.scatter(lons, lats, s=12, c='black')
+
+        for id, edge in self.g2.edges.items():
+            n1_id, n2_id = edge[0], edge[1]
+            n1, n2 = self.g2.nodes[n1_id], self.g2.nodes[n2_id]
+            plt.plot([n1[0], n2[0]], [n1[1], n2[1]], '--', color='red', linewidth=1.5)
+
+        plt.show()
 
 class CellBoundary:
     def __init__(self, g_verts, vertexID, g_edges, edgeID, eps):
@@ -266,11 +297,8 @@ class CellBoundary:
             x1, y1, x2, y2, xa, ya, eps)  # start/end of freespace
 
     def print_cellboundary(self):
-        print("V_ID: " + str(self.vertexID) + " E_ID: " + str(self.edgeID) + " start: " + str(self.start_p) + " end: " + str(self.end_p))
+        pass
+        #print("V_ID: " + str(self.vertexID) + " E_ID: " + str(self.edgeID) + " start: " + str(self.start_p) + " end: " + str(self.end_p))
 
     def add_cd_str(self):
-        if self.g_verts.nodes[0][0] == 0 and self.g_verts.nodes[0][1] == -3:
-            isRectangleGraph = "v"
-        else:
-            isRectangleGraph = "u"
-        return isRectangleGraph+str(self.vertexID) + "," + str(self.edgeID)+" -> "
+        return "u"+str(self.vertexID) + "," + str(self.edgeID)+" -> "

@@ -1,12 +1,13 @@
 """
 Author:
-Carola Wenk
-cwenk@tulane.edu
+  Carola Wenk
+  cwenk@tulane.edu
 
 Contributor:
-Emily Powers
-epowers3@tulane.edu
+  Emily Powers
+  epowers3@tulane.edu
 """
+
 import math
 
 #(x1, y1) is starting point of edge of G1 (x2, y2) is ending point of edge of G1 (xa, ya) is vertex of G2
