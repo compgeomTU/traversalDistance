@@ -26,16 +26,26 @@ python3 main.py samples/athens/groundtruth samples/athens/kevin 300.0 -p
 **Traversal Distance Output:**
 ![Image](/docs/output.jpg?raw=true)
 
-### Author
-**Dr. Carola Wenk** Tulane University | cwenk@tulane.edu
+### Authors
+**Dr. Carola Wenk** 
+Tulane University
+cwenk@tulane.edu
 
-**Erfan Hosseini** Tulane University | shosseinisereshgi@tulane.edu
+**Erfan Hosseini** 
+Tulane University
+shosseinisereshgi@tulane.edu
 
-**Will Rodman** Tulane University | wrodman@tulane.edu
+**Will Rodman** 
+Tulane University
+wrodman@tulane.edu
 
-**Rena Repenning* Morgan Stanly | renarepenning.com
+**Rena Repenning** 
+Morgan Stanly
+renarepenning.com
 
-**Emily Powers** Tulane University | epowers3@tulane.edu
+**Emily Powers**
+Tulane University
+epowers3@tulane.edu
 
 ### Lisence
 MIT License • Copyright (c) 2022 Computational Geometry @ Tulane
