@@ -3,9 +3,6 @@ Author:
     Erfan Hosseini Sereshgi
     Tulane University
 
-Contributor:
-    Will Rodman
-    wrodman@tulane.edu
 """
 
 import math
@@ -135,7 +132,6 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
                     return inter
             # If line is tangent to circle, return just one point (as both intersections have same location)
             # if len(inter) == 2 and abs(discriminant) <= tangent_tol:
-            #    return [inter[0]]
             else:
                 return inter
 
@@ -247,14 +243,3 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
     max2 = fraction_of_segment(*line2, max2)
 
     return min1, max1, min2, max2
-
-
-# test
-"""
-line1 = [[1, 0],[2, 2]]
-line2 = [[-2, 0],[0, -3]]
-epsilon = 1
-print(line1)
-print(line2)
-print(find_ellipse_max_min_points(line1, line2, epsilon))
-"""

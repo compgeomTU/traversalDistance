@@ -4,28 +4,45 @@
         wrodman@tulane.edu
 """
 
+import sys
 from Graph import Graph
 from FreeSpaceGraph import FreeSpaceGraph
 
-graph_a = Graph("sample_graphs/sample_1/arc_de_triomphe")
-graph_b = Graph("sample_graphs/sample_1/vehicle_path")
-#graph_a = Graph("sample_graphs/sample_2/athens_small_1")
-#graph_b = Graph("sample_graphs/sample_2/athens_small_2")
-epsilon = 10
+filename1 = sys.argv[1]
+filename2 = sys.argv[2]
+epsilon = float(sys.argv[3])
 
-fsg = FreeSpaceGraph(graph_a, graph_b, epsilon, log=True)
-fsg.plot()
+if '-l' in sys.argv:
+    log = True
+else:
+    log = False
 
-pg = fsg.DFSTraversalDist()
+if '-p' in sys.argv:
+    plot = True
+else:
+    plot = False
 
-print("-- Graph sample sizes -- ")
-print("     No. edges is graph 1:", graph_a.numberOfEdges)
-print("     No. edges graph 2 :", graph_b.numberOfEdges)
+g1 = Graph(filename1)
+g2 = Graph(filename2)
 
-print("\n -- TESTING FreeSpaceGraph DFS Memorization -- ")
-print("     DFS FS CBs computed:", len(fsg.cell_boundaries))
-print("     DFS Projection Check:", pg)
+fsg = FreeSpaceGraph(g1, g2, epsilon, filename1=filename1, filename2=filename2, log=log)
+
+if plot:
+    fsg.plot()
+
+projection_check = fsg.DFSTraversalDist()
+
+print("\n-- Epsilon --")
+print(f"     {epsilon}")
+
+print("\n-- Sample Graphs --")
+print(f"     No. edges in {filename1}:", g1.numberOfEdges)
+print(f"     No. vertices in {filename1}:", g1.numberOfNodes)
+print(f"     No. edges in {filename2}:", g2.numberOfEdges)
+print(f"     No. vertices in {filename2}:", g1.numberOfNodes)
+
+print("\n -- Running Traversal Distance --")
 print("     DFS Function Calls:", fsg.DFS_calls)
-
-print("\n -- TESTING FreeSpaceGraph Brute Force -- ")
-print("     Brute Force FS CBs computed:", fsg.cb_count)
+print("     DFS FS CBs computed:", len(fsg.cell_boundaries))
+print("     Total Possible CBs:", fsg.cb_count)
+print("     DFS Projection Check:", projection_check)

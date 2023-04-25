@@ -8,11 +8,9 @@ Contributors;
     Tulane University
 """
 
-
 from geojson import LineString, Feature, FeatureCollection
 import matplotlib.pyplot as plt
 import geojson
-
 
 class Graph:
     def __init__(self, filename=None):
