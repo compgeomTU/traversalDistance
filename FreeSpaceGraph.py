@@ -291,10 +291,68 @@ class FreeSpaceGraph:
         for id, edge in self.g2.edges.items():
             n1_id, n2_id = edge[0], edge[1]
             n1, n2 = self.g2.nodes[n1_id], self.g2.nodes[n2_id]
-            plt.plot([n1[0], n2[0]], [n1[1], n2[1]], '--', color='red', linewidth=1.5)
+            plt.plot([n1[0], n2[0]], [n1[1], n2[1]], color='grey', linewidth=1.5)
 
         g1_label = mpatches.Patch(color='black', label=self.filename1)
         g2_label = mpatches.Patch(color='red', label=self.filename2)
+
+        ### plotting freespace component ####
+        for g1_id, g1_edge in self.g1.edges.items():
+            for g2_id, g2_edge in self.g2.edges.items():
+
+                list_ = list()
+
+                def append(a):
+                    if a not in list_: list_.append(a)
+
+                # horizonal lower CB
+                cb_1 = self.cell_boundaries.get(("g2", g2_edge[0], "g1", g1_id))
+
+                if cb_1:
+                    if cb_1.end_fs != -1.0: append((cb_1.end_fs, 0.0))
+                    if cb_1.start_fs != -1.0: append((cb_1.start_fs, 0.0))
+
+                # vertical left CB
+                cb_2 = self.cell_boundaries.get(("g1", g1_edge[0], "g2", g2_id))
+
+                if cb_2:
+                    if cb_2.start_fs != -1.0: append((0.0, cb_2.start_fs))
+                    if cb_2.end_fs != -1.0: append((0.0, cb_2.end_fs))
+
+                # horizonal upper CB
+                cb_3 = self.cell_boundaries.get(("g2", g2_edge[1], "g1", g1_id))
+
+                if cb_3:
+
+                    if cb_3.start_fs != -1.0: append((cb_3.start_fs, 1.0))
+                    if cb_3.end_fs != -1.0: append((cb_3.end_fs, 1.0))
+
+                # vetical right CB
+                cb_4 = self.cell_boundaries.get(("g1", g1_edge[1], "g2", g2_id))
+
+                if cb_4:
+                    if cb_4.end_fs != -1.0: append((1.0, cb_4.end_fs))
+                    if cb_4.start_fs != -1.0: append((1.0, cb_4.start_fs))
+
+                if list_:
+                    x, y = zip(*list_)
+                else:
+                    x, y = list(), list()
+
+                g1_n1_id, g1_n2_id = g1_edge[0], g1_edge[1]
+                g1_n1_x, g1_n2_x = self.g1.nodes[g1_n1_id][0], self.g1.nodes[g1_n2_id][0]
+                g1_n1_y, g1_n2_y = self.g1.nodes[g1_n1_id][1], self.g1.nodes[g1_n2_id][1]
+
+                g2_n1_id, g2_n2_id = g2_edge[0], g2_edge[1]
+                g2_n1_x, g2_n2_x = self.g2.nodes[g2_n1_id][0], self.g2.nodes[g2_n2_id][0]
+                g2_n1_y, g2_n2_y = self.g2.nodes[g2_n1_id][1], self.g2.nodes[g2_n2_id][1]
+
+                # map normal square to quadralateral
+
+        ### end plotting freespace component ####
+
+
+
         plt.legend(handles=[g1_label, g2_label], loc='upper left')
         plt.show()
 
