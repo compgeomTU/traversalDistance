@@ -23,6 +23,7 @@ import logging
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import sys
+import math
 
 sys.setrecursionlimit(10000)
 
@@ -270,10 +271,12 @@ class FreeSpaceGraph:
         return cb
     
     def set_cell_boundry(self, ga, v, gb, e):
-        self.cell_boundaries[(id(ga), v, id(gb), e)] = CellBoundary(ga, v, gb, e, self.epsilon)
+        self.cell_boundaries[(ga, v, gb, e)] = CellBoundary(ga, v, gb, e, self.epsilon)
 
     def plot(self):
-        plt.gca().set_aspect(1.0)
+        axs = plt.gca()
+        axs.set_aspect('equal', 'datalim')
+
         G_n = list()
 
         for id, edge in self.g1.edges.items():
@@ -293,51 +296,21 @@ class FreeSpaceGraph:
             n1, n2 = self.g2.nodes[n1_id], self.g2.nodes[n2_id]
             plt.plot([n1[0], n2[0]], [n1[1], n2[1]], color='grey', linewidth=1.5)
 
-        g1_label = mpatches.Patch(color='black', label=self.filename1)
-        g2_label = mpatches.Patch(color='red', label=self.filename2)
-
-        ### plotting freespace component ####
+        ########### plotting freespace component ##################
         for g1_id, g1_edge in self.g1.edges.items():
             for g2_id, g2_edge in self.g2.edges.items():
 
-                list_ = list()
-
-                def append(a):
-                    if a not in list_: list_.append(a)
-
                 # horizonal lower CB
-                cb_1 = self.cell_boundaries.get(("g2", g2_edge[0], "g1", g1_id))
+                cb_1 = self.get_cell_boundry(self.g2, g2_edge[0], self.g1, g1_id)
 
-                if cb_1:
-                    if cb_1.end_fs != -1.0: append((cb_1.end_fs, 0.0))
-                    if cb_1.start_fs != -1.0: append((cb_1.start_fs, 0.0))
-
-                # vertical left CB
-                cb_2 = self.cell_boundaries.get(("g1", g1_edge[0], "g2", g2_id))
-
-                if cb_2:
-                    if cb_2.start_fs != -1.0: append((0.0, cb_2.start_fs))
-                    if cb_2.end_fs != -1.0: append((0.0, cb_2.end_fs))
+                # vertical right CB
+                cb_2 = self.get_cell_boundry(self.g1, g1_edge[0], self.g2, g2_id)
 
                 # horizonal upper CB
-                cb_3 = self.cell_boundaries.get(("g2", g2_edge[1], "g1", g1_id))
+                cb_3 = self.get_cell_boundry(self.g2, g2_edge[1], self.g1, g1_id)
 
-                if cb_3:
-
-                    if cb_3.start_fs != -1.0: append((cb_3.start_fs, 1.0))
-                    if cb_3.end_fs != -1.0: append((cb_3.end_fs, 1.0))
-
-                # vetical right CB
-                cb_4 = self.cell_boundaries.get(("g1", g1_edge[1], "g2", g2_id))
-
-                if cb_4:
-                    if cb_4.end_fs != -1.0: append((1.0, cb_4.end_fs))
-                    if cb_4.start_fs != -1.0: append((1.0, cb_4.start_fs))
-
-                if list_:
-                    x, y = zip(*list_)
-                else:
-                    x, y = list(), list()
+                # vetical left CB
+                cb_4 = self.get_cell_boundry(self.g1, g1_edge[1], self.g2, g2_id)
 
                 g1_n1_id, g1_n2_id = g1_edge[0], g1_edge[1]
                 g1_n1_x, g1_n2_x = self.g1.nodes[g1_n1_id][0], self.g1.nodes[g1_n2_id][0]
@@ -348,10 +321,75 @@ class FreeSpaceGraph:
                 g2_n1_y, g2_n2_y = self.g2.nodes[g2_n1_id][1], self.g2.nodes[g2_n2_id][1]
 
                 # map normal square to quadralateral
+                points = list()
 
-        ### end plotting freespace component ####
+                # map horizonal lower CB (1)
+                cb_1_x = lambda cb: (g2_n2_x - g2_n1_x) * cb + g2_n1_x
+                cb_1_y = lambda cb: (g2_n2_y - g2_n1_y) * cb + g2_n1_y
 
+                if cb_1:
+                    if cb_1.start_fs != -1.0:
+                        point = (cb_1_x(cb_1.start_fs), cb_1_y(cb_1.start_fs))
+                        points.append(point)
 
+                    if cb_1.end_fs != -1.0:
+                        point = (cb_1_x(cb_1.end_fs), cb_1_y(cb_1.end_fs))
+                        points.append(point)
+
+                # map vert right CB (2)
+                cb_2_x = lambda cb: (g1_n1_x - g2_n1_x) * cb + g2_n1_x
+                cb_2_y = lambda cb: (g1_n1_y - g2_n1_y) * cb + g2_n1_y
+
+                if cb_2:
+                    if cb_2.start_fs != -1.0:
+                        point = (cb_2_x(cb_2.start_fs), cb_2_y(cb_2.start_fs))
+                        points.append(point)
+
+                    if cb_2.end_fs != -1.0:
+                        point = (cb_2_x(cb_2.end_fs), cb_2_y(cb_2.end_fs))
+                        points.append(point)
+
+                # map horizonal upper CB (3)
+                cb_3_x = lambda cb: (g1_n2_x - g1_n1_x) * cb + g1_n1_x
+                cb_3_y = lambda cb: (g1_n2_y - g1_n1_y) * cb + g1_n1_y
+
+                if cb_3:
+                    if cb_3.start_fs != -1.0:
+                        point = (cb_3_x(cb_3.start_fs), cb_3_y(cb_3.start_fs))
+                        points.append(point)
+
+                    if cb_3.end_fs != -1.0:
+                        point = (cb_3_x(cb_3.end_fs), cb_3_y(cb_3.end_fs))
+                        points.append(point)
+                
+                # map vert right CB (2)
+                cb_4_x = lambda cb: (g1_n2_x - g2_n2_x) * cb + g2_n2_x
+                cb_4_y = lambda cb: (g1_n2_y - g2_n2_y) * cb + g2_n2_y
+
+                if cb_4:
+                    if cb_4.start_fs != -1.0:
+                        point = (cb_4_x(cb_4.start_fs), cb_4_y(cb_4.start_fs))
+                        points.append(point)
+
+                    if cb_4.end_fs != -1.0:
+                        point = (cb_4_x(cb_4.end_fs), cb_4_y(cb_4.end_fs))
+                        points.append(point)
+
+                # verify polygon (not line)
+                if len(points) > 2: 
+
+                    # sorting coords 
+                    cent=(sum([p[0] for p in points])/len(points),sum([p[1] for p in points])/len(points))
+                    points.sort(key=lambda p: math.atan2(p[1]-cent[1],p[0]-cent[0]))
+
+                    xs, ys = list(zip(*points))    
+                    axs.fill(xs, ys, alpha=0.3, fc='r', ec='none')
+
+        # python3 main.py samples/paris/arc_de_triomphe samples/paris/vehicle 5 -p
+        ########## end plotting freespace component ################
+
+        g1_label = mpatches.Patch(color='black', label=self.filename1)
+        g2_label = mpatches.Patch(color='grey', label=self.filename2)
 
         plt.legend(handles=[g1_label, g2_label], loc='upper left')
         plt.show()

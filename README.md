@@ -40,7 +40,7 @@ Tulane University
 wrodman@tulane.edu
 
 **Rena Repenning** 
-Morgan Stanly
+Morgan Stanley
 renarepenning.com
 
 **Emily Powers**

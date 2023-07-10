@@ -28,10 +28,10 @@ if __name__ == "__main__":
 
     fsg = FreeSpaceGraph(g1, g2, epsilon, filename1=filename1, filename2=filename2, log=log)
 
+    projection_check = fsg.DFSTraversalDist()
+
     if plot:
         fsg.plot()
-
-    projection_check = fsg.DFSTraversalDist()
 
     print("\n-- Epsilon --")
     print(f"     {epsilon}")
