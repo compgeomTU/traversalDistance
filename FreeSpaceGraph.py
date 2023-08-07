@@ -297,9 +297,18 @@ class FreeSpaceGraph:
             plt.plot([n1[0], n2[0]], [n1[1], n2[1]], color='grey', linewidth=1.5)
 
         ########### plotting freespace component ##################
-        for g1_id, g1_edge in self.g1.edges.items():
-            for g2_id, g2_edge in self.g2.edges.items():
 
+        # single cell condition
+        g1_id, g2_id = 0, 1
+        g1_edge, g2_edge = self.g1.edges[g1_id], self.g2.edges[g2_id]
+
+        # cell iteration
+        #for g2_id, g2_edge in self.g2.edges.items():
+            #for g1_id, g1_edge in self.g1.edges.items():
+
+        # dummy ittr
+        for i in [0]:
+                
                 # horizonal lower CB
                 cb_1 = self.get_cell_boundry(self.g2, g2_edge[0], self.g1, g1_id)
 
