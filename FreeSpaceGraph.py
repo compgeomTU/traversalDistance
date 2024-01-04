@@ -86,11 +86,9 @@ class FreeSpaceGraph:
                     newCB = self.cell_boundaries[(cb.g_edges, V, cb.g_verts, new_edgeID)] # creating new cell boundary from "flipping" horiz --> vertical
                     f.write("start + end values: " +
                             str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
-                    if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
+                    if newCB.visited == False and newCB.start_fs < newCB.end_fs:
                         p.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
-                        print("horizontal start_p min1:", min1)
                         newCB.start_p = min1  # from block calling ellipse
-                        print("horizontal end_p max1:", max1)
                         newCB.end_p = max1
                         logging.info("START_P, END_P: "+ str(newCB.start_p)+ " " + str(newCB.end_p))
                         self.DFS(newCB, f, p, paths,
@@ -104,9 +102,7 @@ class FreeSpaceGraph:
             f.write("start + end values: " + str(newCB.start_fs) + " " + str(newCB.end_fs)+"\n")
             if newCB.visited == False and newCB.start_fs <= newCB.end_fs:
                 f.write("DFS -- add "+str(newCB.print_cellboundary())+"\n")
-                print("vertical start_p min2:", min2)
                 newCB.start_p = min2  # from block calling ellipse
-                print("vertical end_p max2:", max2)
                 newCB.end_p = max2 
                 # recursive call on the edge that hasn't been called yet
                 self.DFS(newCB, f, p, paths, curr_path+(newCB.add_cd_str()))
@@ -226,8 +222,8 @@ class CellBoundary:
         self.g_edges = g_edges
         self.g_verts = g_verts
         self.visited = False
-        self.start_p = 0
-        self.end_p = 0
+        self.start_p = -1
+        self.end_p = -1
 
         edge = g_edges.edges[self.edgeID]
         # inputs for CFS

@@ -25,12 +25,13 @@ import os
 
 def testFreeSpaceGraph():
     print("\n -- TESTING FreeSpaceGraph.py -- ")
-    g = Graph("sample_graphs/test1")
+    g = Graph("sample_graphs/test2")
     g.Plot2MatPlotLib()
     h = Graph("sample_graphs/test2")
     h.Plot2MatPlotLib()
     #epsilon: 3
-    e = 1.1067
+    e = 0.0001
+    # 1.1067
     # print("-- G: ", g, " -- H: ", h, " -- eps ", e, "")
 
     for vertex in g.nodes.keys():
