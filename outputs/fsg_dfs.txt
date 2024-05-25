@@ -1,127 +1,187 @@
 
-edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
-start + end values: 0 2.7735009811261458e-05
+edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
+start + end values: 0 0.2370574244776991
 
-edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
-start + end values: 0 2.7735009811261458e-05
-start + end values: 0.9999722649882834 1
+edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
+start + end values: 0 0.3562313915436446
+start + end values: 0.318236398926265 0.9125328318429659
 
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
+edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
 start + end values: -1 -1
-start + end values: 0 7.071067811865475e-05
 
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: 0 7.071067811865475e-05
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: 0 7.071067811865475e-05
-start + end values: 0.9999292893220962 1
-
-
-DFS success!!!
-start + end values: 0.9999292893220962 1
-DFS -- add None
-
-
-DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: 0 2.7735009811261458e-05
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: 0 7.071067811865475e-05
+edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
+start + end values: 0.318236398926265 0.9125328318429659
 start + end values: -1 -1
+
+edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
+start + end values: -1 -1
+
+edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
+start + end values: -1 -1
+
+edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
+start + end values: -1 -1
+start + end values: 0.318236398926265 0.9125328318429659
 start + end values: -1 -1
 DFS -- add None
 
+edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
+start + end values: -1 -1
+
+edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
 
 DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: 0 2.7735009811261458e-05
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: 0 7.071067811865475e-05
-start + end values: -1 -1
 start + end values: -1 -1
 DFS -- add None
 
+edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
+start + end values: 0.26294257552230094 0.7370574244776991
 
-DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: 0 2.7735009811261458e-05
-start + end values: 0.9999722649882834 1
+edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
+start + end values: -1 -1
+start + end values: -1 -1
 
+edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
+start + end values: -1 -1
 
-DFS success!!!
-start + end values: 0.9999722649882834 1
-DFS -- add None
-
-
-DFS success!!!
-
-DFS success!!!
-start + end values: 0.9999722649882834 1
-start + end values: 0.9999722649882834 1
-
-DFS success!!!
+edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
+start + end values: -1 -1
 start + end values: -1 -1
 start + end values: -1 -1
 DFS -- add None
 
 
 DFS success!!!
+edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
+start + end values: 0.08746716815703416 0.681763601073735
+
+edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
+start + end values: -1 -1
+start + end values: 0.7629425755223009 1
+
 
 DFS success!!!
-start + end values: 0.9999292893220962 1
-start + end values: 0.9999292893220962 1
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: 0 2.7735009811261458e-05
+start + end values: 0.6437686084563553 1
+DFS -- add None
+
+edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
 start + end values: -1 -1
+start + end values: 0 0.05099520137370961
+
+
+DFS success!!!
+start + end values: -1 -1
+DFS -- add None
+
+edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
+start + end values: 0.26294257552230094 0.7370574244776991
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: 0.08746716815703416 0.681763601073735
+
+DFS success!!!
+
+DFS success!!!
+
+DFS success!!!
+start + end values: 0.6437686084563553 1
+start + end values: 0.7629425755223009 1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
 start + end values: -1 -1
 DFS -- add None
 
 
 DFS success!!!
+edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
+start + end values: -1 -1
+start + end values: 0.08746716815703416 0.681763601073735
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
+start + end values: 0.6437686084563553 1
+start + end values: -1 -1
+start + end values: 0 0.05099520137370961
+
+DFS success!!!
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: 0.318236398926265 0.9125328318429659
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: 0.26294257552230094 0.7370574244776991
+
+DFS success!!!
+start + end values: 0.26294257552230094 0.7370574244776991
+start + end values: -1 -1
 
 DFS success!!!
 start + end values: -1 -1
 DFS -- add None
 
-
-DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
+edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
 start + end values: -1 -1
-start + end values: 0 2.7735009811261458e-05
+
+edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
 start + end values: -1 -1
-DFS -- add None
-
-
-DFS success!!!
-
-DFS success!!!
-start + end values: 0.9999722649882834 1
-DFS -- add None
-
-edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
 start + end values: -1 -1
-start + end values: 0 7.071067811865475e-05
+
+
+DFS success!!!
 start + end values: -1 -1
-DFS -- add None
-
 
 DFS success!!!
-edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
 start + end values: -1 -1
-start + end values: 0 2.7735009811261458e-05
 start + end values: -1 -1
-DFS -- add None
+edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
+start + end values: -1 -1
 
+edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
+start + end values: -1 -1
+start + end values: -1 -1
+
+
+DFS success!!!
+start + end values: -1 -1
+
+DFS success!!!
+start + end values: -1 -1
+start + end values: -1 -1
 
 DFS success!!!
 
 DFS success!!!
-
-DFS success!!!
-start + end values: 0.9999722649882834 1
-start + end values: 0.9999722649882834 1
+start + end values: -1 -1
+start + end values: 0.318236398926265 0.9125328318429659
 
 DFS success!!!
