@@ -1,11 +1,16 @@
-# Last edited: 2022-03-17
-# Authors: Erfan Hosseini Sereshgi - Tulane University
-#          Will Rodman - Tulane University
+"""
+Author: 
+    Erfan Hosseini Sereshgi
+    Tulane University
+
+Contributors;
+    Will Rodman
+    Tulane University
+"""
 
 from geojson import LineString, Feature, FeatureCollection
 import matplotlib.pyplot as plt
 import geojson
-
 
 class Graph:
     def __init__(self, filename=None):
