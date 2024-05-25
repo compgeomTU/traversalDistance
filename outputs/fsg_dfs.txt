@@ -1,16 +1,16 @@
 
 edge1=[[0.0, 0.0], [2.0, 0.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
-start + end values: 0 0.2370574244776991
+start + end values: 0 0.23740735034956267
 
 edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 0.0], [2.0, 0.0]]
-start + end values: 0 0.3562313915436446
-start + end values: 0.318236398926265 0.9125328318429659
+start + end values: 0 0.3563575604939899
+start + end values: 0.31815045192254954 0.9126187788466813
 
 edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
 start + end values: -1 -1
 
 edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
-start + end values: 0.318236398926265 0.9125328318429659
+start + end values: 0.31815045192254954 0.9126187788466813
 start + end values: -1 -1
 
 edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[0.0, -1.0], [3.0, 1.0]]
@@ -25,7 +25,7 @@ start + end values: -1 -1
 
 edge1=[[0.0, -1.0], [3.0, 1.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
 start + end values: -1 -1
-start + end values: 0.318236398926265 0.9125328318429659
+start + end values: 0.31815045192254954 0.9126187788466813
 start + end values: -1 -1
 DFS -- add None
 
@@ -42,7 +42,7 @@ start + end values: -1 -1
 DFS -- add None
 
 edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[3.0, 1.0], [4.0, 2.0]]
-start + end values: 0.26294257552230094 0.7370574244776991
+start + end values: 0.2625926496504373 0.7374073503495626
 
 edge1=[[3.0, 1.0], [4.0, 2.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
 start + end values: -1 -1
@@ -60,20 +60,20 @@ DFS -- add None
 
 DFS success!!!
 edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 2.0], [0.0, 2.0]]
-start + end values: 0.08746716815703416 0.681763601073735
+start + end values: 0.08738122115331876 0.6818495480774505
 
 edge1=[[2.0, 2.0], [0.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
 start + end values: -1 -1
-start + end values: 0.7629425755223009 1
+start + end values: 0.7625926496504372 1
 
 
 DFS success!!!
-start + end values: 0.6437686084563553 1
+start + end values: 0.6436424395060102 1
 DFS -- add None
 
 edge1=[[0.0, 2.0], [2.0, 0.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
 start + end values: -1 -1
-start + end values: 0 0.05099520137370961
+start + end values: 0 0.05113306859260741
 
 
 DFS success!!!
@@ -81,20 +81,20 @@ start + end values: -1 -1
 DFS -- add None
 
 edge1=[[2.0, 0.0], [2.0, 2.0]]   edge2=[[3.0, 1.0], [0.0, 3.0]]
-start + end values: 0.26294257552230094 0.7370574244776991
+start + end values: 0.2625926496504373 0.7374073503495626
 start + end values: -1 -1
 
 
 DFS success!!!
-start + end values: 0.08746716815703416 0.681763601073735
+start + end values: 0.08738122115331876 0.6818495480774505
 
 DFS success!!!
 
 DFS success!!!
 
 DFS success!!!
-start + end values: 0.6437686084563553 1
-start + end values: 0.7629425755223009 1
+start + end values: 0.6436424395060102 1
+start + end values: 0.7625926496504372 1
 
 DFS success!!!
 start + end values: -1 -1
@@ -108,7 +108,7 @@ DFS -- add None
 DFS success!!!
 edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[2.0, 0.0], [2.0, 2.0]]
 start + end values: -1 -1
-start + end values: 0.08746716815703416 0.681763601073735
+start + end values: 0.08738122115331876 0.6818495480774505
 start + end values: -1 -1
 
 DFS success!!!
@@ -121,28 +121,28 @@ DFS success!!!
 start + end values: -1 -1
 start + end values: -1 -1
 edge1=[[3.0, 1.0], [0.0, 3.0]]   edge2=[[0.0, 2.0], [2.0, 0.0]]
-start + end values: 0.6437686084563553 1
+start + end values: 0.6436424395060102 1
 start + end values: -1 -1
-start + end values: 0 0.05099520137370961
+start + end values: 0 0.05113306859260741
 
 DFS success!!!
-
-DFS success!!!
-start + end values: -1 -1
-start + end values: 0.318236398926265 0.9125328318429659
 
 DFS success!!!
 start + end values: -1 -1
+start + end values: 0.31815045192254954 0.9126187788466813
+
+DFS success!!!
+start + end values: -1 -1
 
 DFS success!!!
 start + end values: -1 -1
 start + end values: -1 -1
 
 DFS success!!!
-start + end values: 0.26294257552230094 0.7370574244776991
+start + end values: 0.2625926496504373 0.7374073503495626
 
 DFS success!!!
-start + end values: 0.26294257552230094 0.7370574244776991
+start + end values: 0.2625926496504373 0.7374073503495626
 start + end values: -1 -1
 
 DFS success!!!
@@ -182,6 +182,6 @@ DFS success!!!
 
 DFS success!!!
 start + end values: -1 -1
-start + end values: 0.318236398926265 0.9125328318429659
+start + end values: 0.31815045192254954 0.9126187788466813
 
 DFS success!!!
