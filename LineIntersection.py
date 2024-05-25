@@ -187,7 +187,7 @@ def find_ellipse_max_min_points(line1, line2, epsilon, debug=False):
 
     cos_alpha = (v1[0] * v2[0] + v1[1] * v2[1]) / (math.sqrt(v1[0]
                                                              ** 2 + v1[1] ** 2) * math.sqrt(v2[0] ** 2 + v2[1] ** 2))
-    sin_alpha = math.sqrt(abs(1-cos_alpha ** 2))
+    sin_alpha = math.sqrt(1-cos_alpha ** 2)
     d = abs(epsilon / sin_alpha)
 
     m1 = slope(line1[0][0], line1[0][1], line1[1][0], line1[1][1])
