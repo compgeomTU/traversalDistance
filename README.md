@@ -50,7 +50,7 @@ renarepenning.com
 Tulane University
 epowers3@tulane.edu
 
-### Publication
+### Reference
 Alt H., Efrat A., Rote G., and Wenk C., Matching Planer maps, Journal of Algorithms, Volume 49, Issue 2, November 2003, Pages 262-283
 https://doi.org/10.1016/S0196-6774(03)00085-3
 
