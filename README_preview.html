@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Traversal Distance Python Library</title>
+  <style>
+    html {
+      color: #1a1a1a;
+      background-color: #fdfdfd;
+    }
+    body {
+      margin: 0 auto;
+      max-width: 36em;
+      padding-left: 50px;
+      padding-right: 50px;
+      padding-top: 50px;
+      padding-bottom: 50px;
+      hyphens: auto;
+      overflow-wrap: break-word;
+      text-rendering: optimizeLegibility;
+      font-kerning: normal;
+    }
+    @media (max-width: 600px) {
+      body {
+        font-size: 0.9em;
+        padding: 12px;
+      }
+      h1 {
+        font-size: 1.8em;
+      }
+    }
+    @media print {
+      html {
+        background-color: white;
+      }
+      body {
+        background-color: transparent;
+        color: black;
+        font-size: 12pt;
+      }
+      p, h2, h3 {
+        orphans: 3;
+        widows: 3;
+      }
+      h2, h3, h4 {
+        page-break-after: avoid;
+      }
+    }
+    p {
+      margin: 1em 0;
+    }
+    a {
+      color: #1a1a1a;
+    }
+    a:visited {
+      color: #1a1a1a;
+    }
+    img {
+      max-width: 100%;
+    }
+    svg {
+      height: auto;
+      max-width: 100%;
+    }
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1.4em;
+    }
+    h5, h6 {
+      font-size: 1em;
+      font-style: italic;
+    }
+    h6 {
+      font-weight: normal;
+    }
+    ol, ul {
+      padding-left: 1.7em;
+      margin-top: 1em;
+    }
+    li > ol, li > ul {
+      margin-top: 0;
+    }
+    blockquote {
+      margin: 1em 0 1em 1.7em;
+      padding-left: 1em;
+      border-left: 2px solid #e6e6e6;
+      color: #606060;
+    }
+    code {
+      font-family: Menlo, Monaco, Consolas, 'Lucida Console', monospace;
+      font-size: 85%;
+      margin: 0;
+      hyphens: manual;
+    }
+    pre {
+      margin: 1em 0;
+      overflow: auto;
+    }
+    pre code {
+      padding: 0;
+      overflow: visible;
+      overflow-wrap: normal;
+    }
+    .sourceCode {
+     background-color: transparent;
+     overflow: visible;
+    }
+    hr {
+      background-color: #1a1a1a;
+      border: none;
+      height: 1px;
+      margin: 1em 0;
+    }
+    table {
+      margin: 1em 0;
+      border-collapse: collapse;
+      width: 100%;
+      overflow-x: auto;
+      display: block;
+      font-variant-numeric: lining-nums tabular-nums;
+    }
+    table caption {
+      margin-bottom: 0.75em;
+    }
+    tbody {
+      margin-top: 0.5em;
+      border-top: 1px solid #1a1a1a;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    th {
+      border-top: 1px solid #1a1a1a;
+      padding: 0.25em 0.5em 0.25em 0.5em;
+    }
+    td {
+      padding: 0.125em 0.5em 0.25em 0.5em;
+    }
+    header {
+      margin-bottom: 4em;
+      text-align: center;
+    }
+    #TOC li {
+      list-style: none;
+    }
+    #TOC ul {
+      padding-left: 1.3em;
+    }
+    #TOC > ul {
+      padding-left: 0;
+    }
+    #TOC a:not(:hover) {
+      text-decoration: none;
+    }
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    /* The extra [class] is a hack that increases specificity enough to
+       override a similar rule in reveal.js */
+    ul.task-list[class]{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      font-size: inherit;
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1.6em;
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { color: #008000; } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { color: #008000; font-weight: bold; } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+  </style>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="/usr/share/javascript/mathjax/MathJax.js"
+  type="text/javascript"></script>
+</head>
+<body>
+<header id="title-block-header">
+<h1 class="title">Traversal Distance Python Library</h1>
+</header>
+<h1 id="traversal-distance-python-library">Traversal Distance Python
+Library</h1>
+<p>Compute and explore traversal distances between two geometric graphs
+with straight-line edges.</p>
+<p>The library provides three capabilities:</p>
+<ul>
+<li><strong>Distance computation:</strong> compute both directed
+traversal distances, their symmetric maximum, and the complete traversal
+distance through a Python API or a command-line tool.</li>
+<li><strong>Decisions at a specified epsilon:</strong> test whether
+either directed distance, the symmetric distance, or the complete
+distance is at most a chosen threshold.</li>
+<li><strong>Visualization:</strong> plot the input graphs with shaded
+polygons constructed from free-space boundary intervals, select edge
+pairs to display, and record the computation in log files.</li>
+</ul>
+<p>Use <code>compute_traversal_distances</code> or
+<code>traversal-distances</code> to obtain the four distance values. Use
+<code>traversal_decisions</code> for threshold tests. The command
+<code>python3 main.py G H EPSILON</code> runs a threshold computation
+and opens a plot.</p>
+<h2 id="installation">Installation</h2>
+<p>The code can be run directly from a checkout using Python 3.9 or
+later. For the distance computations, install NumPy:</p>
+<div class="sourceCode" id="cb1"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install numpy</span></code></pre></div>
+<p>The plotting program also uses Matplotlib and GeoJSON:</p>
+<div class="sourceCode" id="cb2"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install matplotlib geojson</span></code></pre></div>
+<p>Optionally, install the repository as an editable Python package:</p>
+<div class="sourceCode" id="cb3"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> pip install <span class="at">-e</span> .</span></code></pre></div>
+<p>This makes <code>traversal_distance</code> importable from other
+working directories and installs the <code>traversal-distances</code>
+command-line command. Changes made in the checkout are used immediately
+because the installation is editable.</p>
+<h2 id="quick-start-u-path-and-immersed-tree">Quick start: U-path and
+immersed tree</h2>
+<p>Let <span class="math inline">\(P\)</span> be a U-shaped path and
+<span class="math inline">\(H\)</span> an immersed tree. The runnable
+example is <a
+href="examples/u_path_immersed_tree.py"><code>examples/u_path_immersed_tree.py</code></a>,
+and the regression test in <code>tests/test_distances.py</code> uses the
+same graph-construction function.</p>
+<figure>
+<img src="docs/u_tree_inputs.png"
+alt="U-path and immersed-tree geometry" />
+<figcaption aria-hidden="true">U-path and immersed-tree
+geometry</figcaption>
+</figure>
+<p><em>The dashed curve is P and the solid tree is H. Geometric
+crossings of tree edges do not introduce additional vertices.</em></p>
+<p>Run the example from the repository root:</p>
+<div class="sourceCode" id="cb4"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> <span class="at">-m</span> examples.u_path_immersed_tree</span></code></pre></div>
+<p>The example file is:</p>
+<div class="sourceCode" id="cb5"><pre
+class="sourceCode python"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">&quot;&quot;&quot;U-path / immersed-tree example used in the README and regression tests.&quot;&quot;&quot;</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> traversal_distance <span class="im">import</span> Graph, compute_traversal_distances, traversal_decisions</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> make_u_path_immersed_tree():</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>    <span class="co">&quot;&quot;&quot;Return the U-shaped path P and immersed tree H from the README example.&quot;&quot;&quot;</span></span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>    P <span class="op">=</span> Graph.from_data(</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a>        {<span class="dv">0</span>: (<span class="dv">0</span>, <span class="dv">0</span>), <span class="dv">1</span>: (<span class="dv">0</span>, <span class="dv">20</span>), <span class="dv">2</span>: (<span class="dv">20</span>, <span class="dv">20</span>), <span class="dv">3</span>: (<span class="dv">20</span>, <span class="dv">0</span>)},</span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a>        {<span class="dv">0</span>: (<span class="dv">0</span>, <span class="dv">1</span>), <span class="dv">1</span>: (<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">2</span>: (<span class="dv">2</span>, <span class="dv">3</span>)},</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a>    H <span class="op">=</span> Graph.from_data(</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>        {<span class="dv">0</span>: (<span class="dv">8</span>, <span class="dv">6</span>), <span class="dv">1</span>: (<span class="dv">8</span>, <span class="dv">12</span>), <span class="dv">2</span>: (<span class="dv">13</span>, <span class="dv">10</span>), <span class="dv">3</span>: (<span class="dv">10</span>, <span class="dv">10</span>),</span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>         <span class="dv">4</span>: (<span class="dv">7</span>, <span class="dv">10</span>), <span class="dv">5</span>: (<span class="dv">12</span>, <span class="dv">12</span>), <span class="dv">6</span>: (<span class="dv">12</span>, <span class="dv">6</span>), <span class="dv">7</span>: (<span class="dv">10</span>, <span class="dv">7</span>), <span class="dv">8</span>: (<span class="dv">11</span>, <span class="dv">16</span>)},</span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>        {<span class="dv">0</span>: (<span class="dv">0</span>, <span class="dv">1</span>), <span class="dv">1</span>: (<span class="dv">1</span>, <span class="dv">2</span>), <span class="dv">2</span>: (<span class="dv">2</span>, <span class="dv">3</span>), <span class="dv">3</span>: (<span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>         <span class="dv">4</span>: (<span class="dv">4</span>, <span class="dv">5</span>), <span class="dv">5</span>: (<span class="dv">5</span>, <span class="dv">6</span>), <span class="dv">6</span>: (<span class="dv">3</span>, <span class="dv">7</span>), <span class="dv">7</span>: (<span class="dv">7</span>, <span class="dv">8</span>)},</span>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb5-18"><a href="#cb5-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> P, H</span>
+<span id="cb5-19"><a href="#cb5-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-20"><a href="#cb5-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-21"><a href="#cb5-21" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> main():</span>
+<span id="cb5-22"><a href="#cb5-22" aria-hidden="true" tabindex="-1"></a>    P, H <span class="op">=</span> make_u_path_immersed_tree()</span>
+<span id="cb5-23"><a href="#cb5-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-24"><a href="#cb5-24" aria-hidden="true" tabindex="-1"></a>    d <span class="op">=</span> compute_traversal_distances(P, H, tolerance<span class="op">=</span><span class="fl">1e-6</span>)</span>
+<span id="cb5-25"><a href="#cb5-25" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;P -&gt; H:   </span><span class="sc">{</span>d<span class="sc">.</span>first_to_second<span class="sc">:.7g}</span><span class="ss">&quot;</span>)</span>
+<span id="cb5-26"><a href="#cb5-26" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;H -&gt; P:   </span><span class="sc">{</span>d<span class="sc">.</span>second_to_first<span class="sc">:.7g}</span><span class="ss">&quot;</span>)</span>
+<span id="cb5-27"><a href="#cb5-27" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Symmetric: </span><span class="sc">{</span>d<span class="sc">.</span>symmetric<span class="sc">:.7g}</span><span class="ss">&quot;</span>)</span>
+<span id="cb5-28"><a href="#cb5-28" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f&quot;Complete:  </span><span class="sc">{</span>d<span class="sc">.</span>complete<span class="sc">:.7g}</span><span class="ss">&quot;</span>)</span>
+<span id="cb5-29"><a href="#cb5-29" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;At epsilon 12:  &quot;</span>, traversal_decisions(P, H, <span class="fl">12.0</span>))</span>
+<span id="cb5-30"><a href="#cb5-30" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">&quot;At epsilon 12.3:&quot;</span>, traversal_decisions(P, H, <span class="fl">12.3</span>))</span>
+<span id="cb5-31"><a href="#cb5-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-32"><a href="#cb5-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-33"><a href="#cb5-33" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="va">__name__</span> <span class="op">==</span> <span class="st">&quot;__main__&quot;</span>:</span>
+<span id="cb5-34"><a href="#cb5-34" aria-hidden="true" tabindex="-1"></a>    main()</span></code></pre></div>
+<p>Output:</p>
+<pre class="text"><code>P -&gt; H:   11.31371
+H -&gt; P:   12
+Symmetric: 12
+Complete:  12.20656
+At epsilon 12:   (True, True, False)
+At epsilon 12.3: (True, True, True)</code></pre>
+<p>These approximate the values <span
+class="math inline">\(8\sqrt{2}\)</span>, <span
+class="math inline">\(12\)</span>, <span
+class="math inline">\(12\)</span>, and <span
+class="math inline">\(\sqrt{149}\)</span>, respectively. Both directed
+conditions hold at <span class="math inline">\(\varepsilon=12\)</span>,
+but they are satisfied by different connected components. Neither
+component covers both inputs, so the complete condition fails.</p>
+<p><code>traversal_decisions</code> returns the two directed decisions
+and the complete decision, in that order. The symmetric decision is the
+conjunction of the two directed decisions.</p>
+<p>The fields <code>first_to_second</code> and
+<code>second_to_first</code> follow the order of the arguments to
+<code>compute_traversal_distances</code>. The result also provides
+<code>tolerance</code> and <code>as_dict()</code>.</p>
+<p>To read graphs from files instead, use
+<code>Graph("PATH/NAME")</code>; the <a
+href="#input-format-and-samples">input format</a> is described
+below.</p>
+<h2 id="distance-definitions">Distance definitions</h2>
+<p>Let <span class="math inline">\(G\)</span> and <span
+class="math inline">\(H\)</span> be finite, connected graphs with
+straight-line edges, with drawings <span
+class="math inline">\(\phi_G:G\to\mathbb{R}^2\)</span> and <span
+class="math inline">\(\phi_H:H\to\mathbb{R}^2\)</span>.</p>
+<p>A <strong>traversal</strong> of a graph is a continuous map from
+<span class="math inline">\([0,1]\)</span> onto the entire graph,
+including every edge interior. A <strong>partial traversal</strong> is
+continuous but need not cover the entire graph. Traversals may pause,
+backtrack, and revisit edges; their starting and ending points are
+unrestricted.</p>
+<h3 id="directed-and-complete-distances">Directed and complete
+distances</h3>
+<p>Both distances minimize the same maximum separation:</p>
+<p><span class="math display">\[
+\inf_{\tau,\sigma}\;\max_{t\in[0,1]}
+\left\lVert\phi_G(\tau(t))-\phi_H(\sigma(t))\right\rVert_2.
+\]</span></p>
+<p>Here <span class="math inline">\(\tau:[0,1]\to G\)</span> and <span
+class="math inline">\(\sigma:[0,1]\to H\)</span> are continuous. Only
+the coverage requirements differ:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Distance</th>
+<th>Requirement on <span class="math inline">\(\tau\)</span></th>
+<th>Requirement on <span class="math inline">\(\sigma\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\vec{d}_T(G,H)\)</span></td>
+<td>Covers all of <span class="math inline">\(G\)</span>.</td>
+<td>May cover only part of <span class="math inline">\(H\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\vec{d}_T(H,G)\)</span></td>
+<td>May cover only part of <span class="math inline">\(G\)</span>.</td>
+<td>Covers all of <span class="math inline">\(H\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(d_{\mathrm{comp}}(G,H)\)</span></td>
+<td>Covers all of <span class="math inline">\(G\)</span>.</td>
+<td>Covers all of <span class="math inline">\(H\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<p>Thus the complete distance imposes full coverage on both maps in one
+paired traversal. This symmetric variant was introduced by Maike Buchin
+and Lea Thiel in <em>Comparison of Graph Distance Measures</em> (CG:YRF
+2024), where it is denoted <span
+class="math inline">\(\delta_{cT}\)</span>; see <a
+href="#references">Buchin and Thiel (2024)</a>. The two directed
+distances need not be equal.</p>
+<h3 id="symmetric-distance">Symmetric distance</h3>
+<p>The symmetric traversal distance is the maximum of the two directed
+distances:</p>
+<p><span class="math display">\[
+d_{\mathrm{sym}}(G,H)=\max\left\{\vec{d}_T(G,H),\vec{d}_T(H,G)\right\}.
+\]</span></p>
+<p>Each directed distance can use a different paired traversal. Complete
+traversal requires a single pair covering both inputs, so</p>
+<p><span class="math display">\[
+d_{\mathrm{sym}}(G,H)\leq d_{\mathrm{comp}}(G,H).
+\]</span></p>
+<p>The <a href="#quick-start-u-path-and-immersed-tree">U-path/tree
+example</a> above illustrates strict inequality.</p>
+<h3 id="immersed-graphs-and-crossings">Immersed graphs and
+crossings</h3>
+<p>Connectivity is determined by vertex IDs. A geometric crossing is a
+graph vertex only when the intersecting edges are split there and use a
+shared vertex ID. Otherwise, the crossing has distinct preimages in the
+abstract graph, and a traversal cannot switch between the crossing edges
+there. Distinct vertices with identical coordinates likewise remain
+distinct.</p>
+<p>Edges are undirected. The order of an edge’s endpoints specifies its
+parameterization, not a permitted direction of travel.</p>
+<h3 id="free-space-characterization">Free-space characterization</h3>
+<p>For a threshold <span class="math inline">\(\varepsilon\)</span>,
+define</p>
+<p><span class="math display">\[
+F_\varepsilon(G,H)=\left\{(x,y)\in G\times H:
+\left\lVert\phi_G(x)-\phi_H(y)\right\rVert_2\leq\varepsilon\right\}.
+\]</span></p>
+<p>Each distance is at most <span
+class="math inline">\(\varepsilon\)</span> precisely under the
+corresponding coverage condition:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th></th>
+<th>Required coverage by connected components of <span
+class="math inline">\(F_\varepsilon\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span
+class="math inline">\(\vec{d}_T(G,H)\leq\varepsilon\)</span></td>
+<td>Some component projects onto all of <span
+class="math inline">\(G\)</span>.</td>
+</tr>
+<tr class="even">
+<td><span
+class="math inline">\(\vec{d}_T(H,G)\leq\varepsilon\)</span></td>
+<td>Some component projects onto all of <span
+class="math inline">\(H\)</span>.</td>
+</tr>
+<tr class="odd">
+<td><span
+class="math inline">\(d_{\mathrm{sym}}(G,H)\leq\varepsilon\)</span></td>
+<td>Both directed conditions hold, possibly in different
+components.</td>
+</tr>
+<tr class="even">
+<td><span
+class="math inline">\(d_{\mathrm{comp}}(G,H)\leq\varepsilon\)</span></td>
+<td>One component projects onto both <span
+class="math inline">\(G\)</span> and <span
+class="math inline">\(H\)</span>.</td>
+</tr>
+</tbody>
+</table>
+<p>Free space within each edge-pair cell is convex. Cells connect
+through feasible shared vertex-edge boundaries, including boundaries
+consisting of a single point. Coverage includes edge interiors, not just
+vertices.</p>
+<h2 id="how-the-distances-are-computed">How the distances are
+computed</h2>
+<p><code>traversal_decisions(G, H, epsilon)</code> checks the free-space
+conditions above. It determines which edge-pair cells are nonempty,
+connects them through feasible shared boundaries, and combines the
+projection intervals within each connected component. The component must
+cover every edge of the required graph.</p>
+<p><code>compute_traversal_distances(G, H)</code> finds the smallest
+feasible threshold by <strong>bisection</strong>. It keeps an interval
+whose lower end fails the relevant coverage test and whose upper end
+passes it, tests the midpoint, and retains the appropriate half. It
+performs this search for both directed distances and the complete
+distance, then takes the maximum of the two directed values for the
+symmetric distance.</p>
+<p>The <code>tolerance</code> argument specifies the target width of the
+search interval in coordinate units; its default is <code>1e-6</code>.
+The function returns the passing upper endpoint. The API also accepts
+<code>max_iterations</code>, with a default of 80, as a limit on each
+search. The reported distance values are decimal approximations obtained
+by this search, rather than symbolic critical values.</p>
+<h2 id="command-line">Command line</h2>
+<h3 id="compute-all-four-distances">Compute all four distances</h3>
+<p>After installation:</p>
+<div class="sourceCode" id="cb7"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">traversal-distances</span> GRAPH1_PREFIX GRAPH2_PREFIX</span></code></pre></div>
+<p>Or use the repository entry point:</p>
+<div class="sourceCode" id="cb8"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> distance_main.py GRAPH1_PREFIX GRAPH2_PREFIX <span class="at">--tolerance</span> 1e-6</span></code></pre></div>
+<p>The output lists the two directed values in input order, followed by
+the symmetric and complete distances.</p>
+<h3 id="compute-and-plot-at-a-specified-epsilon">Compute and plot at a
+specified epsilon</h3>
+<div class="sourceCode" id="cb9"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> main.py GRAPH1_PREFIX GRAPH2_PREFIX EPSILON</span></code></pre></div>
+<p>This command takes a threshold as input, runs a depth-first-search
+and projection check, and opens a plot of the graphs with shaded
+polygons constructed from free-space boundary intervals. Its console
+output reports the threshold, graph sizes, computation statistics, and
+projection-check result. It does not search for the four distance
+values; use <code>traversal-distances</code> for those values or
+<code>traversal_decisions</code> for all threshold tests.</p>
+<p>For example:</p>
+<div class="sourceCode" id="cb10"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> main.py samples/athens/groundtruth samples/athens/kevin 300.0 <span class="at">-p</span></span></code></pre></div>
+<figure>
+<img
+src="https://raw.githubusercontent.com/compgeomTU/traversalDistance/5497e6f399fe51d19655457ad4411a735aa9804b/docs/plot.jpg"
+alt="Graph-comparison plot" />
+<figcaption aria-hidden="true">Graph-comparison plot</figcaption>
+</figure>
+<p><em>Input graphs with shaded polygons constructed from free-space
+boundary intervals at a specified epsilon.</em></p>
+<figure>
+<img
+src="https://raw.githubusercontent.com/compgeomTU/traversalDistance/5497e6f399fe51d19655457ad4411a735aa9804b/docs/output.jpg"
+alt="Threshold-computation output" />
+<figcaption aria-hidden="true">Threshold-computation output</figcaption>
+</figure>
+<p><em>Console output from the threshold computation.</em></p>
+<p>The plot opens by default; <code>-p</code> is accepted but is not
+needed to enable it. Use <code>-l</code> to write logs; create the
+<code>logs/</code> directory before running the command:</p>
+<div class="sourceCode" id="cb11"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mkdir</span> <span class="at">-p</span> logs</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> main.py samples/paris/arc_de_triomphe samples/paris/vehicle 5 <span class="at">-l</span></span></code></pre></div>
+<p>To restrict the shaded polygons to selected edge pairs, supply both
+<code>-g1_ids</code> and <code>-g2_ids</code>:</p>
+<div class="sourceCode" id="cb12"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> main.py samples/paris/arc_de_triomphe samples/paris/vehicle 5 <span class="at">-g1_ids</span> 0 <span class="at">-g2_ids</span> 0,1,2</span></code></pre></div>
+<p>These options select edges for the shaded overlay; they do not
+restrict the graphs used in the computation.</p>
+<h2 id="input-format-and-samples">Input format and samples</h2>
+<p>A prefix <code>NAME</code> refers to two comma-separated files
+without a header:</p>
+<pre class="text"><code>NAME_vertices.txt    vertex_id,x,y
+NAME_edges.txt       edge_id,start_vertex_id,end_vertex_id</code></pre>
+<p>Each edge joins the two listed vertex IDs. Coordinates and distances
+use a common Euclidean coordinate system and common units.</p>
+<p>The repository includes these sample pairs:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Location</th>
+<th>First graph prefix</th>
+<th>Second graph prefix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Paris</td>
+<td><code>samples/paris/arc_de_triomphe</code></td>
+<td><code>samples/paris/vehicle</code></td>
+</tr>
+<tr class="even">
+<td>Athens</td>
+<td><code>samples/athens/groundtruth</code></td>
+<td><code>samples/athens/kevin</code></td>
+</tr>
+<tr class="odd">
+<td>Chicago</td>
+<td><code>samples/chicago/groundtruth</code></td>
+<td><code>samples/chicago/james</code></td>
+</tr>
+</tbody>
+</table>
+<p>For example:</p>
+<div class="sourceCode" id="cb14"><pre
+class="sourceCode bash"><code class="sourceCode bash"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python3</span> distance_main.py samples/paris/arc_de_triomphe samples/paris/vehicle</span></code></pre></div>
+<p>The Paris graph is disconnected as stored. No continuous traversal
+can cover all of it, so the distance API reports infinity for the
+first-to-second, symmetric, and complete distances in this example. The
+U-path/tree example has finite values for all four distances.</p>
+<h2 id="free-space-components-and-coverage">Free-space components and
+coverage</h2>
+<p>The following figures use <a
+href="https://github.com/compgeomTU/FSDvis">FSDvis</a> to display the
+graph-versus-curve free space for the U-path/tree pair above.</p>
+<figure>
+<img src="docs/u_tree_components_eps12.png"
+alt="Two separate covering components at epsilon 12" />
+<figcaption aria-hidden="true">Two separate covering components at
+epsilon 12</figcaption>
+</figure>
+<p><em>At epsilon 12, Component 1 covers P and Component 2 covers H;
+neither covers both. In this view the graph input is H and the curve
+input is P, so the distance panel’s two directed labels appear in the
+reverse order from the Python call above.</em></p>
+<figure>
+<img src="docs/u_tree_complete_eps12_3.png"
+alt="One component covers both inputs at epsilon 12.3" />
+<figcaption aria-hidden="true">One component covers both inputs at
+epsilon 12.3</figcaption>
+</figure>
+<p><em>At epsilon 12.3, one component covers both inputs. The distance
+panel reports the same four distances in both figures: changing epsilon
+changes the displayed free space, not the input pair or its
+distances.</em></p>
+<h2 id="interactive-free-space-visualization">Interactive free-space
+visualization</h2>
+<p><a href="https://github.com/compgeomTU/FSDvis">FSDvis</a> provides
+graph-versus-curve free-space diagrams with connected-component colors,
+an epsilon slider, projection coverage, critical contacts, and displayed
+traversal distances. It can use this library to compute the displayed
+values.</p>
+<p>The distance API accepts graph-versus-graph inputs. FSDvis visualizes
+graph-versus-curve inputs, including the U-path/tree pair above.</p>
+<h2 id="authors">Authors</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Author</th>
+<th>Project affiliation</th>
+<th>Contact / website</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Dr. Carola Wenk</td>
+<td>Tulane University</td>
+<td><a href="mailto:cwenk@tulane.edu">cwenk@tulane.edu</a></td>
+</tr>
+<tr class="even">
+<td>Erfan Hosseini Sereshgi</td>
+<td>Tulane University</td>
+<td><a
+href="mailto:shosseinisereshgi@tulane.edu">shosseinisereshgi@tulane.edu</a></td>
+</tr>
+<tr class="odd">
+<td>Will Rodman</td>
+<td>Tulane University</td>
+<td><a href="mailto:wrodman@tulane.edu">wrodman@tulane.edu</a></td>
+</tr>
+<tr class="even">
+<td>Rena Repenning</td>
+<td>Morgan Stanley</td>
+<td><a href="http://renarepenning.com">renarepenning.com</a></td>
+</tr>
+<tr class="odd">
+<td>Emily Powers</td>
+<td>Tulane University</td>
+<td><a href="mailto:epowers3@tulane.edu">epowers3@tulane.edu</a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">References</h2>
+<ul>
+<li>H. Alt, A. Efrat, G. Rote, and C. Wenk. <strong>Matching planar
+maps.</strong> <em>Journal of Algorithms</em> 49(2):262–283, November
+2003. <a href="https://doi.org/10.1016/S0196-6774(03)00085-3">DOI:
+10.1016/S0196-6774(03)00085-3</a>.</li>
+<li>M. Buchin and L. Thiel. <strong>Comparison of Graph Distance
+Measures.</strong> <em>Computational Geometry: Young Researchers Forum
+(CG:YRF 2024), Booklet of Abstracts</em>, pp. 55–57, 2024. <a
+href="https://socg24.athenarc.gr/proceedings/YRF24%20booklet.pdf">Booklet
+PDF</a>.</li>
+</ul>
+<h2 id="license">License</h2>
+<p><a
+href="https://github.com/compgeomTU/traversalDistance/blob/main/LICENSE">MIT
+License</a> • Copyright (c) 2022 Computational Geometry @ Tulane.</p>
+</body>
+</html>
